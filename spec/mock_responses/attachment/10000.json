@@ -1,0 +1,20 @@
+{
+  "self": "http://localhost:2990/jira/rest/api/2/attachment/10000",
+  "filename": "ballmer.png",
+  "author": {
+    "self": "http://localhost:2990/jira/rest/api/2/user?username=admin",
+    "name": "admin",
+    "avatarUrls": {
+      "16x16": "http://localhost:2990/jira/secure/useravatar?size=small&avatarId=10122",
+      "48x48": "http://localhost:2990/jira/secure/useravatar?avatarId=10122"
+    },
+    "displayName": "admin",
+    "active": true
+  },
+  "created": "2012-01-11T10:54:50.875+1300",
+  "size": 15360,
+  "mimeType": "image/png",
+  "properties": {},
+  "content": "http://localhost:2990/jira/secure/attachment/10000/ballmer.png",
+  "thumbnail": "http://localhost:2990/jira/secure/thumbnail/10000/_thumb_10000.png"
+}

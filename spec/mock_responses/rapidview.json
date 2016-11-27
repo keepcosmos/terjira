@@ -1,0 +1,10 @@
+{
+  "views": [
+     {
+       "id": 1,
+       "name": "SAMPLEPROJECT",
+       "canEdit": true,
+       "sprintSupportEnabled": true
+     }
+  ]
+}

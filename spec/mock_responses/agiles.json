@@ -1,0 +1,22 @@
+{
+  "maxResults": 50,
+  "startAt": 0,
+  "isLast": true,
+  "values": [
+    {"id": 3,
+      "self": "http://localhost:2990/rest/agile/1.0/board/3",
+      "name": "IST board",
+      "type": "scrum"
+    },
+    {"id": 2,
+      "self": "http://localhost:2990/rest/agile/1.0/board/2",
+      "name": "DT board",
+      "type": "scrum"
+    },
+    {"id": 1,
+      "self": "http://localhost:2990/rest/agile/1.0/board/1",
+      "name": "Product board",
+      "type": "kanban"
+    }
+  ]
+}

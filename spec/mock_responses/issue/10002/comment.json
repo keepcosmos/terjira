@@ -1,0 +1,65 @@
+{
+  "startAt": 0,
+  "maxResults": 2,
+  "total": 2,
+  "comments": [
+    {
+      "self": "http://localhost:2990/jira/rest/api/2/issue/10002/comment/10000",
+      "id": "10000",
+      "author": {
+        "self": "http://localhost:2990/jira/rest/api/2/user?username=admin",
+        "name": "admin",
+        "emailAddress": "admin@example.com",
+        "avatarUrls": {
+          "16x16": "http://localhost:2990/jira/secure/useravatar?size=small&avatarId=10122",
+          "48x48": "http://localhost:2990/jira/secure/useravatar?avatarId=10122"
+        },
+        "displayName": "admin",
+        "active": true
+      },
+      "body": "This is a comment. Creative.",
+      "updateAuthor": {
+        "self": "http://localhost:2990/jira/rest/api/2/user?username=admin",
+        "name": "admin",
+        "emailAddress": "admin@example.com",
+        "avatarUrls": {
+          "16x16": "http://localhost:2990/jira/secure/useravatar?size=small&avatarId=10122",
+          "48x48": "http://localhost:2990/jira/secure/useravatar?avatarId=10122"
+        },
+        "displayName": "admin",
+        "active": true
+      },
+      "created": "2012-01-11T10:02:14.430+1300",
+      "updated": "2012-01-12T15:15:13.074+1300"
+    },
+    {
+      "self": "http://localhost:2990/jira/rest/api/2/issue/10002/comment/10001",
+      "id": "10001",
+      "author": {
+        "self": "http://localhost:2990/jira/rest/api/2/user?username=admin",
+        "name": "admin",
+        "emailAddress": "admin@example.com",
+        "avatarUrls": {
+          "16x16": "http://localhost:2990/jira/secure/useravatar?size=small&avatarId=10122",
+          "48x48": "http://localhost:2990/jira/secure/useravatar?avatarId=10122"
+        },
+        "displayName": "admin",
+        "active": true
+      },
+      "body": "new comment",
+      "updateAuthor": {
+        "self": "http://localhost:2990/jira/rest/api/2/user?username=admin",
+        "name": "admin",
+        "emailAddress": "admin@example.com",
+        "avatarUrls": {
+          "16x16": "http://localhost:2990/jira/secure/useravatar?size=small&avatarId=10122",
+          "48x48": "http://localhost:2990/jira/secure/useravatar?avatarId=10122"
+        },
+        "displayName": "admin",
+        "active": true
+      },
+      "created": "2012-01-12T14:29:59.209+1300",
+      "updated": "2012-01-12T14:29:59.209+1300"
+    }
+  ]
+}

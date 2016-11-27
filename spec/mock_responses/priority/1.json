@@ -1,0 +1,8 @@
+{
+  "self": "http://localhost:2990/jira/rest/api/2/priority/1",
+  "statusColor": "#cc0000",
+  "description": "Blocks development and/or testing work, production could not run.",
+  "iconUrl": "http://localhost:2990/jira/images/icons/priority_blocker.gif",
+  "name": "Blocker",
+  "id": "1"
+}

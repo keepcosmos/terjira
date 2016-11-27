@@ -1,0 +1,32 @@
+[
+    {
+        "id": "1",
+        "name": "Description",
+        "custom": false,
+        "orderable": true,
+        "navigable": true,
+        "searchable": true,
+        "clauseNames": [
+            "description"
+        ],
+        "schema": {
+            "type": "string",
+            "system": "description"
+        }
+    },
+    {
+        "id": "2",
+        "name": "Summary",
+        "custom": false,
+        "orderable": true,
+        "navigable": true,
+        "searchable": true,
+        "clauseNames": [
+            "summary"
+        ],
+        "schema": {
+            "type": "string",
+            "system": "summary"
+        }
+    }
+]

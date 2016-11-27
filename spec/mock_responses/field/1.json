@@ -1,0 +1,15 @@
+{
+  "id": "1",
+  "name": "Description",
+  "custom": false,
+  "orderable": true,
+  "navigable": true,
+  "searchable": true,
+  "clauseNames": [
+      "description"
+  ],
+  "schema": {
+      "type": "string",
+      "system": "description"
+  }
+}

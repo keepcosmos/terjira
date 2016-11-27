@@ -1,0 +1,85 @@
+{
+  "self": "http://localhost:2990/jira/rest/api/2/project/SAMPLEPROJECT",
+  "id": "10001",
+  "key": "SAMPLEPROJECT",
+  "description": "Hi, sample project",
+  "lead": {
+    "self": "http://localhost:2990/jira/rest/api/2/user?username=admin",
+    "name": "admin",
+    "avatarUrls": {
+      "16x16": "http://localhost:2990/jira/secure/useravatar?size=small&avatarId=10122",
+      "48x48": "http://localhost:2990/jira/secure/useravatar?avatarId=10122"
+    },
+    "displayName": "admin",
+    "active": true
+  },
+  "components": [
+    {
+      "self": "http://localhost:2990/jira/rest/api/2/component/10001",
+      "id": "10001",
+      "name": "Jamflam",
+      "isAssigneeTypeValid": false
+    },
+    {
+      "self": "http://localhost:2990/jira/rest/api/2/component/10000",
+      "id": "10000",
+      "name": "Jammy",
+      "description": "Description!",
+      "isAssigneeTypeValid": false
+    }
+  ],
+  "issueTypes": [
+    {
+      "self": "http://localhost:2990/jira/rest/api/2/issuetype/1",
+      "id": "1",
+      "description": "A problem which impairs or prevents the functions of the product.",
+      "iconUrl": "http://localhost:2990/jira/images/icons/bug.gif",
+      "name": "Bug",
+      "subtask": false
+    },
+    {
+      "self": "http://localhost:2990/jira/rest/api/2/issuetype/2",
+      "id": "2",
+      "description": "A new feature of the product, which has yet to be developed.",
+      "iconUrl": "http://localhost:2990/jira/images/icons/newfeature.gif",
+      "name": "New Feature",
+      "subtask": false
+    },
+    {
+      "self": "http://localhost:2990/jira/rest/api/2/issuetype/3",
+      "id": "3",
+      "description": "A task that needs to be done.",
+      "iconUrl": "http://localhost:2990/jira/images/icons/task.gif",
+      "name": "Task",
+      "subtask": false
+    },
+    {
+      "self": "http://localhost:2990/jira/rest/api/2/issuetype/4",
+      "id": "4",
+      "description": "An improvement or enhancement to an existing feature or task.",
+      "iconUrl": "http://localhost:2990/jira/images/icons/improvement.gif",
+      "name": "Improvement",
+      "subtask": false
+    },
+    {
+      "self": "http://localhost:2990/jira/rest/api/2/issuetype/5",
+      "id": "5",
+      "description": "The sub-task of the issue",
+      "iconUrl": "http://localhost:2990/jira/images/icons/issue_subtask.gif",
+      "name": "Sub-task",
+      "subtask": true
+    }
+  ],
+  "assigneeType": "PROJECT_LEAD",
+  "versions": [],
+  "name": "Sample Project for Developing RoR RESTful API",
+  "roles": {
+    "Users": "http://localhost:2990/jira/rest/api/2/project/SAMPLEPROJECT/role/10000",
+    "Administrators": "http://localhost:2990/jira/rest/api/2/project/SAMPLEPROJECT/role/10002",
+    "Developers": "http://localhost:2990/jira/rest/api/2/project/SAMPLEPROJECT/role/10001"
+  },
+  "avatarUrls": {
+    "16x16": "http://localhost:2990/jira/secure/projectavatar?size=small&pid=10001&avatarId=10011",
+    "48x48": "http://localhost:2990/jira/secure/projectavatar?pid=10001&avatarId=10011"
+  }
+}

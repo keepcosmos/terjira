@@ -1,0 +1,25 @@
+{
+  "issueLinkTypes": [
+    {
+      "id": "10000",
+      "name": "Blocks",
+      "inward": "is blocked by",
+      "outward": "blocks",
+      "self": "http://localhost:2990/jira/rest/api/2/issueLinkType/10000"
+    },
+    {
+      "id": "10400",
+      "name": "Cloners",
+      "inward": "is cloned by",
+      "outward": "clones",
+      "self": "http://localhost:2990/jira/rest/api/2/issueLinkType/10400"
+    },
+    {
+      "id": "10401",
+      "name": "Duplicate",
+      "inward": "is duplicated by",
+      "outward": "duplicates",
+      "self": "http://localhost:2990/jira/rest/api/2/issueLinkType/10401"
+    }
+  ]
+}

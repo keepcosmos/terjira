@@ -1,0 +1,11 @@
+{
+  "self": "http://localhost:2990/jira/rest/api/2/version/10000",
+  "id": "10000",
+  "description": "Initial version",
+  "name": "1.0",
+  "overdue": false,
+  "userReleaseDate": "12/Jan/12",
+  "archived": false,
+  "releaseDate": "2012-01-12",
+  "released": false
+}

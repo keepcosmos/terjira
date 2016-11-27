@@ -1,0 +1,1 @@
+{"nfs":{"/vagrant":{"type":"nfs","guestpath":"/vagrant","hostpath":"/Users/Keepcosmos/workspace/terjira","disabled":false,"__vagrantfile":true,"map_uid":501,"map_gid":20,"nfs_udp":true,"nfs_version":3,"uuid":"2831414849"}}}

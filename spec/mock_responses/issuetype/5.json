@@ -1,0 +1,8 @@
+{
+  "self": "http://localhost:2990/jira/rest/api/2/issuetype/5",
+  "id": "5",
+  "description": "The sub-task of the issue",
+  "iconUrl": "http://localhost:2990/jira/images/icons/issue_subtask.gif",
+  "name": "Sub-task",
+  "subtask": true
+}

@@ -1,0 +1,39 @@
+{
+  "self": "http://localhost:2990/jira/rest/api/2/component/10000",
+  "id": "10000",
+  "name": "Jammy",
+  "description": "Description!",
+  "lead": {
+    "self": "http://localhost:2990/jira/rest/api/2/user?username=admin",
+    "name": "admin",
+    "avatarUrls": {
+      "16x16": "http://localhost:2990/jira/secure/useravatar?size=small&avatarId=10122",
+      "48x48": "http://localhost:2990/jira/secure/useravatar?avatarId=10122"
+    },
+    "displayName": "admin",
+    "active": true
+  },
+  "assigneeType": "PROJECT_DEFAULT",
+  "assignee": {
+    "self": "http://localhost:2990/jira/rest/api/2/user?username=admin",
+    "name": "admin",
+    "avatarUrls": {
+      "16x16": "http://localhost:2990/jira/secure/useravatar?size=small&avatarId=10122",
+      "48x48": "http://localhost:2990/jira/secure/useravatar?avatarId=10122"
+    },
+    "displayName": "admin",
+    "active": true
+  },
+  "realAssigneeType": "PROJECT_DEFAULT",
+  "realAssignee": {
+    "self": "http://localhost:2990/jira/rest/api/2/user?username=admin",
+    "name": "admin",
+    "avatarUrls": {
+      "16x16": "http://localhost:2990/jira/secure/useravatar?size=small&avatarId=10122",
+      "48x48": "http://localhost:2990/jira/secure/useravatar?avatarId=10122"
+    },
+    "displayName": "admin",
+    "active": true
+  },
+  "isAssigneeTypeValid": true
+}

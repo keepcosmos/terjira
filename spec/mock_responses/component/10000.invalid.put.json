@@ -1,0 +1,5 @@
+{
+  "errorMessages": [
+    "Unrecognized field \"invalid\" (Class com.atlassian.jira.rest.v2.issue.component.ComponentBean), not marked as ignorable\n at [Source: org.apache.catalina.connector.CoyoteInputStream@70faf7c7; line: 1, column: 2]"
+  ]
+}

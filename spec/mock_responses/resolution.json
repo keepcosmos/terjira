@@ -1,0 +1,15 @@
+[
+    {
+        "self": "http://www.example.com/jira/rest/api/2/resolution/1",
+        "description": "A fix for this issue is checked into the tree and tested.",
+        "iconUrl": "http://www.example.com/jira/images/icons/status_resolved.gif",
+        "name": "Fixed",
+        "id": "1"
+    },
+    {
+        "self": "http://www.example.com/jira/rest/api/2/resolution/3",
+        "description": "This is what it is supposed to do.",
+        "name": "Works as designed",
+        "id": "3"
+    }
+]

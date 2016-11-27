@@ -1,0 +1,126 @@
+{
+  "expand": "renderedFields,names,schema,transitions,editmeta,changelog",
+  "id": "10002",
+  "self": "http://localhost:2990/jira/rest/api/2/issue/10002",
+  "key": "SAMPLEPROJECT-1",
+  "fields": {
+    "summary": "Sample Issue",
+    "progress": {
+      "progress": 0,
+      "total": 0
+    },
+    "timetracking": {},
+    "issuetype": {
+      "self": "http://localhost:2990/jira/rest/api/2/issuetype/3",
+      "id": "3",
+      "description": "A task that needs to be done.",
+      "iconUrl": "http://localhost:2990/jira/images/icons/task.gif",
+      "name": "Task",
+      "subtask": false
+    },
+    "votes": {
+      "self": "http://localhost:2990/jira/rest/api/2/issue/SAMPLEPROJECT-1/votes",
+      "votes": 0,
+      "hasVoted": false
+    },
+    "resolution": null,
+    "fixVersions": [],
+    "resolutiondate": null,
+    "timespent": null,
+    "reporter": {
+      "self": "http://localhost:2990/jira/rest/api/2/user?username=admin",
+      "name": "admin",
+      "emailAddress": "admin@example.com",
+      "avatarUrls": {
+        "16x16": "http://localhost:2990/jira/secure/useravatar?size=small&avatarId=10122",
+        "48x48": "http://localhost:2990/jira/secure/useravatar?avatarId=10122"
+      },
+      "displayName": "admin",
+      "active": true
+    },
+    "aggregatetimeoriginalestimate": null,
+    "updated": "2011-12-14T10:26:06.030+1300",
+    "created": "2011-12-14T10:26:06.030+1300",
+    "description": null,
+    "priority": {
+      "self": "http://localhost:2990/jira/rest/api/2/priority/3",
+      "iconUrl": "http://localhost:2990/jira/images/icons/priority_major.gif",
+      "name": "Major",
+      "id": "3"
+    },
+    "duedate": "2011-12-14",
+    "issuelinks": [],
+    "watches": {
+      "self": "http://localhost:2990/jira/rest/api/2/issue/SAMPLEPROJECT-1/watchers",
+      "watchCount": 0,
+      "isWatching": false
+    },
+    "worklog": {
+      "startAt": 0,
+      "maxResults": 0,
+      "total": 0,
+      "worklogs": []
+    },
+    "subtasks": [],
+    "status": {
+      "self": "http://localhost:2990/jira/rest/api/2/status/1",
+      "description": "The issue is open and ready for the assignee to start work on it.",
+      "iconUrl": "http://localhost:2990/jira/images/icons/status_open.gif",
+      "name": "Open",
+      "id": "1"
+    },
+    "labels": [],
+    "workratio": -1,
+    "assignee": {
+      "self": "http://localhost:2990/jira/rest/api/2/user?username=admin",
+      "name": "admin",
+      "emailAddress": "admin@example.com",
+      "avatarUrls": {
+        "16x16": "http://localhost:2990/jira/secure/useravatar?size=small&avatarId=10122",
+        "48x48": "http://localhost:2990/jira/secure/useravatar?avatarId=10122"
+      },
+      "displayName": "admin",
+      "active": true
+    },
+    "attachment": [],
+    "aggregatetimeestimate": null,
+    "project": {
+      "self": "http://localhost:2990/jira/rest/api/2/project/SAMPLEPROJECT",
+      "id": "10001",
+      "key": "SAMPLEPROJECT",
+      "name": "Sample Project for Developing RoR RESTful API",
+      "avatarUrls": {
+        "16x16": "http://localhost:2990/jira/secure/projectavatar?size=small&pid=10001&avatarId=10011",
+        "48x48": "http://localhost:2990/jira/secure/projectavatar?pid=10001&avatarId=10011"
+      }
+    },
+    "versions": [],
+    "environment": null,
+    "timeestimate": null,
+    "aggregateprogress": {
+      "progress": 0,
+      "total": 0
+    },
+    "components": [
+      {
+        "self": "http://localhost:2990/jira/rest/api/2/component/10001",
+        "id": "10001",
+        "name": "Jamflam"
+      },
+      {
+        "self": "http://localhost:2990/jira/rest/api/2/component/10000",
+        "id": "10000",
+        "name": "Jammy",
+        "description": "Description!"
+      }
+    ],
+    "comment": {
+      "startAt": 0,
+      "maxResults": 0,
+      "total": 0,
+      "comments": []
+    },
+    "timeoriginalestimate": null,
+    "aggregatetimespent": null
+  }
+}

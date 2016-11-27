@@ -1,0 +1,42 @@
+[
+  {
+    "self": "http://localhost:2990/jira/rest/api/2/issuetype/5",
+    "id": "5",
+    "description": "The sub-task of the issue",
+    "iconUrl": "http://localhost:2990/jira/images/icons/issue_subtask.gif",
+    "name": "Sub-task",
+    "subtask": true
+  },
+  {
+    "self": "http://localhost:2990/jira/rest/api/2/issuetype/4",
+    "id": "4",
+    "description": "An improvement or enhancement to an existing feature or task.",
+    "iconUrl": "http://localhost:2990/jira/images/icons/improvement.gif",
+    "name": "Improvement",
+    "subtask": false
+  },
+  {
+    "self": "http://localhost:2990/jira/rest/api/2/issuetype/3",
+    "id": "3",
+    "description": "A task that needs to be done.",
+    "iconUrl": "http://localhost:2990/jira/images/icons/task.gif",
+    "name": "Task",
+    "subtask": false
+  },
+  {
+    "self": "http://localhost:2990/jira/rest/api/2/issuetype/1",
+    "id": "1",
+    "description": "A problem which impairs or prevents the functions of the product.",
+    "iconUrl": "http://localhost:2990/jira/images/icons/bug.gif",
+    "name": "Bug",
+    "subtask": false
+  },
+  {
+    "self": "http://localhost:2990/jira/rest/api/2/issuetype/2",
+    "id": "2",
+    "description": "A new feature of the product, which has yet to be developed.",
+    "iconUrl": "http://localhost:2990/jira/images/icons/newfeature.gif",
+    "name": "New Feature",
+    "subtask": false
+  }
+]

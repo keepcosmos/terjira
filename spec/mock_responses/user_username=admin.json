@@ -1,0 +1,17 @@
+{
+  "self": "http://localhost:2990/jira/rest/api/2/user?username=admin",
+  "name": "admin",
+  "emailAddress": "admin@example.com",
+  "avatarUrls": {
+    "16x16": "http://localhost:2990/jira/secure/useravatar?size=small&avatarId=10122",
+    "48x48": "http://localhost:2990/jira/secure/useravatar?avatarId=10122"
+  },
+  "displayName": "admin",
+  "active": true,
+  "timeZone": "Pacific/Auckland",
+  "groups": {
+    "size": 3,
+    "items": []
+  },
+  "expand": "groups"
+}

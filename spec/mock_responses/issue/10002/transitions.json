@@ -1,0 +1,49 @@
+{
+  "expand": "transitions",
+  "transitions": [
+    {
+      "id": "41",
+      "name": "Review",
+      "to": {
+        "self": "http://localhost:2990/rest/api/2/status/10006",
+        "description": "",
+        "iconUrl": "http://localhost:2990/images/icons/statuses/generic.png",
+        "name": "Reviewable",
+        "id": "10006"
+      }
+    },
+    {
+      "id": "101",
+      "name": "Stop Progress",
+      "to": {
+        "self": "http://localhost:2990/rest/api/2/status/10017",
+        "description": "Mapping for Accepted in Pivotal Tracker",
+        "iconUrl": "http://localhost:2990/images/icons/statuses/closed.png",
+        "name": "Accepted",
+        "id": "10017"
+      }
+    },
+    {
+      "id": "21",
+      "name": "Remove from Backlog",
+      "to": {
+        "self": "http://localhost:2990/rest/api/2/status/1",
+        "description": "The issue is open and ready for the assignee to start work on it.",
+        "iconUrl": "http://localhost:2990/images/icons/statuses/open.png",
+        "name": "Open",
+        "id": "1"
+      }
+    },
+    {
+      "id": "71",
+      "name": "Resolve",
+      "to": {
+        "self": "http://localhost:2990/rest/api/2/status/5",
+        "description": "A resolution has been taken, and it is awaiting verification by reporter. From here issues are either reopened, or are closed.",
+        "iconUrl": "http://localhost:2990/images/icons/statuses/resolved.png",
+        "name": "Resolved",
+        "id": "5"
+      }
+    }
+  ]
+}

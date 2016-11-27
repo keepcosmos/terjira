@@ -1,0 +1,276 @@
+{
+    "expand": "schema,names",
+    "startAt": 0,
+    "maxResults": 50,
+    "total": 2,
+    "issues": [
+        {
+            "expand": "editmeta,renderedFields,transitions,changelog,operations",
+            "id": "10001",
+            "self": "http://localhost:2990/jira/rest/api/2/issue/10001",
+            "key": "SAM-2",
+            "fields": {
+                "summary": "Test issue 2",
+                "progress": {
+                    "progress": 0,
+                    "total": 0
+                },
+                "issuetype": {
+                    "self": "http://localhost:2990/jira/rest/api/2/issuetype/10001",
+                    "id": "10001",
+                    "description": "",
+                    "iconUrl": "http://localhost:2990/jira/images/icons/ico_story.png",
+                    "name": "Story",
+                    "subtask": false
+                },
+                "votes": {
+                    "self": "http://localhost:2990/jira/rest/api/2/issue/SAM-2/votes",
+                    "votes": 0,
+                    "hasVoted": false
+                },
+                "resolution": null,
+                "fixVersions": [],
+                "resolutiondate": null,
+                "timespent": null,
+                "creator": {
+                    "self": "http://localhost:2990/jira/rest/api/2/user?username=admin",
+                    "name": "admin",
+                    "emailAddress": "admin@example.com",
+                    "avatarUrls": {
+                        "16x16": "http://localhost:2990/jira/secure/useravatar?size=xsmall&avatarId=10122",
+                        "24x24": "http://localhost:2990/jira/secure/useravatar?size=small&avatarId=10122",
+                        "32x32": "http://localhost:2990/jira/secure/useravatar?size=medium&avatarId=10122",
+                        "48x48": "http://localhost:2990/jira/secure/useravatar?avatarId=10122"
+                    },
+                    "displayName": "admin",
+                    "active": true
+                },
+                "reporter": {
+                    "self": "http://localhost:2990/jira/rest/api/2/user?username=admin",
+                    "name": "admin",
+                    "emailAddress": "admin@example.com",
+                    "avatarUrls": {
+                        "16x16": "http://localhost:2990/jira/secure/useravatar?size=xsmall&avatarId=10122",
+                        "24x24": "http://localhost:2990/jira/secure/useravatar?size=small&avatarId=10122",
+                        "32x32": "http://localhost:2990/jira/secure/useravatar?size=medium&avatarId=10122",
+                        "48x48": "http://localhost:2990/jira/secure/useravatar?avatarId=10122"
+                    },
+                    "displayName": "admin",
+                    "active": true
+                },
+                "aggregatetimeoriginalestimate": null,
+                "created": "2014-07-18T23:30:43.000+0700",
+                "updated": "2014-07-18T23:30:44.000+0700",
+                "description": null,
+                "priority": {
+                    "self": "http://localhost:2990/jira/rest/api/2/priority/3",
+                    "iconUrl": "http://localhost:2990/jira/images/icons/priorities/major.png",
+                    "name": "Major",
+                    "id": "3"
+                },
+                "duedate": null,
+                "customfield_10001": null,
+                "customfield_10002": null,
+                "customfield_10003": null,
+                "issuelinks": [],
+                "customfield_10004": null,
+                "watches": {
+                    "self": "http://localhost:2990/jira/rest/api/2/issue/SAM-2/watchers",
+                    "watchCount": 1,
+                    "isWatching": true
+                },
+                "customfield_10000": null,
+                "subtasks": [],
+                "customfield_10009": "0|100004:",
+                "status": {
+                    "self": "http://localhost:2990/jira/rest/api/2/status/1",
+                    "description": "The issue is open and ready for the assignee to start work on it.",
+                    "iconUrl": "http://localhost:2990/jira/images/icons/statuses/open.png",
+                    "name": "Open",
+                    "id": "1",
+                    "statusCategory": {
+                        "self": "http://localhost:2990/jira/rest/api/2/statuscategory/2",
+                        "id": 2,
+                        "key": "new",
+                        "colorName": "blue-gray",
+                        "name": "New"
+                    }
+                },
+                "labels": [],
+                "customfield_10005": null,
+                "workratio": -1,
+                "assignee": {
+                    "self": "http://localhost:2990/jira/rest/api/2/user?username=admin",
+                    "name": "admin",
+                    "emailAddress": "admin@example.com",
+                    "avatarUrls": {
+                        "16x16": "http://localhost:2990/jira/secure/useravatar?size=xsmall&avatarId=10122",
+                        "24x24": "http://localhost:2990/jira/secure/useravatar?size=small&avatarId=10122",
+                        "32x32": "http://localhost:2990/jira/secure/useravatar?size=medium&avatarId=10122",
+                        "48x48": "http://localhost:2990/jira/secure/useravatar?avatarId=10122"
+                    },
+                    "displayName": "admin",
+                    "active": true
+                },
+                "aggregatetimeestimate": null,
+                "project": {
+                    "self": "http://localhost:2990/jira/rest/api/2/project/10000",
+                    "id": "10000",
+                    "key": "SAM",
+                    "name": "SAMPLEPROJECT",
+                    "avatarUrls": {
+                        "16x16": "http://localhost:2990/jira/secure/projectavatar?size=xsmall&pid=10000&avatarId=10011",
+                        "24x24": "http://localhost:2990/jira/secure/projectavatar?size=small&pid=10000&avatarId=10011",
+                        "32x32": "http://localhost:2990/jira/secure/projectavatar?size=medium&pid=10000&avatarId=10011",
+                        "48x48": "http://localhost:2990/jira/secure/projectavatar?pid=10000&avatarId=10011"
+                    }
+                },
+                "versions": [],
+                "environment": null,
+                "timeestimate": null,
+                "aggregateprogress": {
+                    "progress": 0,
+                    "total": 0
+                },
+                "lastViewed": "2014-07-18T23:30:43.561+0700",
+                "components": [],
+                "timeoriginalestimate": null,
+                "aggregatetimespent": null
+            }
+        },
+        {
+            "expand": "editmeta,renderedFields,transitions,changelog,operations",
+            "id": "10000",
+            "self": "http://localhost:2990/jira/rest/api/2/issue/10000",
+            "key": "SAM-1",
+            "fields": {
+                "summary": "Test issue 1",
+                "progress": {
+                    "progress": 0,
+                    "total": 0
+                },
+                "issuetype": {
+                    "self": "http://localhost:2990/jira/rest/api/2/issuetype/10001",
+                    "id": "10001",
+                    "description": "",
+                    "iconUrl": "http://localhost:2990/jira/images/icons/ico_story.png",
+                    "name": "Story",
+                    "subtask": false
+                },
+                "votes": {
+                    "self": "http://localhost:2990/jira/rest/api/2/issue/SAM-1/votes",
+                    "votes": 0,
+                    "hasVoted": false
+                },
+                "resolution": null,
+                "fixVersions": [],
+                "resolutiondate": null,
+                "timespent": null,
+                "creator": {
+                    "self": "http://localhost:2990/jira/rest/api/2/user?username=admin",
+                    "name": "admin",
+                    "emailAddress": "admin@example.com",
+                    "avatarUrls": {
+                        "16x16": "http://localhost:2990/jira/secure/useravatar?size=xsmall&avatarId=10122",
+                        "24x24": "http://localhost:2990/jira/secure/useravatar?size=small&avatarId=10122",
+                        "32x32": "http://localhost:2990/jira/secure/useravatar?size=medium&avatarId=10122",
+                        "48x48": "http://localhost:2990/jira/secure/useravatar?avatarId=10122"
+                    },
+                    "displayName": "admin",
+                    "active": true
+                },
+                "reporter": {
+                    "self": "http://localhost:2990/jira/rest/api/2/user?username=admin",
+                    "name": "admin",
+                    "emailAddress": "admin@example.com",
+                    "avatarUrls": {
+                        "16x16": "http://localhost:2990/jira/secure/useravatar?size=xsmall&avatarId=10122",
+                        "24x24": "http://localhost:2990/jira/secure/useravatar?size=small&avatarId=10122",
+                        "32x32": "http://localhost:2990/jira/secure/useravatar?size=medium&avatarId=10122",
+                        "48x48": "http://localhost:2990/jira/secure/useravatar?avatarId=10122"
+                    },
+                    "displayName": "admin",
+                    "active": true
+                },
+                "aggregatetimeoriginalestimate": null,
+                "created": "2014-07-18T23:30:26.000+0700",
+                "updated": "2014-07-18T23:30:26.000+0700",
+                "description": null,
+                "priority": {
+                    "self": "http://localhost:2990/jira/rest/api/2/priority/3",
+                    "iconUrl": "http://localhost:2990/jira/images/icons/priorities/major.png",
+                    "name": "Major",
+                    "id": "3"
+                },
+                "duedate": null,
+                "customfield_10001": null,
+                "customfield_10002": null,
+                "customfield_10003": null,
+                "issuelinks": [],
+                "customfield_10004": null,
+                "watches": {
+                    "self": "http://localhost:2990/jira/rest/api/2/issue/SAM-1/watchers",
+                    "watchCount": 1,
+                    "isWatching": true
+                },
+                "customfield_10000": null,
+                "subtasks": [],
+                "customfield_10009": "0|100000:",
+                "status": {
+                    "self": "http://localhost:2990/jira/rest/api/2/status/1",
+                    "description": "The issue is open and ready for the assignee to start work on it.",
+                    "iconUrl": "http://localhost:2990/jira/images/icons/statuses/open.png",
+                    "name": "Open",
+                    "id": "1",
+                    "statusCategory": {
+                        "self": "http://localhost:2990/jira/rest/api/2/statuscategory/2",
+                        "id": 2,
+                        "key": "new",
+                        "colorName": "blue-gray",
+                        "name": "New"
+                    }
+                },
+                "labels": [],
+                "customfield_10005": null,
+                "workratio": -1,
+                "assignee": {
+                    "self": "http://localhost:2990/jira/rest/api/2/user?username=admin",
+                    "name": "admin",
+                    "emailAddress": "admin@example.com",
+                    "avatarUrls": {
+                        "16x16": "http://localhost:2990/jira/secure/useravatar?size=xsmall&avatarId=10122",
+                        "24x24": "http://localhost:2990/jira/secure/useravatar?size=small&avatarId=10122",
+                        "32x32": "http://localhost:2990/jira/secure/useravatar?size=medium&avatarId=10122",
+                        "48x48": "http://localhost:2990/jira/secure/useravatar?avatarId=10122"
+                    },
+                    "displayName": "admin",
+                    "active": true
+                },
+                "aggregatetimeestimate": null,
+                "project": {
+                    "self": "http://localhost:2990/jira/rest/api/2/project/10000",
+                    "id": "10000",
+                    "key": "SAM",
+                    "name": "SAMPLEPROJECT",
+                    "avatarUrls": {
+                        "16x16": "http://localhost:2990/jira/secure/projectavatar?size=xsmall&pid=10000&avatarId=10011",
+                        "24x24": "http://localhost:2990/jira/secure/projectavatar?size=small&pid=10000&avatarId=10011",
+                        "32x32": "http://localhost:2990/jira/secure/projectavatar?size=medium&pid=10000&avatarId=10011",
+                        "48x48": "http://localhost:2990/jira/secure/projectavatar?pid=10000&avatarId=10011"
+                    }
+                },
+                "versions": [],
+                "environment": null,
+                "timeestimate": null,
+                "aggregateprogress": {
+                    "progress": 0,
+                    "total": 0
+                },
+                "lastViewed": "2014-07-18T23:30:28.576+0700",
+                "components": [],
+                "timeoriginalestimate": null,
+                "aggregatetimespent": null
+            }
+        }
+    ]
+}

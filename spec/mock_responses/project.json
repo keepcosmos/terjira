@@ -1,0 +1,24 @@
+[
+  {
+    "self": "http://localhost:2990/jira/rest/api/2/project/SAMPLEPROJECT",
+    "id": "10001",
+    "key": "SAMPLEPROJECT",
+    "name": "Sample Project for Developing Ruby RESTful API",
+    "avatarUrls": {
+      "16x16": "http://localhost:2990/jira/secure/projectavatar?size=small&pid=10001&avatarId=10011",
+      "48x48": "http://localhost:2990/jira/secure/projectavatar?pid=10001&avatarId=10011"
+    },
+    "projectTypeKey": "software"
+  },
+  {
+    "self": "http://localhost:2990/jira/rest/api/2/project/TESTPROJECT",
+    "id": "10002",
+    "key": "TESTPROJECT",
+    "name": "Test Project for Developing Cli RESTful API",
+    "avatarUrls": {
+      "16x16": "http://localhost:2990/jira/secure/projectavatar?size=small&pid=10002&avatarId=10011",
+      "48x48": "http://localhost:2990/jira/secure/projectavatar?pid=10002&avatarId=10011"
+    },
+    "projectTypeKey": "software"
+  }
+]

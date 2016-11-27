@@ -1,0 +1,7 @@
+{
+  "id": "10000",
+  "self": "http://localhost:2990/jira/rest/api/2/issueLinkType/10000",
+  "name": "Blocks",
+  "inward": "is blocked by",
+  "outward": "blocks"
+}

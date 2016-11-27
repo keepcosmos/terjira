@@ -1,0 +1,111 @@
+{
+  "sprintMarkersMigrated": true,
+  "issues": [
+    {
+      "id": 10000,
+      "key": "SAM-1",
+      "hidden": false,
+      "typeName": "Story",
+      "typeId": "10001",
+      "summary": "Test issue 1",
+      "typeUrl": "http://localhost:2990/jira/images/icons/ico_story.png",
+      "priorityUrl": "http://localhost:2990/jira/images/icons/priorities/major.png",
+      "priorityName": "Major",
+      "done": false,
+      "assignee": "admin",
+      "assigneeName": "admin",
+      "hasCustomUserAvatar": false,
+      "autoUserAvatar": {
+        "letter": "a",
+        "color": "#f691b2"
+        },
+      "color": "#cc0000",
+      "estimateStatistic": {
+        "statFieldId": "customfield_10002",
+        "statFieldValue": {}
+        },
+      "statusId": "1",
+      "statusName": "Open",
+      "statusUrl": "http://localhost:2990/jira/images/icons/statuses/open.png",
+      "status": {
+        "id": "1",
+        "name": "Open",
+        "description": "The issue is open and ready for the assignee to start work on it.",
+        "iconUrl": "http://localhost:2990/jira/images/icons/statuses/open.png",
+        "statusCategory": {
+          "id": "2",
+          "key": "new",
+          "colorName": "blue-gray"
+        }
+      },
+      "fixVersions": [],
+      "projectId": 10000,
+      "linkedPagesCount": 0
+    },
+    {
+      "id": 10001,
+      "key": "SAM-2",
+      "hidden": false,
+      "typeName": "Story",
+      "typeId": "10001",
+      "summary": "Test issue 2",
+      "typeUrl": "http://localhost:2990/jira/images/icons/ico_story.png",
+      "priorityUrl": "http://localhost:2990/jira/images/icons/priorities/major.png",
+      "priorityName": "Major",
+      "done": false,
+      "assignee": "admin",
+      "assigneeName": "admin",
+      "hasCustomUserAvatar": false,
+      "autoUserAvatar": {
+        "letter": "a",
+        "color": "#f691b2"
+      },
+      "color": "#cc0000",
+        "estimateStatistic": {
+          "statFieldId": "customfield_10002",
+          "statFieldValue": {}
+        },
+          "statusId": "1",
+          "statusName": "Open",
+          "statusUrl": "http://localhost:2990/jira/images/icons/statuses/open.png",
+          "status": {
+            "id": "1",
+            "name": "Open",
+            "description": "The issue is open and ready for the assignee to start work on it.",
+            "iconUrl": "http://localhost:2990/jira/images/icons/statuses/open.png",
+            "statusCategory": {
+              "id": "2",
+              "key": "new",
+              "colorName": "blue-gray"
+            }
+          },
+          "fixVersions": [],
+          "projectId": 10000,
+          "linkedPagesCount": 0
+    }
+  ],
+  "rankCustomFieldId": 10009,
+  "sprints": [],
+  "supportsPages": false,
+  "projects": [
+    {
+      "id": 10000,
+      "key": "SAM",
+      "name": "SAMPLEPROJECT"
+    }
+  ],
+  "epicData": {
+    "epics": [],
+    "canEditEpics": false,
+    "supportsPages": false
+  },
+  "canManageSprints": true,
+  "maxIssuesExceeded": false,
+  "queryResultLimit": 2147483647,
+  "versionData": {
+    "versionsPerProject": {
+      "10000": []
+    },
+    "canCreateVersion": true
+  }
+}

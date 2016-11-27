@@ -1,0 +1,5 @@
+{
+  "errorMessages": [
+    "Unrecognized field \"chump\" (Class com.atlassian.jira.rest.v2.issue.version.VersionBean), not marked as ignorable\n at [Source: org.apache.catalina.connector.CoyoteInputStream@4264a42e; line: 1, column: 2]"
+  ]
+}

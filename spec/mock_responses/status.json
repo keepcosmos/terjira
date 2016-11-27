@@ -1,0 +1,37 @@
+[
+  {
+    "self": "http://localhost:2990/jira/rest/api/2/status/1",
+    "description": "The issue is open and ready for the assignee to start work on it.",
+    "iconUrl": "http://localhost:2990/jira/images/icons/status_open.gif",
+    "name": "Open",
+    "id": "1"
+  },
+  {
+    "self": "http://localhost:2990/jira/rest/api/2/status/3",
+    "description": "This issue is being actively worked on at the moment by the assignee.",
+    "iconUrl": "http://localhost:2990/jira/images/icons/status_inprogress.gif",
+    "name": "In Progress",
+    "id": "3"
+  },
+  {
+    "self": "http://localhost:2990/jira/rest/api/2/status/4",
+    "description": "This issue was once resolved, but the resolution was deemed incorrect. From here issues are either marked assigned or resolved.",
+    "iconUrl": "http://localhost:2990/jira/images/icons/status_reopened.gif",
+    "name": "Reopened",
+    "id": "4"
+  },
+  {
+    "self": "http://localhost:2990/jira/rest/api/2/status/5",
+    "description": "A resolution has been taken, and it is awaiting verification by reporter. From here issues are either reopened, or are closed.",
+    "iconUrl": "http://localhost:2990/jira/images/icons/status_resolved.gif",
+    "name": "Resolved",
+    "id": "5"
+  },
+  {
+    "self": "http://localhost:2990/jira/rest/api/2/status/6",
+    "description": "The issue is considered finished, the resolution is correct. Issues which are closed can be reopened.",
+    "iconUrl": "http://localhost:2990/jira/images/icons/status_closed.gif",
+    "name": "Closed",
+    "id": "6"
+  }
+]
