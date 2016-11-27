@@ -1,15 +1,17 @@
 require_relative '../ext/jira_ruby'
 require_relative 'jql_query_builer'
+require_relative 'auth_option_builder'
 
 module Terjira
   module Client
     # Abstract class to delegate jira-ruby resource class
     class Base
       extend JQLQueryBuilder
+      extend AuthOptionBuilder
 
       class << self
         def client
-          JIRA::Client.build
+          JIRA::Client.new(build_auth_options)
         end
 
         def resource

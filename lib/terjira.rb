@@ -8,6 +8,13 @@ ENV['PAGER'] ||= 'less'
 # http://willschenk.com/making-a-command-line-utility-with-gems-and-thor/
 module Terjira
   class CLI < Thor
+
+    desc "login", "login your Jira"
+    def login
+      Client::Base.expire_auth_options
+      Client::Base.build_auth_options
+    end
+
     desc "project SUBCOMMAND ...ARGS", "manage proejcts"
     subcommand "project", ProjectCLI
 

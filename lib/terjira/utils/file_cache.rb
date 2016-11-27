@@ -5,7 +5,7 @@ module Terjira
   class FileCache
 
     MAX_DEPTH = 32
-    ROOT_DIR = ENV["HOME"].present? ? "#{ENV["HOME"]}/.terjira/" : "~/.terjira/"
+    ROOT_DIR = ENV["HOME"] ? "#{ENV["HOME"]}/.terjira/" : "~/.terjira/"
 
     def initialize(domain, expiry = 0, depth = 2)
       @domain  = domain
@@ -18,10 +18,6 @@ module Terjira
     # the key it will be overwritten.
     def set(key, value)
       f = File.open(get_path(key), "w")
-      require 'pry'
-      binding.pry
-      puts get_path(key)
-
       Marshal.dump(value, f)
       f.close
     end

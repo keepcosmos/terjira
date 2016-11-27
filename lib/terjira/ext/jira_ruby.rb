@@ -4,27 +4,6 @@ require 'pastel'
 
 # Extend jira-ruby for command line interface.
 module JIRA
-  class Client
-    class << self
-      def build
-        @@login_options = {
-        }
-        JIRA::Client.new(@@login_options)
-      end
-
-      private
-
-      def build_by_profile
-      end
-
-      def build_by_tty
-      end
-
-      def save_profile
-      end
-    end
-  end
-
   class HttpClient
     alias_method  :origin_make_request, :make_request
 

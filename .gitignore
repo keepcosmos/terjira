@@ -1,3 +1,5 @@
+.vagrant
+
 *.gem
 *.rbc
 /.config
