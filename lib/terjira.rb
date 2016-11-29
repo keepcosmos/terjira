@@ -18,13 +18,13 @@ module Terjira
     desc "project SUBCOMMAND ...ARGS", "manage proejcts"
     subcommand "project", ProjectCLI
 
-    desc "issue SUBCOMMAND ...ARGS", "manage issues"
-    subcommand "issue", IssueCLI
-
     desc "board SUBCOMMAND ...ARGS", "manage boards"
     subcommand "board", BoardCLI
 
     desc "sprint SUBCOMMAND ...ARGS", "manage sprints"
     subcommand "sprint", SprintCLI
+
+    desc "issue SUBCOMMAND ...ARGS", "manage issues"
+    subcommand "issue", IssueCLI
   end
 end

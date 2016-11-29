@@ -105,6 +105,7 @@ module Terjira
     end
 
     def colorize_priority(priority, title: true)
+      return '' unless priority.respond_to? :name
       name = priority.name
       info = if name =~ /high|major|critic/i
                { color: :red, icon: "⬆", name: name }

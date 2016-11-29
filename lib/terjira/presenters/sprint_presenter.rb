@@ -1,10 +1,22 @@
 module Terjira
   module SprintPresenter
+    def render_sprint_detail(sprint)
+      return puts "Empty" if sprint.nil?
+      attrs = sprint.attrs
+      summary = [
+        pastel.bold("#{sprint.id}. #{sprint.name} #{colorize_sprint_state(sprint.state)}"),
+        "#{attrs["goal"]}",
+        "#{formatted_date(attrs["startDate"])} ~ #{formatted_date(attrs["endDate"])}"
+      ]
+
+      puts summary.reject(&:empty?).join("\n")
+    end
+
     def render_sprints_summary(sprints)
       headers = ["ID", "Summary"].map { |h| pastel.bold(h) }
       rows = []
-      sprints.each do |sprint|
-        rows << [pastel.bold(sprint["id"]), summarise_sprint(sprint)]
+      sort_sprint_by_state(sprints).each do |sprint|
+        rows << [pastel.bold(sprint.id), summarise_sprint(sprint)]
       end
 
       table = TTY::Table.new(headers, rows)
@@ -15,14 +27,14 @@ module Terjira
     end
 
     def summarise_sprint(sprint)
-      summary = colorize_sprint_state(sprint["state"])
-      summary += " " + pastel.bold(sprint["name"])
-      if sprint["startDate"]
+      summary = colorize_sprint_state(sprint.state)
+      summary += " " + pastel.bold(sprint.name)
+      if sprint.respond_to? :startDate
         summary += "\n"
-        summary += formatted_date(sprint["startDate"]) + " ~ "
-        summary += formatted_date(sprint["endDate"]) if sprint["endDate"]
+        summary += formatted_date(sprint.startDate) + " ~ "
+        summary += formatted_date(sprint.endDate) if sprint.respond_to? :endDate
       end
-      summary += "\n#{sprint["goal"]}" if sprint["goal"]
+      summary += "\n#{sprint.goal}" if sprint.respond_to? :goal
       summary
     end
 
@@ -31,9 +43,23 @@ module Terjira
       if(state =~ /active/i)
         pastel.on_blue.bold(state)
       elsif(state =~ /close/i)
-        pastel.on_black.bold.dim(state)
+        pastel.dim(state)
       else
         pastel.on_magenta.bold(state)
+      end
+    end
+
+    def sort_sprint_by_state(sprints)
+      sprints.sort_by do |sprint|
+        if sprint.state == 'active'
+          [0, sprint.id]
+        elsif sprint.state == 'future'
+          [1, sprint.id]
+        elsif sprint.state == 'closed'
+          [2, sprint.id * -1]
+        else
+          [3, 0]
+        end
       end
     end
   end

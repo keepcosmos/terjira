@@ -6,14 +6,12 @@ module Terjira
       class << self
         delegate :all, :get_sprints, :backlog_issues, to: :resource
 
-        def boards
-          all["values"]
+        def project_by_board(board_id)
+          resp = client.get("rest/agile/latest/board/#{board_id}/project")
         end
 
-        def active_sprint(board_id)
-          resp = client.get("/rest/agile/latest/board/#{board_id}/sprint?state=active")
-          sprints = JSON.parse(resp.body)["values"]
-          sprints.first if sprints.is_a? Array
+        def boards
+          all["values"]
         end
 
         def sprints(board_id, options = {})
@@ -36,7 +34,6 @@ module Terjira
         end
 
         def sprint_issues(board_id)
-
         end
       end
     end

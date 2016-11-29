@@ -18,4 +18,22 @@ module JIRA
       result
     end
   end
+
+  # Board model is not defined in jira-ruby gem
+  module Resource
+    class BoardFactory < JIRA::BaseFactory # :nodoc:
+    end
+
+    class Board < JIRA::Base
+      def self.key_attribute
+        :id
+      end
+    end
+  end
+
+  class Client
+    def Board # :nodoc:
+      JIRA::Resource::BoardFactory.new(self)
+    end
+  end
 end

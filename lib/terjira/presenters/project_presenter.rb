@@ -27,32 +27,38 @@ module Terjira
       puts result
     end
 
-    def select_project(projects)
-      prompt = TTY::Prompt.new
-      sep = " - "
-      keys = projects.map { |p| [p.key + sep + p.name] }
-      prompt.select("Choose project?", keys).split(sep)[0]
-    end
-
     def redner_project_detail(project)
-      pastel = Pastel.new
-      head = [pastel.blue.on_white.bold(project.key) + " " + project.name]
+      head = nil
       rows = []
-      rows << [project.description] if project.respond_to?(:description)
-      rows << ['']
+      rows << (pastel.blue.bold(project.key) + " " + project.name)
+      if project.respond_to?(:description)
+        rows << ''
+        rows << pastel.bold("Description")
+        rows << (project.description.strip.empty? ? "None" : project.description)
+      end
+      rows << ''
       lead = project.lead
-      rows << [pastel.bold("Lead")]
-      rows << ["#{lead.displayName} (#{lead.name})"]
-      rows << ['']
-      rows << [pastel.bold("Components")]
-      rows << [project.components.map(&:name).join(", ")]
-      rows << ['']
-      rows << [pastel.bold("Users")]
-      rows << [project.users.map(&:name).reject { |n| n.include?("addon")}.join("\n")]
+      rows << pastel.bold("Lead")
+      rows << "#{lead.displayName} (#{lead.name})"
+      rows << ''
+      rows << render_components_and_versions(project)
 
-      table = TTY::Table.new head, rows
+      table = TTY::Table.new head, rows.map { |row| [row] }
       result = table.render(:unicode, padding: [0, 1, 0, 1], multiline: true)
       puts result
+    end
+
+    def render_components_and_versions(project)
+      componets = project.components.map(&:name)
+      componets = componets.size == 0 ? "Empty" : componets.join("\n")
+      versions = project.versions.reject { |v| v.released }.map(&:name)
+      versions = versions.size == 0 ? "Empty" : versions.join("\n")
+
+      header = [pastel.bold("Components"), pastel.bold("Unreleased versions")]
+      row = [[componets, versions]]
+
+      table = TTY::Table.new(header, row)
+      table.render(padding: [0, 1, 0, 0], multiline: true)
     end
   end
 end

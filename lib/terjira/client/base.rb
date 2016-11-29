@@ -22,15 +22,6 @@ module Terjira
         def username
           client.options[:username]
         end
-
-        # delegate to jira client
-        def method_missing(method_name, *arguments, &block)
-          if(resource.respond_to?(method_name))
-            resource.send(method_name, *arguments, &block)
-          else
-            super(method_name, *arguments, &block)
-          end
-        end
       end
     end
   end
