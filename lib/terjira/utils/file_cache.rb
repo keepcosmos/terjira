@@ -44,7 +44,7 @@ module Terjira
     # Return the value for the specified key from the cache if the key exists in the
     # cache, otherwise set the value returned by the block. Returns the value if found
     # or the value from calling the block that was set.
-    def get_or_set(key)
+    def fetch(key)
       value = get(key)
       return value if value
       value = yield

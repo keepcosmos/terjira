@@ -29,11 +29,28 @@ module JIRA
         :id
       end
     end
+
+    class User
+      def self.key_attribute
+        :key
+      end
+    end
   end
 
   class Client
     def Board # :nodoc:
       JIRA::Resource::BoardFactory.new(self)
     end
+  end
+end
+
+
+class String
+  alias_method :key_value, :to_s
+end
+
+class Integer
+  def key_value
+    self.to_s
   end
 end

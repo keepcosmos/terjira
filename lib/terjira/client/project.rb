@@ -1,20 +1,17 @@
 require_relative 'base'
 
-module Terjira
-  module Client
-    class Project < Base
-      class << self
-        delegate :build, :all, :find, to: :resource
+module Terjira::Client
+  class Project < Base
+    class << self
+      delegate :all, :find, to: :resource
 
-        def statuses(key)
-          response = client.get("/rest/api/latest/project/#{key}/statuses")
-          JSON.parse(response.body)
-        end
+      def statuses(key)
+        get("/rest/api/s/project/#{key}/statuses")
+      end
 
-        def users(key)
-          result = build("key" => key).users
-          result.reject { |u| u.name =~ /^addon/ }
-        end
+      def users(key)
+        result = build("key" => key).users
+        result.reject { |u| u.name =~ /^addon/ }
       end
     end
   end

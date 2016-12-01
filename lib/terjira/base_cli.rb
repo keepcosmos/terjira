@@ -1,18 +1,17 @@
 require 'thor'
 
-%w[option_helper option_builder].each { |f| require_relative f }
+%w[option/shared_options option/option_builder].each { |f| require_relative f }
 Dir[File.dirname(__FILE__) + "/presenters/*.rb"].each { |f| require f }
 
 module Terjira
   module Client
-    %w[Base Project Board Sprint Issue RapidView Agile].each do |klass|
+    %w[Base Project Board Sprint Issue User RapidView Agile].each do |klass|
       autoload klass, "terjira/client/#{klass.gsub(/(.)([A-Z](?=[a-z]))/,'\1_\2').downcase}"
     end
   end
 
   class BaseCLI < Thor
-    extend OptionHelper
-
+    extend SharedOptions
     include OptionBuilder
 
     include CommonPresenter
@@ -31,7 +30,7 @@ module Terjira
 
     no_commands do
       def current_username
-        Client::Base.username
+        @current_username ||= Client::Base.username
       end
     end
   end

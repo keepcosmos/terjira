@@ -7,10 +7,7 @@ module Terjira
     desc "[KEY]", "show detail of project"
     map ls: :lsit
     def show(key = nil)
-      if key.nil?
-        projects = Client::Project.all
-        key = select_project(projects)
-      end
+      key = select_project if key.nil?
       project = Client::Project.find(key)
       redner_project_detail(project)
     end

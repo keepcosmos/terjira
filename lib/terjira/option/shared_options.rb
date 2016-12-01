@@ -1,6 +1,6 @@
 module Terjira
-  module OptionHelper
-    SHARED_OPTIONS = {
+  module SharedOptions
+    OPTIONS = {
       assignee: {
         type: :string,
         aliases: "-a",
@@ -57,8 +57,8 @@ module Terjira
       keys.each { |key| jira_option(key) }
     end
 
-    def jira_option(key, options = {})
-      method_option(key, (SHARED_OPTIONS[key.to_sym] || {}).merge(options))
+    def jira_option(key, opts = {})
+      method_option(key, (OPTIONS[key.to_sym] || {}).merge(opts))
     end
   end
 end

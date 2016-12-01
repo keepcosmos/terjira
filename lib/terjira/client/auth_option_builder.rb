@@ -6,7 +6,7 @@ module Terjira::Client
     AUTH_CACHE_KEY = "auth".freeze
 
     def build_auth_options(cache_key = AUTH_CACHE_KEY)
-      auth_file_cache.get_or_set cache_key do
+      auth_file_cache.fetch cache_key do
         build_auth_options_by_tty
       end
     end

@@ -9,18 +9,33 @@ module Terjira
       extend JQLQueryBuilder
       extend AuthOptionBuilder
 
+      DEFAULT_CACHE_SEC = 60
+
       class << self
+        delegate :build, to: :resource
+
         def client
-          JIRA::Client.new(build_auth_options)
+          @@client ||= JIRA::Client.new(build_auth_options)
         end
 
         def resource
-          client_name = self.to_s.split("::").last
-          client.send(client_name) if client.respond_to?(client_name)
+          client.send(class_name) if client.respond_to?(class_name)
         end
 
         def username
           client.options[:username]
+        end
+
+        def class_name
+          self.to_s.split("::").last
+        end
+
+        def cache(expiry: DEFAULT_CACHE_SEC)
+          @cache ||= Terjira::FileCache.new(class_name, expiry)
+        end
+
+        def get(url)
+          JSON.parse client.get(url).body
         end
       end
     end
