@@ -1,4 +1,5 @@
 require 'terjira'
+require_relative 'mock_resource'
 require 'json'
 require 'pry'
 
@@ -13,10 +14,8 @@ RSpec.configure do |config|
 
   config.shared_context_metadata_behavior = :apply_to_host_groups
 
-  def load_response(path)
-    path += ".json" unless path =~ /\.json/
-    json_path = File.join(File.dirname(__FILE__), "mock_responses/" + path)
-    JSON.parse(File.read(json_path))
+  config.before :example do
+    Terjira::ResourceStore.instance.clear
   end
 
   def capture(stream)

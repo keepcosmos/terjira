@@ -60,11 +60,13 @@ module Terjira
     end
 
     def summarise_issue(issue)
-      summary = colorize_issue_stastus(issue.status)
-      summary += issue.summary.gsub("\t", " ") + "\n"
-      summary += "#{colorize_priority(issue.priority, title: false)} #{colorize_issue_type(issue.issuetype)} "
-      summary +=  assign_info(issue)
-      summary
+      first_line = colorize_issue_stastus(issue.status) + issue.summary.gsub("\t", " ")
+      first_line = insert_new_line(first_line, screen_width - 20)
+
+      second_line = "#{colorize_priority(issue.priority, title: false)} #{colorize_issue_type(issue.issuetype)} "
+      second_line += assign_info(issue)
+
+      [first_line, second_line].join("\n")
     end
 
     private

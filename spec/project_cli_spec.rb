@@ -1,14 +1,11 @@
 require 'spec_helper'
 
 describe Terjira::ProjectCLI do
-  let(:projects) { load_response("project").map { |resp| Terjira::Client::Project.build(resp) } }
-
-  let(:project) { Terjira::Client::Project.build(load_response("project/SAMPLEPROJECT")) }
+  let(:projects) { MockResource.projects }
 
   context "#list" do
     it 'must show project list' do
       allow(Terjira::Client::Project).to receive(:all).and_return(projects)
-
       result = capture(:stdout) { described_class.start(%w[ls]) }
 
       projects.each do |project|
@@ -27,6 +24,8 @@ describe Terjira::ProjectCLI do
 
   context "#show" do
     it 'must show a project by key' do
+      project = projects.first
+
       allow(Terjira::Client::Project).to receive(:find)
         .with(project.key).and_return(project)
       allow(project).to receive(:users).and_return([])
@@ -40,14 +39,18 @@ describe Terjira::ProjectCLI do
 
     it 'must suggest project if project key is not passed' do
       allow(Terjira::Client::Project).to receive(:all).and_return(projects)
+
+      project = projects.first
       allow(Terjira::Client::Project).to receive(:find).and_return(project)
       allow(project).to receive(:users).and_return([])
-      expect(Terjira::Client::Project).to receive(:find).with(projects.first.key)
+
+      expect(Terjira::Client::Project).to receive(:find).with(project.key_value)
 
       prompt = TTY::TestPrompt.new
-      prompt.input << " "
-      prompt.input.rewind
       allow(TTY::Prompt).to receive(:new).and_return(prompt)
+
+      prompt.input << "\r"
+      prompt.input.rewind
 
       capture(:stdout) {
         described_class.start([:show])

@@ -1,8 +1,15 @@
+require_relative 'base'
+
 module Terjira::Client
   class User < Base
     class << self
       def assignables_by_project(project)
-        fetch_assignables("/rest/api/2/user/assignable/search?project=#{project.key_value}")
+        if project.is_a? Array
+          keys = project.map(&:key_value).join(",")
+          fetch_assignables("/rest/api/2/user/assignable/multiProjectSearch?projectKeys=#{keys}")
+        else
+          fetch_assignables("/rest/api/2/user/assignable/search?project=#{project.key_value}")
+        end
       end
 
       def assignables_by_issue(issue)

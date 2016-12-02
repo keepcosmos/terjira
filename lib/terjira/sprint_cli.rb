@@ -4,13 +4,18 @@ module Terjira
   class SprintCLI < BaseCLI
 
     desc "active [BOARD_ID]", "show active sprint and issues on the board"
-    jira_option :assignee
-    map a: :active
+    jira_options :assignee
     def active(board_id = nil)
       options[:assignee] ||= current_username
-      board_id = select_board(Client::Board.all(type: 'scrum')) if board_id.nil?
-      sprint = Client::Sprint.find_active(board_id)
+      if board_id.nil?
+        board = select_board('scrum')
+      else
+        board = Client::Board.build("id" => board_id)
+      end
 
+      build_options!(resouces: { board: board })
+
+      sprint = Client::Sprint.find_active(board)
       render_sprint_with_issues(sprint)
     end
 
@@ -18,24 +23,25 @@ module Terjira
     jira_option(:assignee)
     def show(sprint_id = nil)
       options[:assignee] ||= current_username
-      unless sprint_id
-        board_id = select_board(Client::Board.all(type: 'scrum'))
-        sprints = Client::Sprint.all(board_id)
-        sprint_id = select_sprint(sprints)
-      end
+      sprint_id = select_sprint unless sprint_id
 
       sprint = Client::Sprint.find(sprint_id)
 
       render_sprint_with_issues(sprint)
     end
 
-    desc "list(ls) [BOARD_ID]", "list all sprint in BOARD"
-    jira_option :state, aliases: '-s', default: ['active', 'future'], enum: ['active', 'future', 'closed'], desc: 'states of sprint'
+    desc "list(ls)", "list all sprint in BOARD"
+    jira_options :board, :"sprint-state"
     map ls: :list
-    def list(board_id = nil)
-      board_id = select_board(Client::Board.all(type: 'scrum')) if board_id.nil?
-      options[:state] = options[:state].join(",")
-      sprints = Client::Sprint.all(board_id, options)
+    def list
+      opts = suggest_options(required: [:board])
+
+      if opts[:board].type == 'kanban'
+        return puts "Kanban board does not support sprints"
+      end
+
+      state = opts["sprint-state"].join(",")
+      sprints = Client::Sprint.all(opts[:board], state: state)
       render_sprints_summary sprints
     end
 

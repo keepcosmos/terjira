@@ -2,8 +2,13 @@ require 'tty-prompt'
 require_relative 'resource_store'
 
 module Terjira
-  module OptionBuilder
+  module OptionSelector
     MENU_SEP = " - ".freeze
+
+    # For storing resouces of selected options
+    def resource_store
+      ResourceStore.instance
+    end
 
     def select_project
       if project = resource_store.get(:project)
@@ -31,6 +36,12 @@ module Terjira
 
       issue = resource_store.get(:issue)
       users = Client::User.assignables_by_issue(issue) if users.nil? && issue
+
+      board = resource_store.get(:board)
+      if users.nil? && board
+        projects = Client::Project.all_by_board(board)
+        users = Client::User.assignables_by_project(projects)
+      end
 
       if users.nil?
         project = select_project
@@ -63,8 +74,11 @@ module Terjira
     end
 
     def select_sprint
-      board = select_board('scrum')
+      if sprint = resource_store.get(:sprint)
+        return sprint
+      end
 
+      board = select_board('scrum')
       sprints = resource_store.fetch(:sprints) do
         Client::Sprint.all(board)
       end
@@ -74,8 +88,19 @@ module Terjira
           menu.choice "#{sprint.key_value}#{MENU_SEP}#{sprint.name} (#{sprint.state.capitalize})", sprint
         end
       end
-
       resource_store.set(:sprint, sprint)
+    end
+
+    def select_issuetype
+      project = select_project
+
+      issuetype = option_prompt.select("Choose isseu type?") do |menu|
+        project.issuetypes.each do |issuetype|
+          menu.choice issuetype.name, issuetype
+        end
+      end
+
+      resource_store.set(:issuetype, issuetype)
     end
 
     private
@@ -94,10 +119,6 @@ module Terjira
         end
       end
       result
-    end
-
-    def resource_store
-      ResourceStore.instance
     end
   end
 end

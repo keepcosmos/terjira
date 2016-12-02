@@ -1,6 +1,6 @@
 require 'thor'
 
-%w[option/shared_options option/option_builder].each { |f| require_relative f }
+require_relative 'option_supportable'
 Dir[File.dirname(__FILE__) + "/presenters/*.rb"].each { |f| require f }
 
 module Terjira
@@ -11,8 +11,7 @@ module Terjira
   end
 
   class BaseCLI < Thor
-    extend SharedOptions
-    include OptionBuilder
+    include OptionSupportable
 
     include CommonPresenter
     include IssuePresenter

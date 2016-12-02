@@ -3,10 +3,23 @@ require_relative 'base'
 module Terjira::Client
   class Project < Base
     class << self
-      delegate :all, :find, to: :resource
+      delegate :all, :find, :fetch, to: :resource
+
+      def all
+        expand = %w[description lead issueTypes url projectKeys]
+        resp = get("/rest/api/2/project?expand=#{expand.join(",")}")
+        resp.map { |project| build(project) }
+      end
+
+      def all_by_board(board)
+        resp = get("/rest/agile/1.0/board/#{board.key_value}/project")
+        resp["values"].map do |project|
+          build(project)
+        end
+      end
 
       def statuses(key)
-        get("/rest/api/s/project/#{key}/statuses")
+        get("/rest/api/2/project/#{key}/statuses")
       end
 
       def users(key)

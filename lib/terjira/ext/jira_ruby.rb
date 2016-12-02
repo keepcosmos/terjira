@@ -10,7 +10,7 @@ module JIRA
     def make_request(http_method, path, body='', headers={})
       title = http_method.to_s.upcase + " " + URI.decode(path)
       title = Pastel.new.dim(title)
-      spinner = TTY::Spinner.new ":spinner #{title}", format: :dots
+      spinner = TTY::Spinner.new ":spinner #{title}", format: :dots, clear: true
 
       spinner.start
       result = origin_make_request(http_method, path, body, headers)
@@ -25,15 +25,15 @@ module JIRA
     end
 
     class Board < JIRA::Base
-      def self.key_attribute
-        :id
-      end
+      def self.key_attribute; :id; end
     end
 
     class User
-      def self.key_attribute
-        :key
-      end
+      def self.key_attribute; :key; end
+    end
+
+    class Issuetype
+      def self.key_attribute; :id; end
     end
   end
 
@@ -50,7 +50,5 @@ class String
 end
 
 class Integer
-  def key_value
-    self.to_s
-  end
+  def key_value; self.to_s; end
 end

@@ -1,3 +1,5 @@
+require 'pry'
+
 require 'terjira/version'
 require 'thor'
 
