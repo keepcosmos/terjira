@@ -29,10 +29,14 @@ module Terjira
 
     def render_issue_detail(issue)
       title_pastel = pastel.bold.detach
-      header = ["#{pastel.bold(issue.key)} in #{issue.project.name}"]
+
+      header_title = "#{pastel.bold(issue.key)} in #{issue.project.name}"
+
+      header = [insert_new_line(header_title, screen_width - 10)]
 
       rows = []
-      rows << pastel.underline.bold("#{issue.summary}")
+      summary = issue.summary
+      rows << pastel.underline.bold(summary)
       rows << ""
       rows << "#{title_pastel.("Type")}: #{colorize_issue_type(issue.issuetype)}\s\s\s#{title_pastel.("Status")}: #{colorize_issue_stastus(issue.status)}\s\s\s#{title_pastel.("priority")}: #{colorize_priority(issue.priority)}"
       rows << ""
@@ -52,6 +56,9 @@ module Terjira
           rows << ""
         end
       end
+
+      rows = rows.map { |row| insert_new_line(row, screen_width - 10) }
+
       table = TTY::Table.new header, rows.map { |r| [r] }
       result = table.render(:unicode, padding: [0, 1, 0, 1], multiline: true) do |renderer|
       end
@@ -61,12 +68,11 @@ module Terjira
 
     def summarise_issue(issue)
       first_line = colorize_issue_stastus(issue.status) + issue.summary.gsub("\t", " ")
-      first_line = insert_new_line(first_line, screen_width - 20)
 
       second_line = "#{colorize_priority(issue.priority, title: false)} #{colorize_issue_type(issue.issuetype)} "
       second_line += assign_info(issue)
 
-      [first_line, second_line].join("\n")
+      [first_line, second_line].map { |line| insert_new_line(line, screen_width - 30) }.join("\n")
     end
 
     private

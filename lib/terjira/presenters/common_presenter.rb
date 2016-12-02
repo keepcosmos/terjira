@@ -17,8 +17,15 @@ module Terjira
     end
 
     def insert_new_line(str, length)
-      split_length = (str.length * length / str.display_width).to_i
-      str.scan(/.{1,#{split_length}}/).join("\n")
+      str.split("\n").map do |line|
+        if line.display_width < 1
+          line
+        else
+          display_length = pastel.strip(line).display_width
+          split_length = (line.length * length / display_length).to_i
+          line.scan(/.{1,#{split_length}}/).join("\n")
+        end
+      end.join("\n")
     end
   end
 end

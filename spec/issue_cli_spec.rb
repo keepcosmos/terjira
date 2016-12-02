@@ -8,15 +8,30 @@ describe Terjira::IssueCLI do
   let(:issues) { MockResource.issues }
 
   before :each do
+    allow(TTY::Screen).to receive(:width).and_return(10 ** 4)
     allow(TTY::Prompt).to receive(:new).and_return(prompt)
   end
 
-  it 'must show issue' do
-    issue = issues.first
-    allow(Terjira::Client::Issue).to receive(:find).and_return(issue)
+  context "#show" do
+    it 'must show issue' do
+      issue = issues.first
+      allow(Terjira::Client::Issue).to receive(:find).and_return(issue)
 
-    result = capture(:stdout) { described_class.start(%[show]) }
+      result = capture(:stdout) { described_class.start(%w[show ISSUE-KEY]) }
 
-    puts result
+      expect(result).to be_include(issue.key)
+      expect(result).to be_include(issue.summary)
+      expect(result).to be_include(issue.priority.name)
+      expect(result).to be_include(issue.issuetype.name)
+      expect(result).to be_include(issue.status.name)
+      expect(result).to be_include(issue.assignee.name)
+      expect(result).to be_include(issue.reporter.name)
+    end
+
+    it 'must show help with no arg' do
+      result = capture(:stdout) { described_class.start(%w[show]) }
+
+      expect(result).to be_include("Commands:")
+    end
   end
 end

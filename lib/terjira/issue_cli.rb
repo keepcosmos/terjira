@@ -2,8 +2,10 @@ require_relative 'base_cli'
 
 module Terjira
   class IssueCLI < BaseCLI
+
     desc 'show [ISSUE_KEY]', 'Show detail of the issue'
-    def show(issue_key)
+    def show(issue_key = nil)
+      return invoke(:help) unless issue_key
       issue = Client::Issue.find(issue_key)
       render_issue_detail(issue)
     end

@@ -19,7 +19,7 @@ class MockResource
     end
 
     def issues
-      load_response("issues")["values"].map do |issue|
+      load_response("issues")["issues"].map do |issue|
         Terjira::Client::Issue.build(issue)
       end
     end

@@ -1,4 +1,5 @@
 require 'jira-ruby'
+require 'tty-screen'
 require 'tty-spinner'
 require 'pastel'
 
@@ -10,11 +11,13 @@ module JIRA
     def make_request(http_method, path, body='', headers={})
       title = http_method.to_s.upcase + " " + URI.decode(path)
       title = Pastel.new.dim(title)
-      spinner = TTY::Spinner.new ":spinner #{title}", format: :dots, clear: true
 
-      spinner.start
-      result = origin_make_request(http_method, path, body, headers)
-      spinner.stop
+      spinner = TTY::Spinner.new ":spinner #{title}", format: :dots
+
+      result = nil
+      spinner.run {
+        result = origin_make_request(http_method, path, body, headers)
+      }
       result
     end
   end
