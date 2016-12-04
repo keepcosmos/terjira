@@ -1,4 +1,3 @@
-require_relative '../ext/jira_ruby'
 require_relative 'jql_query_builer'
 require_relative 'auth_option_builder'
 
@@ -12,6 +11,7 @@ module Terjira
       DEFAULT_CACHE_SEC = 60
 
       class << self
+
         delegate :build, to: :resource
 
         def client

@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 require_relative 'base_cli'
 
 module Terjira
@@ -11,14 +13,15 @@ module Terjira
     end
 
     desc "ls", "List of isseus"
-    jira_options :assignee, :'status-category', :status, :project, :type, :priority
+    jira_options :assignee, :status, :project, :issuetype, :priority
     map ls: :list
     def list
-      options[:statusCategory] = ["To Do", "In Progress"] unless options[:status]
-      options[:assignee] = current_username unless options[:assignee]
-      options[:issuetype] = options.delete(:type) if options[:type]
+      opts = suggest_options
+      opts[:statusCategory] ||= ["To Do", "In Progress"] unless opts[:status]
+      opts[:assignee] ||= current_username
+      opts.delete(:assignee) if opts[:assignee] =~ /^all/i
 
-      issues = Client::Issue.all(options)
+      issues = Client::Issue.all(opts)
       render_issues(issues)
     end
 
@@ -32,19 +35,41 @@ module Terjira
     end
 
     desc "new", "create issue"
+    jira_options :project, :issuetype, :priority, :status, :summary
     def new
+
     end
 
     desc "edit", "edit issue"
     def edit(issue)
+
     end
 
-    desc "take [KEY]", "assign issue to self"
+    desc "commenct", "comment issue"
+    jira_options :comment
+    def comment(issue)
+      opts = suggest_options(required: [:comment])
+      comment = opts[:comment]
+      puts comment
+    end
+
+    desc "take ISSUE_KEY", "assign issue to self"
     def take(issue)
+      assign(issue, current_username)
     end
 
-    desc "assign [KEY] ([assignee])", "assing issue to user"
-    def assign(issue, assignee = nil)
+    desc "assign ISSUE_KEY (ASSIGNEE)", "assing issue to user"
+    def assign(*keys)
+      issue = keys[0]
+      assignee = keys[1]
+      if assignee.nil?
+        issue = Client::Issue.find(issue)
+        opts = suggest_options(required: [:assignee],
+                               resouces: { issue: issue })
+        assignee = opts[:assignee]
+      end
+      Client::Issue.assign(issue, assignee)
+      show(issue)
     end
   end
 end

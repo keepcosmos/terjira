@@ -9,13 +9,16 @@ module Terjira
           memo
         end.slice(*JQL_KEYS)
 
-        q_options.map do |key, value|
+        query = q_options.map do |key, value|
           if value.is_a? Array
-            "#{key} IN (#{value.map { |v| "\"#{v.key_value}\""}.join(",")})"
+            values = value.map { |v| "\"#{v.key_value}\""}.join(",")
+            "#{key} IN (#{values})"
           else
-            "#{key} = #{value.key_value}"
+            "#{key}=#{value.key_value}"
           end
         end.reject(&:blank?).join(" AND ")
+
+        query
       end
     end
   end

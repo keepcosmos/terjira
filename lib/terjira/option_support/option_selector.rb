@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 require 'tty-prompt'
 require_relative 'resource_store'
 
@@ -38,8 +40,10 @@ module Terjira
       users = Client::User.assignables_by_issue(issue) if users.nil? && issue
 
       board = resource_store.get(:board)
-      if users.nil? && board
-        projects = Client::Project.all_by_board(board)
+      sprint = resource_store.get(:sprint)
+      board_id = board ? board.id : (sprint ? sprint.originBoardId : nil)
+      if users.nil? && board_id
+        projects = Client::Project.all_by_board(board_id)
         users = Client::User.assignables_by_project(projects)
       end
 
@@ -97,7 +101,6 @@ module Terjira
 
     def select_issuetype
       project = select_project
-
       issuetype = option_prompt.select("Choose isseu type?") do |menu|
         project.issuetypes.each do |issuetype|
           menu.choice issuetype.name, issuetype
@@ -105,6 +108,38 @@ module Terjira
       end
 
       resource_store.set(:issuetype, issuetype)
+    end
+
+    def select_issue_status
+      statuses = resource_store.fetch(:statuses) do
+                   project = select_project
+                   Client::Status.all(project)
+                 end
+
+      status = option_prompt.select("Choose status?") do |menu|
+        statuses.each do |status|
+          menu.choice status.name, status
+        end
+      end
+
+      resource_store.set(:status, status)
+    end
+
+    def select_priority
+      priorities = resource_store.fetch(:priorities) do
+                     Terjira::Client::Priority.all
+                   end
+      priority = option_prompt.select("Choose priority?") do |menu|
+                   priorities.each do |priority|
+                     menu.choice priority.name, priority
+                   end
+                 end
+      resource_store.set(:priority, priority)
+    end
+
+    def write_comment
+      comment = option_prompt.multiline("Comment? (Return empty line for finish)\n",)
+      resource_store.set(:comment, comment)
     end
 
     private

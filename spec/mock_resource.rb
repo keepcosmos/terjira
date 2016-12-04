@@ -24,6 +24,14 @@ class MockResource
       end
     end
 
+    def statuses
+      itypes = load_response("statuses")
+      json = itypes.map { |issuetype| issuetype["statuses"] }.flatten.uniq
+      json.map do |status|
+        Terjira::Client::Status.build(status)
+      end
+    end
+
     def load_response(path)
       path += ".json" unless path =~ /\.json/
       json_path = File.join(File.dirname(__FILE__), "mock_responses/" + path)

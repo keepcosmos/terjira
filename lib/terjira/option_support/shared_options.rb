@@ -20,12 +20,7 @@ module Terjira
         aliases: "-a",
         desc: 'Assignee username. no option -> return only your issues, ALL -> issues of all assignees'
       },
-      "status-category" => {
-        type: :string,
-        aliases: '-S',
-        desc: 'Status categories, if no option return all issues without `Done`'
-      },
-      "sprint-state" => {
+      "state" => {
         type: :array,
         aliases: '-s',
         default: ['active', 'future'],
@@ -37,14 +32,20 @@ module Terjira
         aliases: '-s',
         desc: 'status'
       },
-      "issue-type" => {
+      "issuetype" => {
         type: :string,
         aliases: '-t',
         desc: 'Issue type'
       },
       "priority" => {
         type: :string,
+        aliases: '-P',
         desc: 'priority'
+      },
+      "summary" => {
+        type: :string,
+        aliases: '-S',
+        desc: "Issue summary"
       },
       "comment" => {
         type: :string,

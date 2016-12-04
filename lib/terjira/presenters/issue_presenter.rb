@@ -42,8 +42,9 @@ module Terjira
       rows << ""
       rows << "#{title_pastel.("Type")}: #{colorize_issue_type(issue.issuetype)}\s\s\s#{title_pastel.("Status")}: #{colorize_issue_stastus(issue.status)}\s\s\s#{title_pastel.("priority")}: #{colorize_priority(issue.priority)}"
       rows << ""
-      rows << title_pastel.("Assignee") + " #{issue.assignee.displayName}(#{issue.assignee.name}, #{issue.assignee.emailAddress})"
-      rows << title_pastel.("Reporter") + " #{issue.reporter.displayName}(#{issue.reporter.name}, #{issue.reporter.emailAddress})"
+
+      rows << title_pastel.("Assignee") + " " +  username_with_email(issue.assignee)
+      rows << title_pastel.("Reporter") + " " + username_with_email(issue.reporter)
       rows << ""
       rows << title_pastel.("Description")
       rows << (issue.description.blank? ? "None" : issue.description.gsub("\r", ""))
@@ -114,7 +115,7 @@ module Terjira
       end
     end
 
-    def colorize_priority(priority, title: true)
+    def colorize_priority(priority, optiosn = {})
       return '' unless priority.respond_to? :name
       name = priority.name
       info = if name =~ /high|major|critic/i
@@ -126,14 +127,16 @@ module Terjira
              else
                { color: :green, icon: "•", name: name }
              end
-      title = title ? "#{info[:icon]} #{info[:name]}" : info[:icon]
+      title = options[:title] ? "#{info[:icon]} #{info[:name]}" : info[:icon]
       pastel.send(info[:color], title)
     end
 
     def extract_status_names(issues)
       issues.sort_by do |issue|
         status_key = %w[new indeterminate done]
-        idx = status_key.index(issue.status.statusCategory["key"])
+        idx = if issue.status.respond_to? :statusCategory
+                status_key.index(issue.status.statusCategory["key"])
+              end
         idx || status_key.size
       end.map { |issue| issue.status.name }.uniq
     end

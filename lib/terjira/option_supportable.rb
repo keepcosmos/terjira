@@ -17,7 +17,10 @@ module Terjira
       board: :select_board,
       sprint: :select_sprint,
       assignee: :select_assignee,
-      issuetype: :select_issuetype
+      issuetype: :select_issuetype,
+      status: :select_issue_status,
+      priority: :select_priority,
+      comment: :write_comment
     }
 
     def suggest_options(opts = {})
@@ -29,20 +32,26 @@ module Terjira
         end
       end
 
+      result.each do |k, v|
+        unless k.to_s.downcase == v.to_s.downcase
+          resource_store.set(k.to_sym, v)
+        end
+      end
+
       if opts[:resouces].is_a? Hash
         opts[:resouces].each { |k, v| resource_store.set(k.to_sym, v) }
       end
 
       default_value_options = result.select { |k, v| k.to_s.downcase == v.to_s.downcase }
 
-      default_value_options.each do |k, v|
+      default_value_options.each do |k, _v|
         if selector_method = OPTION_TO_SELECTOR[k.to_sym]
           send(selector_method)
         end
       end
 
-      default_value_options.each do |k, v|
-        default_value_options[k] = resource_store.get(v)
+      default_value_options.each do |k, _v|
+        default_value_options[k] = resource_store.get(k)
       end
 
       result.merge! default_value_options

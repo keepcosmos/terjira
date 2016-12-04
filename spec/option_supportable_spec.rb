@@ -19,9 +19,10 @@ describe Terjira::OptionSupportable do
   let(:projects) { MockResource.projects }
   let(:boards)  { MockResource.projects }
   let(:sprints) { MockResource.sprints }
+  let(:statuses) { MockResource.statuses }
 
   before :each do
-    allow(TTY::Prompt).to receive(:new).and_return(prompt)
+    # allow(TTY::Prompt).to receive(:new).and_return(prompt)
   end
 
   it "suggest proejct selections" do
@@ -48,15 +49,24 @@ describe Terjira::OptionSupportable do
   end
 
   it 'suggeset sprint selections' do
-    allow(Terjira::Client::Board).to receive(:all).and_return(boards)
     allow(Terjira::Client::Sprint).to receive(:all).and_return(sprints)
 
-    prompt.input << "\r" * 2
+    prompt.input << "\r"
     prompt.input.rewind
 
-    subject.options = { "sprint" => "sprint" }
-    suggested = subject.suggest_options(required: ["board"])
+    suggested = subject.suggest_options(required: [:sprint], resouces: { board: boards.first } )
+
     expect(sprints).to include(suggested["sprint"])
-    expect(boards).to include(suggested["board"])
+  end
+
+  it 'suggest issue status selections' do
+    allow(Terjira::Client::Status).to receive(:all).and_return(statuses)
+    
+    prompt.input << "\r"
+    prompt.input.rewind
+
+    suggested = subject.suggest_options(required: [:status], resouces: { project: projects.first } )
+
+    expect(statuses).to include(suggested["status"])
   end
 end

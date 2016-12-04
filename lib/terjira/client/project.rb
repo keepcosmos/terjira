@@ -18,10 +18,6 @@ module Terjira::Client
         end
       end
 
-      def statuses(key)
-        get("/rest/api/2/project/#{key}/statuses")
-      end
-
       def users(key)
         result = build("key" => key).users
         result.reject { |u| u.name =~ /^addon/ }

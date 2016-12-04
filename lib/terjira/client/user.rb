@@ -17,7 +17,6 @@ module Terjira::Client
       end
 
       def all
-
       end
 
       private

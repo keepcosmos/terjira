@@ -1,5 +1,6 @@
 require 'pry'
-
+require_relative 'terjira/ext/jira_ruby'
+require_relative 'terjira/ext/tty_prompt'
 require 'terjira/version'
 require 'thor'
 
@@ -10,7 +11,6 @@ ENV['PAGER'] ||= 'less'
 # http://willschenk.com/making-a-command-line-utility-with-gems-and-thor/
 module Terjira
   class CLI < Thor
-
     desc "login", "login your Jira"
     def login
       Client::Base.expire_auth_options

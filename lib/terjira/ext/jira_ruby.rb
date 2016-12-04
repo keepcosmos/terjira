@@ -11,9 +11,7 @@ module JIRA
     def make_request(http_method, path, body='', headers={})
       title = http_method.to_s.upcase + " " + URI.decode(path)
       title = Pastel.new.dim(title)
-
-      spinner = TTY::Spinner.new ":spinner #{title}", format: :dots
-
+      spinner = TTY::Spinner.new ":spinner #{title}", format: :dots, clear: false
       result = nil
       spinner.run {
         result = origin_make_request(http_method, path, body, headers)
@@ -35,6 +33,10 @@ module JIRA
       def self.key_attribute; :key; end
     end
 
+    class Issue
+      def self.key_attribute; :key; end
+    end
+
     class Issuetype
       def self.key_attribute; :id; end
     end
@@ -47,9 +49,8 @@ module JIRA
   end
 end
 
-
 class String
-  alias_method :key_value, :to_s
+  def key_value; self.strip; end
 end
 
 class Integer

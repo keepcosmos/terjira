@@ -9,7 +9,7 @@ describe Terjira::IssueCLI do
 
   before :each do
     allow(TTY::Screen).to receive(:width).and_return(10 ** 4)
-    allow(TTY::Prompt).to receive(:new).and_return(prompt)
+    # allow(TTY::Prompt).to receive(:new).and_return(prompt)
   end
 
   context "#show" do
@@ -30,8 +30,17 @@ describe Terjira::IssueCLI do
 
     it 'must show help with no arg' do
       result = capture(:stdout) { described_class.start(%w[show]) }
-
       expect(result).to be_include("Commands:")
+    end
+  end
+
+  context "#list" do
+    allow(Terjira::Client::Issue).to receive(:all).and_return(issues)
+
+    result = capture(:stdout) { described_class.start(%w[show list]) }
+
+    issues.each do |issue|
+      expect(issue)
     end
   end
 end

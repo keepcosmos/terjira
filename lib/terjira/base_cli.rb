@@ -5,7 +5,7 @@ Dir[File.dirname(__FILE__) + "/presenters/*.rb"].each { |f| require f }
 
 module Terjira
   module Client
-    %w[Base Project Board Sprint Issue User RapidView Agile].each do |klass|
+    %w[Base Project Board Sprint Issue User Status Priority RapidView Agile].each do |klass|
       autoload klass, "terjira/client/#{klass.gsub(/(.)([A-Z](?=[a-z]))/,'\1_\2').downcase}"
     end
   end

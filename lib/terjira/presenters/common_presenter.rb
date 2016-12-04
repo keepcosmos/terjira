@@ -14,6 +14,14 @@ module Terjira
       Time.parse(date_str).strftime("%c")
     end
 
+    def username_with_email(user)
+      if user.nil?
+        "None"
+      else
+        "#{user.name}, #{user.displayName} <#{user.emailAddress}>"
+      end
+    end
+
     def screen_width
       TTY::Screen.width
     end

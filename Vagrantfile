@@ -12,6 +12,8 @@ Vagrant.configure(2) do |config|
   config.vm.network :private_network, ip: '192.168.20.21'
   # config.vm.network "public_network"
 
+  config.vm.network 'forwarded_port', guest: 2990, host: 2990
+
   config.vm.synced_folder '.', '/vagrant', type: 'nfs'
 
   config.vm.provider 'virtualbox' do |vb|
