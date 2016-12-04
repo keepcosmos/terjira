@@ -2,6 +2,12 @@ require 'spec_helper'
 
 module Terjira
   class TestCLI < Thor
+    include CommonPresenter
+    include IssuePresenter
+    include ProjectPresenter
+    include BoardPresenter
+    include SprintPresenter
+
     include OptionSupportable
   end
 end
@@ -25,9 +31,9 @@ describe Terjira::OptionSupportable do
     prompt.input << "\r"
     prompt.input.rewind
 
-    subject.build_options!
+    suggested = subject.suggest_options
 
-    expect(projects).to include(subject.options["project"])
+    expect(projects).to include(suggested["project"])
   end
 
   it 'suggest board selections' do
@@ -37,22 +43,20 @@ describe Terjira::OptionSupportable do
     prompt.input << "\r"
     prompt.input.rewind
 
-    subject.build_options!
-    expect(boards).to include(subject.options["board"])
+    suggested = subject.suggest_options
+    expect(boards).to include(suggested["board"])
   end
 
   it 'suggeset sprint selections' do
     allow(Terjira::Client::Board).to receive(:all).and_return(boards)
-
     allow(Terjira::Client::Sprint).to receive(:all).and_return(sprints)
 
-    prompt.input << "\r\r"
+    prompt.input << "\r" * 2
     prompt.input.rewind
 
     subject.options = { "sprint" => "sprint" }
-    subject.build_options!
-
-    expect(sprints).to include(subject.options["sprint"])
-    expect(boards).to include(subject.options["board"])
+    suggested = subject.suggest_options(required: ["board"])
+    expect(sprints).to include(suggested["sprint"])
+    expect(boards).to include(suggested["board"])
   end
 end

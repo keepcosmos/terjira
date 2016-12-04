@@ -60,6 +60,10 @@ module Terjira
     end
 
     def select_board(type = nil)
+      if board = resource_store.get(:board)
+        return board
+      end
+
       boards = resource_store.fetch(:boards) do
         Client::Board.all(type: type)
       end

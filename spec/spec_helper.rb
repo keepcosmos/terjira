@@ -1,5 +1,6 @@
 require 'terjira'
 require_relative 'mock_resource'
+require 'jira-ruby'
 require 'json'
 require 'pry'
 
@@ -16,6 +17,7 @@ RSpec.configure do |config|
 
   config.before :example do
     Terjira::ResourceStore.instance.clear
+    allow(Terjira::Client::Base).to receive(:client).and_return(JIRA::Client.new({}))
   end
 
   def capture(stream)
