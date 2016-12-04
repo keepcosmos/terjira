@@ -1,8 +1,6 @@
 language: ruby
 
 rvm:
-  - 1.8.7
-  - 1.9.2
   - 1.9.3
   - 2.0.0
   - 2.1.0
@@ -12,4 +10,4 @@ rvm:
 before_install:
   - gem install i18n --no-rdoc --no-ri --no-document
 
-script: rspec /spec
+script: bundle exec rspec spec/
