@@ -20,29 +20,24 @@ module Terjira
       issuetype: :select_issuetype,
       status: :select_issue_status,
       priority: :select_priority,
-      comment: :write_comment
+      comment: :write_comment,
+      summary: :write_summary
     }
 
     def suggest_options(opts = {})
-      result = options.dup
+      origin = options.dup
 
       if opts[:required].is_a? Array
-        opts[:required].each do |opt|
-          result[opt] ||= opt.to_s
-        end
+        opts.inject(origin) { |memo, opt| memo[opt] ||= opt.to_s; memo }
       end
 
-      result.each do |k, v|
-        unless k.to_s.downcase == v.to_s.downcase
-          resource_store.set(k.to_sym, v)
-        end
+      origin.reject { |k, v| k.to_s.downcase == v.to_s.downcase }.each do |k, v|
+        resource_store.set(k.to_sym, v)
       end
 
-      if opts[:resouces].is_a? Hash
-        opts[:resouces].each { |k, v| resource_store.set(k.to_sym, v) }
-      end
+      (opts[:resouces] || {}).each { |k, v| resource_store.set(k.to_sym, v) }
 
-      default_value_options = result.select { |k, v| k.to_s.downcase == v.to_s.downcase }
+      default_value_options = origin.select { |k, v| k.to_s.downcase == v.to_s.downcase }
 
       default_value_options.each do |k, _v|
         if selector_method = OPTION_TO_SELECTOR[k.to_sym]
@@ -54,7 +49,11 @@ module Terjira
         default_value_options[k] = resource_store.get(k)
       end
 
-      result.merge! default_value_options
+      origin.merge! default_value_options
+    end
+
+    def resource_store
+      ResourceStore.instance
     end
   end
 end

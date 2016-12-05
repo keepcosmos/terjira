@@ -52,8 +52,16 @@ module Terjira
       if issue.comments.present?
         rows << ""
         rows << title_pastel.("Comments")
-        rows << "None" if issue.comments.size == 0
-        issue.comments.each do |comment|
+        remain_comments = issue.comments
+        comments = remain_comments.pop(4)
+
+        if comments.size == 0
+          rows << "None"
+        elsif remain_comments.size > 0
+          rows << pastel.dim("- #{remain_comments.size} previous comments exist -")
+        end
+
+        comments.each do |comment|
           rows << "#{pastel.bold(comment.author["displayName"])} <#{comment.author["emailAddress"]}> | #{formatted_date(comment.created)}"
           rows << comment.body
           rows << ""

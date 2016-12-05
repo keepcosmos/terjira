@@ -9,7 +9,7 @@ describe Terjira::IssueCLI do
 
   before :each do
     allow(TTY::Screen).to receive(:width).and_return(10 ** 4)
-    # allow(TTY::Prompt).to receive(:new).and_return(prompt)
+    allow(TTY::Prompt).to receive(:new).and_return(prompt)
   end
 
   context "#show" do
@@ -35,12 +35,14 @@ describe Terjira::IssueCLI do
   end
 
   context "#list" do
-    allow(Terjira::Client::Issue).to receive(:all).and_return(issues)
+    it 'must show issue list' do
+      allow(Terjira::Client::Issue).to receive(:all).and_return(issues)
 
-    result = capture(:stdout) { described_class.start(%w[show list]) }
+      result = capture(:stdout) { described_class.start(%w[show list]) }
 
-    issues.each do |issue|
-      expect(issue)
+      issues.each do |issue|
+        expect(issue)
+      end
     end
   end
 end

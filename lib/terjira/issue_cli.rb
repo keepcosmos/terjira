@@ -35,22 +35,28 @@ module Terjira
     end
 
     desc "new", "create issue"
-    jira_options :project, :issuetype, :priority, :status, :summary
+    jira_options :project, :issuetype, :priority, :status, :summary, :assignee
     def new
-
+      opts = suggest_options(required: [:project, :summary, :issuetype])
+      result = Client::Issue.create(opts)
+      puts result.map { |k, v| "#{k}=#{v.key_value}"}
     end
 
     desc "edit", "edit issue"
     def edit(issue)
-
     end
 
     desc "commenct", "comment issue"
     jira_options :comment
     def comment(issue)
       opts = suggest_options(required: [:comment])
-      comment = opts[:comment]
-      puts comment
+      10.times do
+        if comment_id = Client::Issue.write_comment(issue, opts[:comment])
+          puts pastel.blue.bold("Success! comment id: #{comment_id}")
+        else
+          puts pastel.red("Error")
+        end
+      end
     end
 
     desc "take ISSUE_KEY", "assign issue to self"
@@ -69,7 +75,7 @@ module Terjira
         assignee = opts[:assignee]
       end
       Client::Issue.assign(issue, assignee)
-      show(issue)
+      show(issue.key_value)
     end
   end
 end

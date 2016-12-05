@@ -7,142 +7,125 @@ module Terjira
   module OptionSelector
     MENU_SEP = " - ".freeze
 
-    # For storing resouces of selected options
-    def resource_store
-      ResourceStore.instance
-    end
-
     def select_project
-      if project = resource_store.get(:project)
-        return project
-      end
-
-      projects = resource_store.fetch(:projects) do
-        Client::Project.all
-      end
-
-      project = option_prompt.select("Choose project?") do |menu|
-        projects.each do |project|
-          menu.choice "#{project.key_value}#{MENU_SEP}#{project.name}", project
+      fetch_resource :project do
+        projects = fetch_resource(:projects) { Client::Project.all }
+        option_prompt.select("Choose project?") do |menu|
+          projects.each { |project| menu.choice project_choice_title(project), project }
         end
       end
-      resource_store.set(:project, project)
     end
 
     def select_assignee
-      if assignee = resource_store.get(:assignee)
-        return assignee
-      end
+      fetch_resource(:assignee) do
+        users = fetch_resource(:users) do
+                  if issue = get_resource(:issue)
+                    Client::User.assignables_by_issue(issue)
+                  elsif board = get_resource(:board)
+                    Client::User.assignables_by_board(board)
+                  elsif sprint = get_resource(:sprint)
+                    Client::User.assignables_by_sprint(board)
+                  else
+                    users = Client::User.assignables_by_project(select_project)
+                  end
+                end
 
-      users = resource_store.get(:users)
-
-      issue = resource_store.get(:issue)
-      users = Client::User.assignables_by_issue(issue) if users.nil? && issue
-
-      board = resource_store.get(:board)
-      sprint = resource_store.get(:sprint)
-      board_id = board ? board.id : (sprint ? sprint.originBoardId : nil)
-      if users.nil? && board_id
-        projects = Client::Project.all_by_board(board_id)
-        users = Client::User.assignables_by_project(projects)
-      end
-
-      if users.nil?
-        project = select_project
-        users = Client::User.assignables_by_project(project)
-      end
-
-      resource_store.set(:users, users)
-
-      assignee = option_prompt.select("Choose assignee?") do |menu|
-        users.each do |user|
-          menu.choice "#{user.key_value}#{MENU_SEP}#{user.displayName}", user
+        option_prompt.select("Choose assignee?") do |menu|
+          users.each { |user| menu.choice user_choice_title(user), user }
         end
       end
-
-      resource_store.set(:assignee, assignee)
     end
 
     def select_board(type = nil)
-      if board = resource_store.get(:board)
-        return board
-      end
-
-      boards = resource_store.fetch(:boards) do
-        Client::Board.all(type: type)
-      end
-
-      board = option_prompt.select("Choose board?") do |menu|
-        boards.sort_by { |b| b.id }.each do |board|
-          menu.choice "#{board.key_value}#{MENU_SEP}#{board.name}", board
+      fetch_resource(:board) do
+        boards = fetch_resource(:boards) { Client::Board.all(type: type) }
+        option_prompt.select("Choose board?") do |menu|
+          boards.sort_by { |b| b.id }.each do |board|
+            menu.choice "#{board.key_value}#{MENU_SEP}#{board.name}", board
+          end
         end
       end
-
-      resource_store.set(:board, board)
     end
 
     def select_sprint
-      if sprint = resource_store.get(:sprint)
-        return sprint
-      end
-
-      board = select_board('scrum')
-      sprints = resource_store.fetch(:sprints) do
-        Client::Sprint.all(board)
-      end
-
-      sprint = option_prompt.select("Choose sprint?") do |menu|
-        sort_sprint_by_state(sprints).each do |sprint|
-          menu.choice "#{sprint.key_value}#{MENU_SEP}#{sprint.name} (#{sprint.state.capitalize})", sprint
+      fetch_resource(:sprint) do
+        board = select_board('scrum')
+        sprints = fetch_resource(:sprints) { Client::Sprint.all(board) }
+        option_prompt.select("Choose sprint?") do |menu|
+          sort_sprint_by_state(sprints).each do |sprint|
+            menu.choice sprint_choice_title(sprint), sprint
+          end
         end
       end
-      resource_store.set(:sprint, sprint)
     end
 
     def select_issuetype
-      project = select_project
-      issuetype = option_prompt.select("Choose isseu type?") do |menu|
-        project.issuetypes.each do |issuetype|
-          menu.choice issuetype.name, issuetype
+      fetch_resource(:issuetype) do
+        project = select_project
+        option_prompt.select("Choose isseu type?") do |menu|
+          project.issuetypes.each do |issuetype|
+            menu.choice issuetype.name, issuetype
+          end
         end
       end
-
-      resource_store.set(:issuetype, issuetype)
     end
 
     def select_issue_status
-      statuses = resource_store.fetch(:statuses) do
-                   project = select_project
-                   Client::Status.all(project)
-                 end
+      fetch_resource(:status) do
+        statuses = fetch_resource(:statuses) do
+                     Client::Status.all(select_project)
+                   end
 
-      status = option_prompt.select("Choose status?") do |menu|
-        statuses.each do |status|
-          menu.choice status.name, status
+        option_prompt.select("Choose status?") do |menu|
+          statuses.each do |status|
+            menu.choice status.name, status
+          end
         end
       end
-
-      resource_store.set(:status, status)
     end
 
     def select_priority
-      priorities = resource_store.fetch(:priorities) do
-                     Terjira::Client::Priority.all
-                   end
-      priority = option_prompt.select("Choose priority?") do |menu|
-                   priorities.each do |priority|
-                     menu.choice priority.name, priority
-                   end
-                 end
-      resource_store.set(:priority, priority)
+      fetch_resource(:priority) do
+        priorities = fetch_resource(:priorities) { Terjira::Client::Priority.all }
+        option_prompt.select("Choose priority?") do |menu|
+          priorities.each do |priority|
+            menu.choice priority.name, priority
+          end
+        end
+      end
     end
 
     def write_comment
-      comment = option_prompt.multiline("Comment? (Return empty line for finish)\n",)
-      resource_store.set(:comment, comment)
+      fetch_resource(:comment) do
+        option_prompt.multiline("Comment? (Return empty line for finish)\n",).join("\n")
+      end
+    end
+
+    def write_summary
+      fetch_resource(:summary) { option_prompt.ask("Summary?") }
     end
 
     private
+
+    def sprint_choice_title(sprint)
+      "#{sprint.key_value}#{MENU_SEP}#{sprint.name} (#{sprint.state.capitalize})"
+    end
+
+    def user_choice_title(user)
+      "#{user.key_value}#{MENU_SEP}#{user.displayName}"
+    end
+
+    def project_choice_title(project)
+      "#{project.key_value}#{MENU_SEP}#{project.name}"
+    end
+
+    def get_resource(resource_name)
+      ResourceStore.instance.get(resource_name)
+    end
+
+    def fetch_resource(resource_name, &block)
+      ResourceStore.instance.fetch(resource_name, &block)
+    end
 
     def option_prompt
       @option_prompt ||= TTY::Prompt.new

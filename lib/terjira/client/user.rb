@@ -12,11 +12,22 @@ module Terjira::Client
         end
       end
 
-      def assignables_by_issue(issue)
-        fetch_assignables("/rest/api/2/user/assignable/search?issueKey=#{issue.key_value}")
+      def assignables_by_board(board)
+        projects = Client::Project.all_by_board(board)
+        assignables_by_project(projects)
       end
 
-      def all
+      def assignables_by_sprint(sprint)
+        board_id = if sprint.respond_to? :originBoardId
+                     sprint.originBoardId
+                   else
+                     Client::Sprint.find(sprint).originBoardId
+                   end
+        assignables_by_board(board_id)
+      end
+
+      def assignables_by_issue(issue)
+        fetch_assignables("/rest/api/2/user/assignable/search?issueKey=#{issue.key_value}")
       end
 
       private
