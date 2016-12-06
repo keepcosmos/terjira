@@ -28,6 +28,8 @@ module Terjira
     def suggest_options(opts = {})
       origin = options.dup
 
+      origin.reject! { |k, v| v.to_s =~ /^all$/i }
+
       if opts[:required].is_a? Array
         opts[:required].inject(origin) { |memo, opt| memo[opt] ||= opt.to_s; memo }
       end

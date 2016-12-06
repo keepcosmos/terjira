@@ -5,6 +5,14 @@ require 'pastel'
 
 module Terjira
   module CommonPresenter
+    def render(text)
+      if text.is_a? Array
+        puts text.join("\n")
+      else
+        puts text
+      end
+    end
+
     def pastel
       @pastel ||= Pastel.new
     end

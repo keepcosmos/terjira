@@ -3,7 +3,7 @@
 module Terjira
   module SprintPresenter
     def render_sprint_detail(sprint)
-      return puts "Empty" if sprint.nil?
+      return render("Empty") if sprint.nil?
       attrs = sprint.attrs
       summary = [
         pastel.bold("#{sprint.id}. #{sprint.name} #{colorize_sprint_state(sprint.state)}"),
@@ -11,7 +11,7 @@ module Terjira
         "#{formatted_date(attrs["startDate"])} ~ #{formatted_date(attrs["endDate"])}"
       ]
 
-      puts summary.reject(&:empty?).join("\n")
+      render(summary.reject(&:empty?).join("\n"))
     end
 
     def render_sprints_summary(sprints)
@@ -25,7 +25,7 @@ module Terjira
       result = table.render(:unicode, multiline: true) do |renderer|
         renderer.border.separator = :each_row
       end
-      puts result
+      render(result)
     end
 
     def summarise_sprint(sprint)

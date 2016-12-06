@@ -6,7 +6,7 @@ require 'tty-table'
 module Terjira
   module ProjectPresenter
     def render_projects_summary(projects)
-      return puts "Nothing." if projects.blank?
+      return render("Nothing.") if projects.blank?
       head = ["KEY", "NAME", "TYPE"].map do |v|
                { value: v, alignment: :center }
              end
@@ -26,7 +26,7 @@ module Terjira
         end
       end
 
-      puts result
+      render(result)
     end
 
     def redner_project_detail(project)
@@ -47,7 +47,7 @@ module Terjira
 
       table = TTY::Table.new head, rows.map { |row| [row] }
       result = table.render(:unicode, padding: [0, 1, 0, 1], multiline: true)
-      puts result
+      render(result)
     end
 
     def render_components_and_versions(project)

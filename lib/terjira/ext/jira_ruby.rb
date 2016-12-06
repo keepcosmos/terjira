@@ -9,7 +9,6 @@ module JIRA
     alias_method  :origin_make_request, :make_request
 
     def make_request(http_method, path, body='', headers={})
-      puts body
       title = http_method.to_s.upcase + " " + URI.decode(path)
       title = Pastel.new.dim(title)
       spinner = TTY::Spinner.new ":spinner #{title}", format: :dots, clear: false
@@ -28,6 +27,7 @@ module JIRA
       [self.class.key_attribute, key_value]
     end
   end
+
   module Resource
     class BoardFactory < JIRA::BaseFactory # :nodoc:
     end

@@ -3,6 +3,12 @@ require_relative 'base_cli'
 module Terjira
   class SprintCLI < BaseCLI
 
+    no_commands do
+      def client_class
+        Client::Sprint
+      end
+    end
+
     desc "active", "show active sprint and issues on the board"
     jira_options :board, :assignee
     def active
@@ -11,7 +17,7 @@ module Terjira
       else
         board = options[:board]
       end
-      sprint = Client::Sprint.find_active(board)
+      sprint = client_class.find_active(board)
       opts = suggest_options(required: [:sprint],
                              resouces: { board: board, sprint: sprint }
                             )
@@ -23,7 +29,7 @@ module Terjira
     desc "show [SPRINT_ID]", "show sprint"
     jira_option(:assignee)
     def show(sprint_id = nil)
-      sprint = Client::Sprint.find(sprint_id)
+      sprint = client_class.find(sprint_id)
       opts = suggest_options(required: [:sprint],
                              resouces: { sprint: sprint }
                             )
@@ -32,18 +38,18 @@ module Terjira
       render_sprint_with_issues(sprint, issues)
     end
 
-    desc "list(ls)", "list all sprint in BOARD"
+    desc "list|ls", "list all sprint in BOARD"
     jira_options :board, :state
     map ls: :list
     def list
       opts = suggest_options(required: [:board])
 
       if opts[:board].type == 'kanban'
-        return puts "Kanban board does not support sprints"
+        return render("Kanban board does not support sprints")
       end
 
-      state = opts["sprint-state"].join(",")
-      sprints = Client::Sprint.all(opts[:board], state: state)
+      state = opts["state"].join(",") if opts["state"]
+      sprints = client_class.all(opts[:board], state: state)
       render_sprints_summary sprints
     end
 

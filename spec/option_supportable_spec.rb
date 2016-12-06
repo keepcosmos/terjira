@@ -22,7 +22,7 @@ describe Terjira::OptionSupportable do
   let(:statuses) { MockResource.statuses }
 
   before :each do
-    # allow(TTY::Prompt).to receive(:new).and_return(prompt)
+    allow(TTY::Prompt).to receive(:new).and_return(prompt)
   end
 
   it "suggest proejct selections" do
@@ -61,7 +61,7 @@ describe Terjira::OptionSupportable do
 
   it 'suggest issue status selections' do
     allow(Terjira::Client::Status).to receive(:all).and_return(statuses)
-    
+
     prompt.input << "\r"
     prompt.input.rewind
 

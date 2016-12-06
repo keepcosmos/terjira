@@ -38,8 +38,7 @@ describe Terjira::IssueCLI do
     it 'must show issue list' do
       allow(Terjira::Client::Issue).to receive(:all).and_return(issues)
 
-      result = capture(:stdout) { described_class.start(%w[show list]) }
-
+      result = capture(:stdout) { described_class.start(%w[list]) }
       issues.each do |issue|
         expect(issue)
       end

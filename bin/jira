@@ -7,5 +7,6 @@ require 'json'
 begin
   Terjira::CLI.start(ARGV)
 rescue JIRA::HTTPError => e
+  puts e.message
   puts JSON.parse(e.response.body)["errors"].to_json
 end

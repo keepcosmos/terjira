@@ -9,11 +9,13 @@ module Terjira
       "board" => {
         type: :numeric,
         aliases: '-b',
-        desc: 'board_id'
+        banner: 'BOARD_ID',
+        lazy_default: 'board',
       },
       "sprint" => {
         type: :numeric,
-        desc: 'sprint id'
+        banner: 'SPRINT_ID',
+        lazy_default: 'sprint'
       },
       "assignee" => {
         type: :string,
@@ -23,9 +25,10 @@ module Terjira
       "state" => {
         type: :array,
         aliases: '-s',
-        default: ['active', 'future'],
-        enum: ['active', 'future', 'closed'],
-        desc: 'states of sprint'
+        default: ['Active', 'Future'],
+        lazy_default: ['Active', 'Future'],
+        enum: ['Active', 'Future', 'Closed', 'ALL'],
+        desc: 'States of sprint'
       },
       "status" => {
         type: :string,

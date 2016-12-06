@@ -5,10 +5,16 @@ require_relative 'base_cli'
 module Terjira
   class IssueCLI < BaseCLI
 
+    no_commands do
+      def client_class
+        Client::Issue
+      end
+    end
+
     desc 'show [ISSUE_KEY]', 'Show detail of the issue'
     def show(issue_key = nil)
       return invoke(:help) unless issue_key
-      issue = Client::Issue.find(issue_key)
+      issue = client_class.find(issue_key)
       render_issue_detail(issue)
     end
 
@@ -21,24 +27,25 @@ module Terjira
       opts[:assignee] ||= current_username
       opts.delete(:assignee) if opts[:assignee] =~ /^all/i
 
-      issues = Client::Issue.all(opts)
+      issues = client_class.all(opts)
       render_issues(issues)
     end
 
     desc 'trans [KEY] [STATUS]', 'Update status of the issue'
-    def trans(issue, *args)
-      status = if args.size == 1
-                 args.first
-               elsif args.size > 1
-                 args.join(" ")
-               end
+    def trans(*args)
+      issue = args.shift
+      raise "must pass issue key or id" unless issue
+      status = args.join(" ")
+      opts = suggest_options(required: [:status], resources: { status: status, issue: issue })
+      client_class.trans(issue, opts)
     end
 
     desc "new", "create issue"
-    jira_options :summary, :description, :project, :issuetype, :priority, :status, :assignee
+    jira_options :summary, :description, :project, :issuetype, :priority, :status,
+                 :assignee
     def new
       opts = suggest_options(required: [:project, :summary, :issuetype])
-      issue = Client::Issue.create(opts)
+      issue = client_class.create(opts)
       render_issue_detail(issue)
     end
 
@@ -50,12 +57,11 @@ module Terjira
     jira_options :comment
     def comment(issue)
       opts = suggest_options(required: [:comment])
-      10.times do
-        if comment_id = Client::Issue.write_comment(issue, opts[:comment])
-          puts pastel.blue.bold("Success! comment id: #{comment_id}")
-        else
-          puts pastel.red("Error")
-        end
+      if comment_id = client_class.write_comment(issue, opts[:comment])
+        issue = client_class.find(issue)
+        render_issue_detail(issue)
+      else
+        puts pastel.red("Error")
       end
     end
 
@@ -69,12 +75,12 @@ module Terjira
       issue = keys[0]
       assignee = keys[1]
       if assignee.nil?
-        issue = Client::Issue.find(issue)
+        issue = client_class.find(issue)
         opts = suggest_options(required: [:assignee],
                                resouces: { issue: issue })
         assignee = opts[:assignee]
       end
-      Client::Issue.assign(issue, assignee)
+      client_class.assign(issue, assignee)
       show(issue.key_value)
     end
   end

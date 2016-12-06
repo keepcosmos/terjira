@@ -16,7 +16,7 @@ module Terjira
         renderer.border.separator = :each_row
       end
 
-      puts result
+      render(result)
     end
 
     def render_divided_issues_by_status(issues)
@@ -24,7 +24,7 @@ module Terjira
         selected_issues = issues.select { |issue| issue.status.name == name }
         title = colorize_issue_stastus(selected_issues.first.status)
         title += "(#{selected_issues.size})"
-        puts title
+        render(title)
         render_issues(selected_issues, header: false)
       end
     end
@@ -74,7 +74,7 @@ module Terjira
       result = table.render(:unicode, padding: [0, 1, 0, 1], multiline: true) do |renderer|
       end
 
-      puts result
+      render(result)
     end
 
     def summarise_issue(issue)

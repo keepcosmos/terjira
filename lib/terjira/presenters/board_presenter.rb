@@ -15,7 +15,7 @@ module Terjira
       table = TTY::Table.new header, rows
       result = table.render(:unicode, padding: [0, 1, 0, 1])
 
-      puts result
+      render(result)
     end
   end
 end
