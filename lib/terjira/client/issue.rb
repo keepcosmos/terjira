@@ -33,40 +33,54 @@ module Terjira::Client
       end
 
       def create(options = {})
-        convert_options_to_params(options)
+        params = { fields: convert_options_to_params(options) }
+        if transition_param = convert_transition_param(options)
+          params[:transition] = transition_param
+        end
+        resp = client.post("/rest/api/2/issue", params.to_json)
+        result_id = JSON.parse(resp.body)["id"]
+        find(result_id)
       end
 
       def trans(issue)
-
       end
 
       private
 
       def convert_options_to_params(options = {})
         opts = options.dup
-        params = opts.slice(:summary, :comment)
-        opts.each do |key, value|
-          opts[key] = if value.respond_to? :key_with_key_value
-                        okey, ovalue = value.key_with_key_value
-                        { okey => ovalue}
-                      elsif value =~ /^\d+$/
-                        { id: Integer(value) }
-                      else
-                        { name: value }
-                      end
+        opts.delete(:status)
+        params = {}
+
+        [:summary, :description].each do |k, v|
+          params[k] = opts.delete(k) if opts.key?(k)
         end
-        opts
+
+        params[:project] = { key: opts.delete(:project).key_value }
+
+        opts.each do |k, v|
+          params[k] = convert_param_key_value_hash(v)
+        end
+        params
       end
 
-      def find_string_value_param_key(resource_key)
-        @param_key_mapping ||= {
-          project: :key,
-          issuetype: :name,
-          priority: :name,
-          status: :name,
-          assignee: :key
-        }
-        @param_key_mapping[resource_key.to_sym]
+      def convert_transition_param(options = {})
+        transition = options[:status] ? options[:status] : options[:transition]
+        return unless transition
+        convert_param_key_value_hash(transition)
+      end
+
+      def convert_param_key_value_hash(resource, options = {})
+        default_string_key = options[:string_key] || :name
+
+        if resource.respond_to? :key_with_key_value
+          okey, ovalue = resource.key_with_key_value
+          { okey => ovalue }
+        elsif resource =~ /^\d+$/
+          { id: resource.key_value }
+        else
+          { default_string_key => resource.key_value }
+        end
       end
     end
   end

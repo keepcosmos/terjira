@@ -2,5 +2,10 @@
 
 require "bundler/setup"
 require 'terjira'
+require 'json'
 
-Terjira::CLI.start(ARGV)
+begin
+  Terjira::CLI.start(ARGV)
+rescue JIRA::HTTPError => e
+  puts JSON.parse(e.response.body)["errors"].to_json
+end

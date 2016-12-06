@@ -6,8 +6,8 @@ require 'pastel'
 
 module Terjira
   module IssuePresenter
-    def render_issues(issues, options = {})
-      header = [pastel.bold("Key"), pastel.bold("Summary")] if options[:header]
+    def render_issues(issues, opts = {})
+      header = [pastel.bold("Key"), pastel.bold("Summary")] if opts[:header]
 
       rows = issues.map { |issue| [pastel.bold(issue.key), summarise_issue(issue)] }
 
@@ -40,7 +40,7 @@ module Terjira
       summary = issue.summary
       rows << pastel.underline.bold(summary)
       rows << ""
-      rows << "#{title_pastel.("Type")}: #{colorize_issue_type(issue.issuetype)}\s\s\s#{title_pastel.("Status")}: #{colorize_issue_stastus(issue.status)}\s\s\s#{title_pastel.("priority")}: #{colorize_priority(issue.priority)}"
+      rows << "#{title_pastel.("Type")}: #{colorize_issue_type(issue.issuetype)}\s\s\s#{title_pastel.("Status")}: #{colorize_issue_stastus(issue.status)}\s\s\s#{title_pastel.("priority")}: #{colorize_priority(issue.priority, title: true)}"
       rows << ""
 
       rows << title_pastel.("Assignee") + " " +  username_with_email(issue.assignee)
@@ -80,7 +80,7 @@ module Terjira
     def summarise_issue(issue)
       first_line = colorize_issue_stastus(issue.status) + issue.summary.gsub("\t", " ")
 
-      second_line = "#{colorize_priority(issue.priority, title: false)} #{colorize_issue_type(issue.issuetype)} "
+      second_line = "#{colorize_priority(issue.priority)} #{colorize_issue_type(issue.issuetype)} "
       second_line += assign_info(issue)
 
       [first_line, second_line].map { |line| insert_new_line(line, screen_width - 30) }.join("\n")
@@ -123,19 +123,19 @@ module Terjira
       end
     end
 
-    def colorize_priority(priority, optiosn = {})
+    def colorize_priority(priority, opts = {})
       return '' unless priority.respond_to? :name
       name = priority.name
       info = if name =~ /high|major|critic/i
-               { color: :red, icon: "⬆", name: name }
+               { color: :red, icon: "⬆"}
              elsif name =~ /medium|default/i
-               { color: :yellow, icon: "⬆", name: name }
+               { color: :yellow, icon: "⬆"}
              elsif name =~ /minor|low|trivial/i
-               { color: :green, icon: "⬇", name: name }
+               { color: :green, icon: "⬇"}
              else
-               { color: :green, icon: "•", name: name }
+               { color: :green, icon: "•"}
              end
-      title = options[:title] ? "#{info[:icon]} #{info[:name]}" : info[:icon]
+      title = opts[:title] ? "#{info[:icon]} #{name}" : info[:icon]
       pastel.send(info[:color], title)
     end
 

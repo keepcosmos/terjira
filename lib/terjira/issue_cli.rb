@@ -35,11 +35,11 @@ module Terjira
     end
 
     desc "new", "create issue"
-    jira_options :project, :issuetype, :priority, :status, :summary, :assignee
+    jira_options :summary, :description, :project, :issuetype, :priority, :status, :assignee
     def new
       opts = suggest_options(required: [:project, :summary, :issuetype])
-      result = Client::Issue.create(opts)
-      puts result.map { |k, v| "#{k}=#{v.key_value}"}
+      issue = Client::Issue.create(opts)
+      render_issue_detail(issue)
     end
 
     desc "edit", "edit issue"

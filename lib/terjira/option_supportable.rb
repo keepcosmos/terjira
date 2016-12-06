@@ -21,14 +21,15 @@ module Terjira
       status: :select_issue_status,
       priority: :select_priority,
       comment: :write_comment,
-      summary: :write_summary
+      summary: :write_summary,
+      description: :write_description
     }
 
     def suggest_options(opts = {})
       origin = options.dup
 
       if opts[:required].is_a? Array
-        opts.inject(origin) { |memo, opt| memo[opt] ||= opt.to_s; memo }
+        opts[:required].inject(origin) { |memo, opt| memo[opt] ||= opt.to_s; memo }
       end
 
       origin.reject { |k, v| k.to_s.downcase == v.to_s.downcase }.each do |k, v|

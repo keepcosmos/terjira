@@ -47,10 +47,15 @@ module Terjira
         aliases: '-S',
         desc: "Issue summary"
       },
+      "description" => {
+        type: :string,
+        aliases: '-d',
+        desc: "Description"
+      },
       "comment" => {
         type: :string,
         aliases: '-m',
-        desc: 'comment'
+        desc: 'Comment'
       }
     }
 

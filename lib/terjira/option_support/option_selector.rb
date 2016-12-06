@@ -62,6 +62,11 @@ module Terjira
     def select_issuetype
       fetch_resource(:issuetype) do
         project = select_project
+        if project.is_a? String
+          project = Client::Project.find(project)
+          set_resource(:project, project)
+        end
+
         option_prompt.select("Choose isseu type?") do |menu|
           project.issuetypes.each do |issuetype|
             menu.choice issuetype.name, issuetype
@@ -101,6 +106,12 @@ module Terjira
       end
     end
 
+    def write_description
+      fetch_resource(:description) do
+        option_prompt.multiline("Description? (Return empty line for finish)\n",).join("\n")
+      end
+    end
+
     def write_summary
       fetch_resource(:summary) { option_prompt.ask("Summary?") }
     end
@@ -123,8 +134,12 @@ module Terjira
       ResourceStore.instance.get(resource_name)
     end
 
-    def fetch_resource(resource_name, &block)
-      ResourceStore.instance.fetch(resource_name, &block)
+    def set_resource(resource_name, resource)
+      ResourceStore.instance.set(resource_name, resource)
+    end
+
+    def fetch_resource(resource_name, options = {}, &block)
+      result = ResourceStore.instance.fetch(resource_name, &block)
     end
 
     def option_prompt
