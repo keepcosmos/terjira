@@ -111,13 +111,15 @@ module Terjira
 
     def write_comment
       fetch_resource(:comment) do
-        option_prompt.multiline("Comment? (Return empty line for finish)\n",).join("\n")
+        comment = option_prompt.multiline("Comment? (Return empty line for finish)\n",)
+        comment.join("\n") if comment
       end
     end
 
     def write_description
       fetch_resource(:description) do
-        option_prompt.multiline("Description? (Return empty line for finish)\n",).join("\n")
+        desc = option_prompt.multiline("Description? (Return empty line for finish)\n",)
+        desc.join("\n") if desc
       end
     end
 

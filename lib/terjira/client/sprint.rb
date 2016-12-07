@@ -14,7 +14,7 @@ module Terjira
 
         def find(sprint)
           resp = agile_api_get "sprint/#{sprint.key_value}"
-          build JSON.parse(resp)
+          build resp
         end
 
         def find_active(board)

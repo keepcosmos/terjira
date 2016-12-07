@@ -15,14 +15,14 @@ module Terjira
     OPTION_TO_SELECTOR = {
       project: :select_project,
       board: :select_board,
+      summary: :write_summary,
+      description: :write_description,
       sprint: :select_sprint,
-      assignee: :select_assignee,
       issuetype: :select_issuetype,
+      assignee: :select_assignee,
       status: :select_issue_status,
       priority: :select_priority,
-      comment: :write_comment,
-      summary: :write_summary,
-      description: :write_description
+      comment: :write_comment
     }
 
     def suggest_options(opts = {})
@@ -40,7 +40,11 @@ module Terjira
 
       (opts[:resources] || {}).each { |k, v| resource_store.set(k.to_sym, v) }
 
-      default_value_options = origin.select { |k, v| k.to_s.downcase == v.to_s.downcase }
+      default_value_options = origin.select do |k, v|
+        k.to_s.downcase == v.to_s.downcase
+      end.sort_by do |k, v|
+        OPTION_TO_SELECTOR.keys.index(k.to_sym) || 999
+      end
 
       default_value_options.each do |k, _v|
         if selector_method = OPTION_TO_SELECTOR[k.to_sym]
