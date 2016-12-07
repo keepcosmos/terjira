@@ -30,11 +30,7 @@ module Terjira
 
         def write_comment(issue, message)
           resp = api_post("issue/#{issue.key_value}/comment", { body: message }.to_json)
-          if resp.code.to_i < 300
-            JSON.parse(resp.body)["id"]
-          else
-            false
-          end
+          find(issue)
         end
 
         def create(options = {})

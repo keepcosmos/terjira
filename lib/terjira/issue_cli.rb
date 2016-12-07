@@ -79,12 +79,8 @@ module Terjira
     jira_options :comment
     def comment(issue)
       opts = suggest_options(required: [:comment])
-      if comment_id = client_class.write_comment(issue, opts[:comment])
-        issue = client_class.find(issue)
-        render_issue_detail(issue)
-      else
-        puts pastel.red("Error")
-      end
+      issue = client_class.write_comment(issue, opts[:comment])
+      render_issue_detail(issue)
     end
 
     desc "take ISSUE_KEY", "assign issue to self"
