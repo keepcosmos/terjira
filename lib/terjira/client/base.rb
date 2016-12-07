@@ -30,7 +30,8 @@ module Terjira
           self.to_s.split("::").last
         end
 
-        def cache(expiry: DEFAULT_CACHE_SEC)
+        def cache(options = {})
+          options[:expiry] ||= DEFAULT_CACHE_SEC
           @cache ||= Terjira::FileCache.new(class_name, expiry)
         end
 
