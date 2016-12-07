@@ -38,7 +38,7 @@ module Terjira
         resource_store.set(k.to_sym, v)
       end
 
-      (opts[:resouces] || {}).each { |k, v| resource_store.set(k.to_sym, v) }
+      (opts[:resources] || {}).each { |k, v| resource_store.set(k.to_sym, v) }
 
       default_value_options = origin.select { |k, v| k.to_s.downcase == v.to_s.downcase }
 

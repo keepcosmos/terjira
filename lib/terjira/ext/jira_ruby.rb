@@ -11,6 +11,7 @@ module JIRA
     def make_request(http_method, path, body='', headers={})
       title = http_method.to_s.upcase + " " + URI.decode(path)
       title = Pastel.new.dim(title)
+      puts body
       spinner = TTY::Spinner.new ":spinner #{title}", format: :dots, clear: false
       result = nil
 

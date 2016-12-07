@@ -19,7 +19,7 @@ module Terjira
       end
       sprint = client_class.find_active(board)
       opts = suggest_options(required: [:sprint],
-                             resouces: { board: board, sprint: sprint }
+                             resources: { board: board, sprint: sprint }
                             )
       opts[:assignee] ||= current_username
       issues = Client::Issue.all(opts)
@@ -31,7 +31,7 @@ module Terjira
     def show(sprint_id = nil)
       sprint = client_class.find(sprint_id)
       opts = suggest_options(required: [:sprint],
-                             resouces: { sprint: sprint }
+                             resources: { sprint: sprint }
                             )
       opts[:assignee] ||= current_username
       issues = Client::Issue.all(opts)

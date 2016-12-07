@@ -7,7 +7,7 @@ module Terjira
         delegate :all, :get_sprints, :backlog_issues, to: :resource
 
         def project_by_board(board_id)
-          resp = client.get("rest/agile/latest/board/#{board_id}/project")
+          resp = agile_api_get("board/#{board_id}/project")
         end
 
         def boards

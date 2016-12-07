@@ -78,7 +78,16 @@ module Terjira
     def select_issue_status
       fetch_resource(:status) do
         statuses = fetch_resource(:statuses) do
-                     Client::Status.all(select_project)
+                     project = if issue = get_resource(:issue)
+                                 if issue.respond_to?(:project)
+                                   issue.project
+                                 else
+                                   set_resource(:issue, Client::Issue.find(issue)).project
+                                 end
+                               else
+                                 select_project
+                               end
+                     Client::Status.all(project)
                    end
 
         option_prompt.select("Choose status?") do |menu|

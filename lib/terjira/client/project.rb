@@ -8,20 +8,15 @@ module Terjira
 
         def all
           expand = %w[description lead issueTypes url projectKeys]
-          resp = get("/rest/api/2/project?expand=#{expand.join(",")}")
+          resp = api_get "project", { expand: expand.join(",") }
           resp.map { |project| build(project) }
         end
 
         def all_by_board(board)
-          resp = get("/rest/agile/1.0/board/#{board.key_value}/project")
+          resp = api_agile_get "board/#{board.key_value}/project"
           resp["values"].map do |project|
             build(project)
           end
-        end
-
-        def users(key)
-          result = build("key" => key).users
-          result.reject { |u| u.name =~ /^addon/ }
         end
       end
     end

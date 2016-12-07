@@ -54,7 +54,7 @@ describe Terjira::OptionSupportable do
     prompt.input << "\r"
     prompt.input.rewind
 
-    suggested = subject.suggest_options(required: [:sprint], resouces: { board: boards.first } )
+    suggested = subject.suggest_options(required: [:sprint], resources: { board: boards.first } )
 
     expect(sprints).to include(suggested["sprint"])
   end
@@ -65,7 +65,7 @@ describe Terjira::OptionSupportable do
     prompt.input << "\r"
     prompt.input.rewind
 
-    suggested = subject.suggest_options(required: [:status], resouces: { project: projects.first } )
+    suggested = subject.suggest_options(required: [:status], resources: { project: projects.first } )
 
     expect(statuses).to include(suggested["status"])
   end

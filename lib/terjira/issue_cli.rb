@@ -32,17 +32,32 @@ module Terjira
     end
 
     desc 'trans [KEY] [STATUS]', 'Update status of the issue'
+    jira_options :comment, :assignee
     def trans(*args)
       issue = args.shift
       raise "must pass issue key or id" unless issue
-      status = args.join(" ")
-      opts = suggest_options(required: [:status], resources: { status: status, issue: issue })
-      client_class.trans(issue, opts)
+      status = args.join(" ") if args.present?
+      issue = client_class.find(issue, { expand: 'transitions.fields' })
+
+      transitions = issue.transitions
+      transition = transitions.find do |t|
+        t.name.downcase == status.to_s.downcase
+      end
+
+      resources = if transition
+                    { status: transition, issue: issue }
+                  else
+                    { statuses: transitions, issue: issue }
+                  end
+
+      opts = suggest_options(required: [:status], resources: resources )
+      issue = client_class.trans(issue, opts)
+      render_issue_detail(issue)
     end
 
     desc "new", "create issue"
-    jira_options :summary, :description, :project, :issuetype, :priority, :status,
-                 :assignee
+    jira_options :summary, :description, :project, :issuetype,
+                 :priority, :status, :assignee
     def new
       opts = suggest_options(required: [:project, :summary, :issuetype])
       issue = client_class.create(opts)
@@ -50,7 +65,14 @@ module Terjira
     end
 
     desc "edit", "edit issue"
+    jira_options :summary, :description, :project, :issuetype,
+                 :priority, :assignee
     def edit(issue)
+      return if options.blank?
+      issue = client_class.find(issue)
+      opts = suggest_options(resources: { issue: issue })
+      issue = client_class.update(issue, opts)
+      render_issue_detail(issue)
     end
 
     desc "commenct", "comment issue"
