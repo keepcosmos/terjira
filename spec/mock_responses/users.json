@@ -1,0 +1,146 @@
+[
+  {
+    "self": "https://localhost:2990/rest/api/2/user?username=addon_com.xiplink.jira.git.jira_git_plugin",
+    "key": "addon_com.xiplink.jira.git.jira_git_plugin",
+    "name": "addon_com.xiplink.jira.git.jira_git_plugin",
+    "emailAddress": "noreply@mailer.atlassian.com",
+    "avatarUrls": {
+      "16x16": "https://avatar-cdn.atlassian.com/56348a706ae5ea05f52d9b3c3140cf05?s=16&d=https%3A%2F%2Fsecure.gravatar.com%2Favatar%2F56348a706ae5ea05f52d9b3c3140cf05%3Fd%3Dmm%26s%3D16%26noRedirect%3Dtrue",
+      "24x24": "https://avatar-cdn.atlassian.com/56348a706ae5ea05f52d9b3c3140cf05?s=24&d=https%3A%2F%2Fsecure.gravatar.com%2Favatar%2F56348a706ae5ea05f52d9b3c3140cf05%3Fd%3Dmm%26s%3D24%26noRedirect%3Dtrue",
+      "32x32": "https://avatar-cdn.atlassian.com/56348a706ae5ea05f52d9b3c3140cf05?s=32&d=https%3A%2F%2Fsecure.gravatar.com%2Favatar%2F56348a706ae5ea05f52d9b3c3140cf05%3Fd%3Dmm%26s%3D32%26noRedirect%3Dtrue",
+      "48x48": "https://avatar-cdn.atlassian.com/56348a706ae5ea05f52d9b3c3140cf05?s=48&d=https%3A%2F%2Fsecure.gravatar.com%2Favatar%2F56348a706ae5ea05f52d9b3c3140cf05%3Fd%3Dmm%26s%3D48%26noRedirect%3Dtrue"
+    },
+    "displayName": "Git for JIRA Cloud",
+    "active": true,
+    "timeZone": "Asia/Seoul",
+    "locale": "en_US"
+  },
+  {
+    "self": "https://localhost:2990/rest/api/2/user?username=addon_whoslooking-connect",
+    "key": "addon_whoslooking-connect",
+    "name": "addon_whoslooking-connect",
+    "emailAddress": "noreply@mailer.atlassian.com",
+    "avatarUrls": {
+      "16x16": "https://avatar-cdn.atlassian.com/56348a706ae5ea05f52d9b3c3140cf05?s=16&d=https%3A%2F%2Fsecure.gravatar.com%2Favatar%2F56348a706ae5ea05f52d9b3c3140cf05%3Fd%3Dmm%26s%3D16%26noRedirect%3Dtrue",
+      "24x24": "https://avatar-cdn.atlassian.com/56348a706ae5ea05f52d9b3c3140cf05?s=24&d=https%3A%2F%2Fsecure.gravatar.com%2Favatar%2F56348a706ae5ea05f52d9b3c3140cf05%3Fd%3Dmm%26s%3D24%26noRedirect%3Dtrue",
+      "32x32": "https://avatar-cdn.atlassian.com/56348a706ae5ea05f52d9b3c3140cf05?s=32&d=https%3A%2F%2Fsecure.gravatar.com%2Favatar%2F56348a706ae5ea05f52d9b3c3140cf05%3Fd%3Dmm%26s%3D32%26noRedirect%3Dtrue",
+      "48x48": "https://avatar-cdn.atlassian.com/56348a706ae5ea05f52d9b3c3140cf05?s=48&d=https%3A%2F%2Fsecure.gravatar.com%2Favatar%2F56348a706ae5ea05f52d9b3c3140cf05%3Fd%3Dmm%26s%3D48%26noRedirect%3Dtrue"
+    },
+    "displayName": "Who's Looking for OnDemand",
+    "active": true,
+    "timeZone": "Asia/Seoul",
+    "locale": "en_US"
+  },
+  {
+    "self": "https://localhost:2990/rest/api/2/user?username=doah.kim",
+    "key": "doah.kim",
+    "name": "doah.kim",
+    "emailAddress": "doah.kim@localhost.co",
+    "avatarUrls": {
+      "16x16": "https://avatar-cdn.atlassian.com/c950820474f0761072566d2de7d78d85?s=16&d=https%3A%2F%2Fsecure.gravatar.com%2Favatar%2Fc950820474f0761072566d2de7d78d85%3Fd%3Dmm%26s%3D16%26noRedirect%3Dtrue",
+      "24x24": "https://avatar-cdn.atlassian.com/c950820474f0761072566d2de7d78d85?s=24&d=https%3A%2F%2Fsecure.gravatar.com%2Favatar%2Fc950820474f0761072566d2de7d78d85%3Fd%3Dmm%26s%3D24%26noRedirect%3Dtrue",
+      "32x32": "https://avatar-cdn.atlassian.com/c950820474f0761072566d2de7d78d85?s=32&d=https%3A%2F%2Fsecure.gravatar.com%2Favatar%2Fc950820474f0761072566d2de7d78d85%3Fd%3Dmm%26s%3D32%26noRedirect%3Dtrue",
+      "48x48": "https://avatar-cdn.atlassian.com/c950820474f0761072566d2de7d78d85?s=48&d=https%3A%2F%2Fsecure.gravatar.com%2Favatar%2Fc950820474f0761072566d2de7d78d85%3Fd%3Dmm%26s%3D48%26noRedirect%3Dtrue"
+    },
+    "displayName": "doah.kim",
+    "active": true,
+    "timeZone": "Asia/Seoul",
+    "locale": "en_US"
+  },
+  {
+    "self": "https://localhost:2990/rest/api/2/user?username=dongkeon.lee",
+    "key": "dongkeon.lee",
+    "name": "dongkeon.lee",
+    "emailAddress": "dongkeon.lee@localhost.co",
+    "avatarUrls": {
+      "16x16": "https://avatar-cdn.atlassian.com/627c05c0b488a6a6509bc58440452d7a?s=16&d=https%3A%2F%2Fsecure.gravatar.com%2Favatar%2F627c05c0b488a6a6509bc58440452d7a%3Fd%3Dmm%26s%3D16%26noRedirect%3Dtrue",
+      "24x24": "https://avatar-cdn.atlassian.com/627c05c0b488a6a6509bc58440452d7a?s=24&d=https%3A%2F%2Fsecure.gravatar.com%2Favatar%2F627c05c0b488a6a6509bc58440452d7a%3Fd%3Dmm%26s%3D24%26noRedirect%3Dtrue",
+      "32x32": "https://avatar-cdn.atlassian.com/627c05c0b488a6a6509bc58440452d7a?s=32&d=https%3A%2F%2Fsecure.gravatar.com%2Favatar%2F627c05c0b488a6a6509bc58440452d7a%3Fd%3Dmm%26s%3D32%26noRedirect%3Dtrue",
+      "48x48": "https://avatar-cdn.atlassian.com/627c05c0b488a6a6509bc58440452d7a?s=48&d=https%3A%2F%2Fsecure.gravatar.com%2Favatar%2F627c05c0b488a6a6509bc58440452d7a%3Fd%3Dmm%26s%3D48%26noRedirect%3Dtrue"
+    },
+    "displayName": "dongkeon.lee",
+    "active": true,
+    "timeZone": "Asia/Seoul",
+    "locale": "en_US"
+  },
+  {
+    "self": "https://localhost:2990/rest/api/2/user?username=eunbi.koh",
+    "key": "eunbi.koh",
+    "name": "eunbi.koh",
+    "emailAddress": "eunbi.koh@localhost.co",
+    "avatarUrls": {
+      "16x16": "https://avatar-cdn.atlassian.com/cbc081cbb7a662215403373293ee91ff?s=16&d=https%3A%2F%2Fsecure.gravatar.com%2Favatar%2Fcbc081cbb7a662215403373293ee91ff%3Fd%3Dmm%26s%3D16%26noRedirect%3Dtrue",
+      "24x24": "https://avatar-cdn.atlassian.com/cbc081cbb7a662215403373293ee91ff?s=24&d=https%3A%2F%2Fsecure.gravatar.com%2Favatar%2Fcbc081cbb7a662215403373293ee91ff%3Fd%3Dmm%26s%3D24%26noRedirect%3Dtrue",
+      "32x32": "https://avatar-cdn.atlassian.com/cbc081cbb7a662215403373293ee91ff?s=32&d=https%3A%2F%2Fsecure.gravatar.com%2Favatar%2Fcbc081cbb7a662215403373293ee91ff%3Fd%3Dmm%26s%3D32%26noRedirect%3Dtrue",
+      "48x48": "https://avatar-cdn.atlassian.com/cbc081cbb7a662215403373293ee91ff?s=48&d=https%3A%2F%2Fsecure.gravatar.com%2Favatar%2Fcbc081cbb7a662215403373293ee91ff%3Fd%3Dmm%26s%3D48%26noRedirect%3Dtrue"
+    },
+    "displayName": "Rose Koh",
+    "active": true,
+    "timeZone": "Asia/Seoul",
+    "locale": "en_US"
+  },
+  {
+    "self": "https://localhost:2990/rest/api/2/user?username=Hongseok",
+    "key": "admin",
+    "name": "Hongseok",
+    "emailAddress": "hongseok.jang@localhost.co",
+    "avatarUrls": {
+      "16x16": "https://avatar-cdn.atlassian.com/ca4e2fb947c56c7fc71226506068c004?s=16&d=https%3A%2F%2Flocalhost:2990%2Fsecure%2Fuseravatar%3Fsize%3Dxsmall%26avatarId%3D10349%26noRedirect%3Dtrue",
+      "24x24": "https://avatar-cdn.atlassian.com/ca4e2fb947c56c7fc71226506068c004?s=24&d=https%3A%2F%2Flocalhost:2990%2Fsecure%2Fuseravatar%3Fsize%3Dsmall%26avatarId%3D10349%26noRedirect%3Dtrue",
+      "32x32": "https://avatar-cdn.atlassian.com/ca4e2fb947c56c7fc71226506068c004?s=32&d=https%3A%2F%2Flocalhost:2990%2Fsecure%2Fuseravatar%3Fsize%3Dmedium%26avatarId%3D10349%26noRedirect%3Dtrue",
+      "48x48": "https://avatar-cdn.atlassian.com/ca4e2fb947c56c7fc71226506068c004?s=48&d=https%3A%2F%2Flocalhost:2990%2Fsecure%2Fuseravatar%3FavatarId%3D10349%26noRedirect%3Dtrue"
+    },
+    "displayName": "Hongseok Jang",
+    "active": true,
+    "timeZone": "Asia/Seoul",
+    "locale": "en_US"
+  },
+  {
+    "self": "https://localhost:2990/rest/api/2/user?username=hyojeong.seo",
+    "key": "hyojeong.seo",
+    "name": "hyojeong.seo",
+    "emailAddress": "hyojeong.seo@localhost.co",
+    "avatarUrls": {
+      "16x16": "https://avatar-cdn.atlassian.com/8e4505fac6e0e0c5147ebbee2c1698d4?s=16&d=https%3A%2F%2Flocalhost:2990%2Fsecure%2Fuseravatar%3Fsize%3Dxsmall%26ownerId%3Dhyojeong.seo%26avatarId%3D10600%26noRedirect%3Dtrue",
+      "24x24": "https://avatar-cdn.atlassian.com/8e4505fac6e0e0c5147ebbee2c1698d4?s=24&d=https%3A%2F%2Flocalhost:2990%2Fsecure%2Fuseravatar%3Fsize%3Dsmall%26ownerId%3Dhyojeong.seo%26avatarId%3D10600%26noRedirect%3Dtrue",
+      "32x32": "https://avatar-cdn.atlassian.com/8e4505fac6e0e0c5147ebbee2c1698d4?s=32&d=https%3A%2F%2Flocalhost:2990%2Fsecure%2Fuseravatar%3Fsize%3Dmedium%26ownerId%3Dhyojeong.seo%26avatarId%3D10600%26noRedirect%3Dtrue",
+      "48x48": "https://avatar-cdn.atlassian.com/8e4505fac6e0e0c5147ebbee2c1698d4?s=48&d=https%3A%2F%2Flocalhost:2990%2Fsecure%2Fuseravatar%3FownerId%3Dhyojeong.seo%26avatarId%3D10600%26noRedirect%3Dtrue"
+    },
+    "displayName": "hyojeong.seo",
+    "active": true,
+    "timeZone": "Asia/Seoul",
+    "locale": "en_US"
+  },
+  {
+    "self": "https://localhost:2990/rest/api/2/user?username=hyun.kim",
+    "key": "hyun.kim",
+    "name": "hyun.kim",
+    "emailAddress": "hyun.kim@localhost.co",
+    "avatarUrls": {
+      "16x16": "https://avatar-cdn.atlassian.com/097eb3b20db62b3668c2b397677d081b?s=16&d=https%3A%2F%2Fsecure.gravatar.com%2Favatar%2F097eb3b20db62b3668c2b397677d081b%3Fd%3Dmm%26s%3D16%26noRedirect%3Dtrue",
+      "24x24": "https://avatar-cdn.atlassian.com/097eb3b20db62b3668c2b397677d081b?s=24&d=https%3A%2F%2Fsecure.gravatar.com%2Favatar%2F097eb3b20db62b3668c2b397677d081b%3Fd%3Dmm%26s%3D24%26noRedirect%3Dtrue",
+      "32x32": "https://avatar-cdn.atlassian.com/097eb3b20db62b3668c2b397677d081b?s=32&d=https%3A%2F%2Fsecure.gravatar.com%2Favatar%2F097eb3b20db62b3668c2b397677d081b%3Fd%3Dmm%26s%3D32%26noRedirect%3Dtrue",
+      "48x48": "https://avatar-cdn.atlassian.com/097eb3b20db62b3668c2b397677d081b?s=48&d=https%3A%2F%2Fsecure.gravatar.com%2Favatar%2F097eb3b20db62b3668c2b397677d081b%3Fd%3Dmm%26s%3D48%26noRedirect%3Dtrue"
+    },
+    "displayName": "Hyun Kim",
+    "active": true,
+    "timeZone": "Asia/Seoul",
+    "locale": "en_US"
+  },
+  {
+    "self": "https://localhost:2990/rest/api/2/user?username=hyunjin.yun",
+    "key": "hyunjin.yun",
+    "name": "hyunjin.yun",
+    "emailAddress": "hyunjin.yun@localhost.co",
+    "avatarUrls": {
+      "16x16": "https://avatar-cdn.atlassian.com/ddc48e1712c833797db2b05e19305c09?s=16&d=https%3A%2F%2Fsecure.gravatar.com%2Favatar%2Fddc48e1712c833797db2b05e19305c09%3Fd%3Dmm%26s%3D16%26noRedirect%3Dtrue",
+      "24x24": "https://avatar-cdn.atlassian.com/ddc48e1712c833797db2b05e19305c09?s=24&d=https%3A%2F%2Fsecure.gravatar.com%2Favatar%2Fddc48e1712c833797db2b05e19305c09%3Fd%3Dmm%26s%3D24%26noRedirect%3Dtrue",
+      "32x32": "https://avatar-cdn.atlassian.com/ddc48e1712c833797db2b05e19305c09?s=32&d=https%3A%2F%2Fsecure.gravatar.com%2Favatar%2Fddc48e1712c833797db2b05e19305c09%3Fd%3Dmm%26s%3D32%26noRedirect%3Dtrue",
+      "48x48": "https://avatar-cdn.atlassian.com/ddc48e1712c833797db2b05e19305c09?s=48&d=https%3A%2F%2Fsecure.gravatar.com%2Favatar%2Fddc48e1712c833797db2b05e19305c09%3Fd%3Dmm%26s%3D48%26noRedirect%3Dtrue"
+    },
+    "displayName": "hyunjin.yun",
+    "active": true,
+    "timeZone": "Asia/Seoul",
+    "locale": "ko_KR"
+  }
+]

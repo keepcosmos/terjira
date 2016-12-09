@@ -20,7 +20,7 @@ module Terjira
         def find_active(board)
           params = { state: 'active' }
           resp = agile_api_get "board/#{board.key_value}/sprint", params
-          resp["values"].map { |value| build(value) }.first
+          resp["values"].map { |value| build(value) }
         end
       end
     end

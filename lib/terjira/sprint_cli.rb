@@ -17,24 +17,27 @@ module Terjira
       else
         board = options[:board]
       end
-      sprint = client_class.find_active(board)
+      sprints = client_class.find_active(board)
       opts = suggest_options(required: [:sprint],
-                             resources: { board: board, sprint: sprint }
+                             resources: { board: board, sprint: sprints.first }
                             )
+
       opts[:assignee] ||= current_username
-      issues = Client::Issue.all(opts)
-      render_sprint_with_issues(sprint, issues)
+
+      sprints.each do |sprint|
+        issues = Client::Issue.all(opts)
+        render_sprint_with_issues(sprint, issues)
+      end
     end
 
     desc "show [SPRINT_ID]", "show sprint"
     jira_option(:assignee)
-    def show(sprint_id = nil)
-      sprint = client_class.find(sprint_id)
-      opts = suggest_options(required: [:sprint],
-                             resources: { sprint: sprint }
-                            )
+    def show(sprint = nil)
+      sprint = client_class.find(sprint)
+      opts = suggest_options(resources: { sprint: sprint })
       opts[:assignee] ||= current_username
-      issues = Client::Issue.all(opts)
+
+      issues = Client::Issue.all(opts.merge({ sprint: sprint }))
       render_sprint_with_issues(sprint, issues)
     end
 

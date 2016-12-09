@@ -46,7 +46,11 @@ module JIRA
     end
 
     class Issuetype
-      def self.key_attribute; :id; end
+      def self.key_attribute; :name; end
+    end
+
+    class Resolution
+      def self.key_attribute; :name; end
     end
   end
 

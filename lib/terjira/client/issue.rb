@@ -38,6 +38,7 @@ module Terjira
           if transition_param = extract_to_transition_param(options)
             params.merge!(transition_param)
           end
+
           resp = api_post "issue", params.to_json
           result_id = resp["id"]
           find(result_id)
@@ -71,18 +72,21 @@ module Terjira
           transition = options.delete(:status)
           transition ||= options.delete(:transition)
           return unless transition
-          { transition: { id: transition.id } }
+          { transition: convert_param_key_value_hash(transition) }
         end
 
         def extract_to_fields_params(options = {})
           opts = options.dup
           params = {}
 
-          [:summary, :description].each do |k, v|
+          custom_fields = options.keys.select { |k| k.to_s =~ /^customfield/ }
+          (custom_fields + [:summary, :description]).each do |k, v|
             params[k] = opts.delete(k) if opts.key?(k)
           end
 
-          params[:project] = { key: opts.delete(:project).key_value } if opts.key?(:project)
+          if opts.key?(:project)
+            params[:project] = { key: opts.delete(:project).key_value }
+          end
 
           opts.each do |k, v|
             params[k] = convert_param_key_value_hash(v)
@@ -90,16 +94,14 @@ module Terjira
           { fields: params }
         end
 
-        def convert_param_key_value_hash(resource, options = {})
-          default_string_key = options[:string_key] || :name
-
+        def convert_param_key_value_hash(resource)
           if resource.respond_to? :key_with_key_value
             okey, ovalue = resource.key_with_key_value
             { okey => ovalue }
           elsif resource =~ /^\d+$/
             { id: resource.key_value }
           else
-            { default_string_key => resource.key_value }
+            { name: resource.key_value }
           end
         end
       end

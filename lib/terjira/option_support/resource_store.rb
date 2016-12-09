@@ -5,10 +5,10 @@ module Terjira
   class ResourceStore
     include Singleton
 
-    attr_accessor :resource_store
+    attr_accessor :store
 
     def initialize
-      @resource_store = {}
+      @store = Thor::CoreExt::HashWithIndifferentAccess.new
     end
 
     def fetch(resource_name, &block)
@@ -21,16 +21,20 @@ module Terjira
     end
 
     def get(resource_name)
-      resource_store[resource_name.to_sym]
+      store[resource_name]
     end
 
     def set(resource_name, resource)
-      resource_store[resource_name.to_sym] = resource
+      store[resource_name] = resource
       resource
     end
 
+    def exists?(resource_name)
+      store[resource_name].present?
+    end
+
     def clear
-      @resource_store = {}
+      @store = {}
     end
   end
 end

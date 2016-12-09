@@ -32,7 +32,7 @@ module Terjira
     end
 
     desc 'trans [KEY] [STATUS]', 'Update status of the issue'
-    jira_options :comment, :assignee
+    jira_options :comment, :assignee, :resolution
     def trans(*args)
       issue = args.shift
       raise "must pass issue key or id" unless issue
@@ -57,9 +57,15 @@ module Terjira
 
     desc "new", "create issue"
     jira_options :summary, :description, :project, :issuetype,
-                 :priority, :status, :assignee
+                 :priority, :assignee
     def new
       opts = suggest_options(required: [:project, :summary, :issuetype])
+
+      if opts[:issuetype].key_value.downcase == "epic"
+        epic_name_field = Client::Field.epic_name
+        opts[epic_name_field.key] = write_epic_name
+      end
+
       issue = client_class.create(opts)
       render_issue_detail(issue)
     end

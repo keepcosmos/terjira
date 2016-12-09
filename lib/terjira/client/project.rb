@@ -13,7 +13,7 @@ module Terjira
         end
 
         def all_by_board(board)
-          resp = api_agile_get "board/#{board.key_value}/project"
+          resp = agile_api_get "board/#{board.key_value}/project"
           resp["values"].map do |project|
             build(project)
           end

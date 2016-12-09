@@ -19,46 +19,43 @@ module Terjira
       },
       "assignee" => {
         type: :string,
-        aliases: "-a",
-        desc: 'Assignee username. no option -> return only your issues, ALL -> issues of all assignees'
+        aliases: "-a"
       },
       "state" => {
         type: :array,
         aliases: '-s',
         default: ['Active', 'Future'],
         lazy_default: ['Active', 'Future'],
-        enum: ['Active', 'Future', 'Closed', 'ALL'],
-        desc: 'States of sprint'
+        enum: ['Active', 'Future', 'Closed', 'ALL']
       },
       "status" => {
         type: :string,
         aliases: '-s',
         desc: 'status'
       },
+      "resolution" => {
+        type: :string,
+        aliases: '-r'
+      },
       "issuetype" => {
         type: :string,
-        aliases: '-t',
-        desc: 'Issue type'
+        aliases: '-t'
       },
       "priority" => {
         type: :string,
-        aliases: '-P',
-        desc: 'priority'
+        aliases: '-P'
       },
       "summary" => {
         type: :string,
-        aliases: '-S',
-        desc: "Issue summary"
+        aliases: '-S'
       },
       "description" => {
         type: :string,
-        aliases: '-d',
-        desc: "Description"
+        aliases: '-d'
       },
       "comment" => {
         type: :string,
-        aliases: '-m',
-        desc: 'Comment'
+        aliases: '-m'
       }
     }
 

@@ -22,13 +22,12 @@ module Terjira
       assignee: :select_assignee,
       status: :select_issue_status,
       priority: :select_priority,
+      resolution: :select_resolution,
       comment: :write_comment
     }
 
     def suggest_options(opts = {})
       origin = options.dup
-
-      origin.reject! { |k, v| v.to_s =~ /^all$/i }
 
       if opts[:required].is_a? Array
         opts[:required].inject(origin) { |memo, opt| memo[opt] ||= opt.to_s; memo }
@@ -40,11 +39,12 @@ module Terjira
 
       (opts[:resources] || {}).each { |k, v| resource_store.set(k.to_sym, v) }
 
+
       default_value_options = origin.select do |k, v|
         k.to_s.downcase == v.to_s.downcase
-      end.sort_by do |k, v|
-        OPTION_TO_SELECTOR.keys.index(k.to_sym) || 999
-      end
+      end.sort do |hash|
+        OPTION_TO_SELECTOR.keys.index(hash[0].to_sym) || 999
+      end.to_h
 
       default_value_options.each do |k, _v|
         if selector_method = OPTION_TO_SELECTOR[k.to_sym]

@@ -7,7 +7,7 @@ module Terjira
         def assignables_by_project(project)
           if project.is_a? Array
             keys = project.map(&:key_value).join(",")
-            fetch_assignables "user/assignable/multiProjectSearch", {projectKey: keys }
+            fetch_assignables "user/assignable/multiProjectSearch", {projectKeys: keys }
           else
             fetch_assignables "user/assignable/search", { project: project.key_value }
           end

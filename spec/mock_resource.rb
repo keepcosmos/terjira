@@ -25,10 +25,28 @@ class MockResource
     end
 
     def statuses
-      itypes = load_response("statuses")
-      json = itypes.map { |issuetype| issuetype["statuses"] }.flatten.uniq
+      issuetypes = load_response("statuses")
+      json = issuetypes.map { |issuetype| issuetype["statuses"] }.flatten.uniq
       json.map do |status|
         Terjira::Client::Status.build(status)
+      end
+    end
+
+    def users
+      load_response("users").map do |user|
+        Terjira::Client::User.build(user)
+      end
+    end
+
+    def priorities
+      load_response("priorities").map do |priority|
+        Terjira::Client::Priority.build(priority)
+      end
+    end
+
+    def resolutions
+      load_response("resolutions").map do |resolution|
+        Terjira::Client::Resolution.build(resolution)
       end
     end
 
