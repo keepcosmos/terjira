@@ -34,7 +34,7 @@ module Terjira
     end
 
     def clear
-      @store = {}
+      @store = Thor::CoreExt::HashWithIndifferentAccess.new
     end
   end
 end
