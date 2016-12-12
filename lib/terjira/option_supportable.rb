@@ -24,34 +24,48 @@ module Terjira
       priority: :select_priority,
       resolution: :select_resolution,
       comment: :write_comment
-    }
+    }.freeze
 
+    # Transforming and clening options
+    # and suggest list of option values
     def suggest_options(opts = {})
       origin = options.dup
 
       if opts[:required].is_a? Array
-        opts[:required].inject(origin) { |memo, opt| memo[opt] ||= opt.to_s; memo }
-      end
-
-      origin.reject { |k, v| k.to_s.downcase == v.to_s.downcase }.each do |k, v|
-        resource_store.set(k.to_sym, v)
-      end
-
-      (opts[:resources] || {}).each { |k, v| resource_store.set(k.to_sym, v) }
-
-
-      default_value_options = origin.select do |k, v|
-        k.to_s.downcase == v.to_s.downcase
-      end.sort do |hash|
-        OPTION_TO_SELECTOR.keys.index(hash[0].to_sym) || 999
-      end.to_h
-
-      default_value_options.each do |k, _v|
-        if selector_method = OPTION_TO_SELECTOR[k.to_sym]
-          send(selector_method)
+        opts[:required].each_with_object(origin) do |memo, opt|
+          memo[opt] ||= opt.to_s
+          memo
         end
       end
 
+      # Store assigned options
+      origin.reject { |k, v| k.to_s.casecmp(v.to_s).zero? }.each do |k, v|
+        resource_store.set(k.to_sym, v)
+      end
+
+      # Store given options from arguments
+      (opts[:resources] || {}).each do |k, v|
+        resource_store.set(k.to_sym, v)
+      end
+
+      # Select options that are not assigned value from user
+      default_value_options = origin.select do |k, v|
+        k.to_s.casecmp(v.to_s).zero?
+      end
+
+      # Sort order for suggest option values
+      default_value_options = default_value_options.sort do |hash|
+        OPTION_TO_SELECTOR.keys.index(hash[0].to_sym) || 999
+      end
+      default_value_options = Hash[default_value_options]
+
+      # Suggest option values and save to resource store
+      default_value_options.each do |k, _v|
+        selector_method = OPTION_TO_SELECTOR[k.to_sym]
+        send(selector_method) if selector_method
+      end
+
+      # Fetch selected values from resource store
       default_value_options.each do |k, _v|
         default_value_options[k] = resource_store.get(k)
       end
