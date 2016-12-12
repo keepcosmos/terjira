@@ -116,15 +116,15 @@ module Terjira
     def colorize_issue_type(issue_type)
       title = " #{issue_type.name} "
       if title =~ /bug/i
-        pastel.on_red.bold(title)
+        pastel.on_red.white.bold(title)
       elsif title =~ /task/i
-        pastel.on_blue.bold(title)
+        pastel.on_blue.white.bold(title)
       elsif title =~ /story/i
-        pastel.on_green.bold(title)
+        pastel.on_green.white.bold(title)
       elsif title =~ /epic/i
-        pastel.on_magenta.bold(title)
+        pastel.on_magenta.white.bold(title)
       else
-        pastel.on_cyan.bold(title)
+        pastel.on_cyan.white.bold(title)
       end
     end
 

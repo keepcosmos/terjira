@@ -1,3 +1,4 @@
+[![Gem Version](https://badge.fury.io/rb/terjira.svg)](https://badge.fury.io/rb/terjira)
 [![Build Status](https://travis-ci.org/keepcosmos/terjira.svg?branch=master)](https://travis-ci.org/keepcosmos/terjira)
 [![Test Coverage](https://codeclimate.com/github/keepcosmos/terjira/badges/coverage.svg)](https://codeclimate.com/github/keepcosmos/terjira/coverage)
 [![Code Climate](https://codeclimate.com/github/keepcosmos/terjira/badges/gpa.svg)](https://codeclimate.com/github/keepcosmos/terjira)
