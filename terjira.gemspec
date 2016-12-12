@@ -7,31 +7,30 @@ require 'terjira/version'
 Gem::Specification.new do |spec|
   spec.name          = "terjira"
   spec.version       = Terjira::VERSION
-  spec.authors       = ["keepcosmos"]
+  spec.authors       = ["Jaehyun Shin"]
   spec.email         = ["keepcosmos@gmail.com"]
 
-  spec.summary       = "TEST DESCRIPTION"
-  spec.description   = "TEST DESCRIPTION"
-  spec.homepage      = "https://www.jaehyunshin.me"
+  spec.summary       = "Terjira is interactive command line app for Jira"
+  spec.description   = "Terjira is interactive and easy to use command line interface (or Application) for Jira"
+  spec.homepage      = "https://github.com/keepcosmos/terjira"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features|dev)/}) }
-  spec.bindir        = "exe"
-  spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
+  spec.bindir        = "bin"
+  spec.executables   = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
   spec.require_paths = ["lib"]
 
   spec.add_dependency "thor", "~> 0.19"
   spec.add_dependency "jira-ruby", "~> 1.1"
-  spec.add_dependency "activesupport", "~> 4.0.0"
+  spec.add_dependency "activesupport", "~> 4.0"
 
-  # spec.add_dependency "tty"
-  spec.add_dependency "tty-table"
-  spec.add_dependency "tty-prompt"
-  spec.add_dependency "tty-spinner"
-  spec.add_dependency "pastel"
+  spec.add_dependency "tty-table", "~> 0.6.0"
+  spec.add_dependency "tty-prompt", "~> 0.8.0"
+  spec.add_dependency "tty-spinner", "~> 0.4.1"
+  spec.add_dependency "pastel", "~> 0.6.1"
 
   spec.add_development_dependency "bundler", "~> 1.11"
   spec.add_development_dependency "rake", "~> 10.0"
-  spec.add_development_dependency "rspec"
-  spec.add_development_dependency "pry"
+  spec.add_development_dependency "rspec", "~> 3.5"
+  spec.add_development_dependency "pry", "~> 0.10.0"
 end

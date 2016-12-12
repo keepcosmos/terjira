@@ -1,24 +1,24 @@
 [
   {
-    "self": "https://myrealtrip.atlassian.net/rest/api/2/resolution/10000",
+    "self": "http://localhost:2990/rest/api/2/resolution/10000",
     "id": "10000",
     "description": "Work has been completed on this issue.",
     "name": "Done"
   },
   {
-    "self": "https://myrealtrip.atlassian.net/rest/api/2/resolution/10001",
+    "self": "http://localhost:2990/rest/api/2/resolution/10001",
     "id": "10001",
     "description": "This issue won't be actioned.",
     "name": "Won't Do"
   },
   {
-    "self": "https://myrealtrip.atlassian.net/rest/api/2/resolution/10002",
+    "self": "http://localhost:2990/rest/api/2/resolution/10002",
     "id": "10002",
     "description": "The problem is a duplicate of an existing issue.",
     "name": "Duplicate"
   },
   {
-    "self": "https://myrealtrip.atlassian.net/rest/api/2/resolution/10003",
+    "self": "http://localhost:2990/rest/api/2/resolution/10003",
     "id": "10003",
     "description": "All attempts at reproducing this issue failed, or not enough information was available to reproduce the issue. Reading the code produces no clues as to why this behavior would occur. If more information appears later, please reopen the issue.",
     "name": "Cannot Reproduce"

@@ -5,7 +5,7 @@
   "values": [
     {
       "id": 31,
-      "self": "https://myrealtrip.atlassian.net/rest/agile/1.0/sprint/31",
+      "self": "http://localhost:2990/rest/agile/1.0/sprint/31",
       "state": "closed",
       "name": "11/14~11/25 :: PSI 1-4",
       "startDate": "2016-11-14T10:00:00.000+09:00",
@@ -16,7 +16,7 @@
     },
     {
       "id": 32,
-      "self": "https://myrealtrip.atlassian.net/rest/agile/1.0/sprint/32",
+      "self": "http://localhost:2990/rest/agile/1.0/sprint/32",
       "state": "active",
       "name": "11/28~12/9 :: PSI 2-1",
       "startDate": "2016-11-28T10:20:29.092+09:00",
@@ -26,7 +26,7 @@
     },
     {
       "id": 33,
-      "self": "https://myrealtrip.atlassian.net/rest/agile/1.0/sprint/33",
+      "self": "http://localhost:2990/rest/agile/1.0/sprint/33",
       "state": "future",
       "name": "12/12~12/23 :: PSI 2-2",
       "originBoardId": 1,
@@ -34,7 +34,7 @@
     },
     {
       "id": 35,
-      "self": "https://myrealtrip.atlassian.net/rest/agile/1.0/sprint/35",
+      "self": "http://localhost:2990/rest/agile/1.0/sprint/35",
       "state": "future",
       "name": "12/26~1/6 :: PSI 2-3",
       "originBoardId": 1,

@@ -8,7 +8,7 @@ module Terjira
     attr_accessor :store
 
     def initialize
-      @store = Thor::CoreExt::HashWithIndifferentAccess.new
+      initialize_store
     end
 
     def fetch(resource_name, &block)
@@ -34,6 +34,10 @@ module Terjira
     end
 
     def clear
+      initialize_store
+    end
+
+    def initialize_store
       @store = Thor::CoreExt::HashWithIndifferentAccess.new
     end
   end

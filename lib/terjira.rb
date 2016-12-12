@@ -17,6 +17,11 @@ module Terjira
       Client::Base.build_auth_options
     end
 
+    desc "logout", "logout your Jira"
+    def logout
+      Client::Base.expire_auth_options
+    end
+
     desc "project SUBCOMMAND ...ARGS", "manage proejcts"
     subcommand "project", ProjectCLI
 

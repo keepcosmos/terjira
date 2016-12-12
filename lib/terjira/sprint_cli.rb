@@ -46,7 +46,7 @@ module Terjira
     map ls: :list
     def list
       opts = suggest_options(required: [:board])
-      puts ":::::#{opts}"
+
       if opts[:board].type == 'kanban'
         return render("Kanban board does not support sprints")
       end

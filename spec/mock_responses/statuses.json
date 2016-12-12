@@ -1,18 +1,18 @@
 [
   {
-    "self": "https://myrealtrip.atlassian.net/rest/api/2/issuetype/10002",
+    "self": "http://localhost:2990/rest/api/2/issuetype/10002",
     "id": "10002",
     "name": "Task",
     "subtask": false,
     "statuses": [
       {
-        "self": "https://myrealtrip.atlassian.net/rest/api/2/status/10100",
+        "self": "http://localhost:2990/rest/api/2/status/10100",
         "description": "",
-        "iconUrl": "https://myrealtrip.atlassian.net/",
+        "iconUrl": "http://localhost:2990/",
         "name": "Backlog",
         "id": "10100",
         "statusCategory": {
-          "self": "https://myrealtrip.atlassian.net/rest/api/2/statuscategory/2",
+          "self": "http://localhost:2990/rest/api/2/statuscategory/2",
           "id": 2,
           "key": "new",
           "colorName": "blue-gray",
@@ -20,13 +20,13 @@
         }
       },
       {
-        "self": "https://myrealtrip.atlassian.net/rest/api/2/status/10101",
+        "self": "http://localhost:2990/rest/api/2/status/10101",
         "description": "",
-        "iconUrl": "https://myrealtrip.atlassian.net/",
+        "iconUrl": "http://localhost:2990/",
         "name": "Selected for Development",
         "id": "10101",
         "statusCategory": {
-          "self": "https://myrealtrip.atlassian.net/rest/api/2/statuscategory/2",
+          "self": "http://localhost:2990/rest/api/2/statuscategory/2",
           "id": 2,
           "key": "new",
           "colorName": "blue-gray",
@@ -34,13 +34,13 @@
         }
       },
       {
-        "self": "https://myrealtrip.atlassian.net/rest/api/2/status/3",
+        "self": "http://localhost:2990/rest/api/2/status/3",
         "description": "This issue is being actively worked on at the moment by the assignee.",
-        "iconUrl": "https://myrealtrip.atlassian.net/images/icons/statuses/inprogress.png",
+        "iconUrl": "http://localhost:2990/images/icons/statuses/inprogress.png",
         "name": "In Progress",
         "id": "3",
         "statusCategory": {
-          "self": "https://myrealtrip.atlassian.net/rest/api/2/statuscategory/4",
+          "self": "http://localhost:2990/rest/api/2/statuscategory/4",
           "id": 4,
           "key": "indeterminate",
           "colorName": "yellow",
@@ -48,13 +48,13 @@
         }
       },
       {
-        "self": "https://myrealtrip.atlassian.net/rest/api/2/status/10002",
+        "self": "http://localhost:2990/rest/api/2/status/10002",
         "description": "",
-        "iconUrl": "https://myrealtrip.atlassian.net/",
+        "iconUrl": "http://localhost:2990/",
         "name": "Done",
         "id": "10002",
         "statusCategory": {
-          "self": "https://myrealtrip.atlassian.net/rest/api/2/statuscategory/3",
+          "self": "http://localhost:2990/rest/api/2/statuscategory/3",
           "id": 3,
           "key": "done",
           "colorName": "green",
@@ -64,19 +64,19 @@
     ]
   },
   {
-    "self": "https://myrealtrip.atlassian.net/rest/api/2/issuetype/10003",
+    "self": "http://localhost:2990/rest/api/2/issuetype/10003",
     "id": "10003",
     "name": "Sub-task",
     "subtask": true,
     "statuses": [
       {
-        "self": "https://myrealtrip.atlassian.net/rest/api/2/status/10100",
+        "self": "http://localhost:2990/rest/api/2/status/10100",
         "description": "",
-        "iconUrl": "https://myrealtrip.atlassian.net/",
+        "iconUrl": "http://localhost:2990/",
         "name": "Backlog",
         "id": "10100",
         "statusCategory": {
-          "self": "https://myrealtrip.atlassian.net/rest/api/2/statuscategory/2",
+          "self": "http://localhost:2990/rest/api/2/statuscategory/2",
           "id": 2,
           "key": "new",
           "colorName": "blue-gray",
@@ -84,13 +84,13 @@
         }
       },
       {
-        "self": "https://myrealtrip.atlassian.net/rest/api/2/status/10101",
+        "self": "http://localhost:2990/rest/api/2/status/10101",
         "description": "",
-        "iconUrl": "https://myrealtrip.atlassian.net/",
+        "iconUrl": "http://localhost:2990/",
         "name": "Selected for Development",
         "id": "10101",
         "statusCategory": {
-          "self": "https://myrealtrip.atlassian.net/rest/api/2/statuscategory/2",
+          "self": "http://localhost:2990/rest/api/2/statuscategory/2",
           "id": 2,
           "key": "new",
           "colorName": "blue-gray",
@@ -98,13 +98,13 @@
         }
       },
       {
-        "self": "https://myrealtrip.atlassian.net/rest/api/2/status/3",
+        "self": "http://localhost:2990/rest/api/2/status/3",
         "description": "This issue is being actively worked on at the moment by the assignee.",
-        "iconUrl": "https://myrealtrip.atlassian.net/images/icons/statuses/inprogress.png",
+        "iconUrl": "http://localhost:2990/images/icons/statuses/inprogress.png",
         "name": "In Progress",
         "id": "3",
         "statusCategory": {
-          "self": "https://myrealtrip.atlassian.net/rest/api/2/statuscategory/4",
+          "self": "http://localhost:2990/rest/api/2/statuscategory/4",
           "id": 4,
           "key": "indeterminate",
           "colorName": "yellow",
@@ -112,13 +112,13 @@
         }
       },
       {
-        "self": "https://myrealtrip.atlassian.net/rest/api/2/status/10002",
+        "self": "http://localhost:2990/rest/api/2/status/10002",
         "description": "",
-        "iconUrl": "https://myrealtrip.atlassian.net/",
+        "iconUrl": "http://localhost:2990/",
         "name": "Done",
         "id": "10002",
         "statusCategory": {
-          "self": "https://myrealtrip.atlassian.net/rest/api/2/statuscategory/3",
+          "self": "http://localhost:2990/rest/api/2/statuscategory/3",
           "id": 3,
           "key": "done",
           "colorName": "green",
@@ -128,19 +128,19 @@
     ]
   },
   {
-    "self": "https://myrealtrip.atlassian.net/rest/api/2/issuetype/10001",
+    "self": "http://localhost:2990/rest/api/2/issuetype/10001",
     "id": "10001",
     "name": "Story",
     "subtask": false,
     "statuses": [
       {
-        "self": "https://myrealtrip.atlassian.net/rest/api/2/status/10100",
+        "self": "http://localhost:2990/rest/api/2/status/10100",
         "description": "",
-        "iconUrl": "https://myrealtrip.atlassian.net/",
+        "iconUrl": "http://localhost:2990/",
         "name": "Backlog",
         "id": "10100",
         "statusCategory": {
-          "self": "https://myrealtrip.atlassian.net/rest/api/2/statuscategory/2",
+          "self": "http://localhost:2990/rest/api/2/statuscategory/2",
           "id": 2,
           "key": "new",
           "colorName": "blue-gray",
@@ -148,13 +148,13 @@
         }
       },
       {
-        "self": "https://myrealtrip.atlassian.net/rest/api/2/status/10101",
+        "self": "http://localhost:2990/rest/api/2/status/10101",
         "description": "",
-        "iconUrl": "https://myrealtrip.atlassian.net/",
+        "iconUrl": "http://localhost:2990/",
         "name": "Selected for Development",
         "id": "10101",
         "statusCategory": {
-          "self": "https://myrealtrip.atlassian.net/rest/api/2/statuscategory/2",
+          "self": "http://localhost:2990/rest/api/2/statuscategory/2",
           "id": 2,
           "key": "new",
           "colorName": "blue-gray",
@@ -162,13 +162,13 @@
         }
       },
       {
-        "self": "https://myrealtrip.atlassian.net/rest/api/2/status/3",
+        "self": "http://localhost:2990/rest/api/2/status/3",
         "description": "This issue is being actively worked on at the moment by the assignee.",
-        "iconUrl": "https://myrealtrip.atlassian.net/images/icons/statuses/inprogress.png",
+        "iconUrl": "http://localhost:2990/images/icons/statuses/inprogress.png",
         "name": "In Progress",
         "id": "3",
         "statusCategory": {
-          "self": "https://myrealtrip.atlassian.net/rest/api/2/statuscategory/4",
+          "self": "http://localhost:2990/rest/api/2/statuscategory/4",
           "id": 4,
           "key": "indeterminate",
           "colorName": "yellow",
@@ -176,13 +176,13 @@
         }
       },
       {
-        "self": "https://myrealtrip.atlassian.net/rest/api/2/status/10002",
+        "self": "http://localhost:2990/rest/api/2/status/10002",
         "description": "",
-        "iconUrl": "https://myrealtrip.atlassian.net/",
+        "iconUrl": "http://localhost:2990/",
         "name": "Done",
         "id": "10002",
         "statusCategory": {
-          "self": "https://myrealtrip.atlassian.net/rest/api/2/statuscategory/3",
+          "self": "http://localhost:2990/rest/api/2/statuscategory/3",
           "id": 3,
           "key": "done",
           "colorName": "green",
@@ -192,19 +192,19 @@
     ]
   },
   {
-    "self": "https://myrealtrip.atlassian.net/rest/api/2/issuetype/10004",
+    "self": "http://localhost:2990/rest/api/2/issuetype/10004",
     "id": "10004",
     "name": "Bug",
     "subtask": false,
     "statuses": [
       {
-        "self": "https://myrealtrip.atlassian.net/rest/api/2/status/10100",
+        "self": "http://localhost:2990/rest/api/2/status/10100",
         "description": "",
-        "iconUrl": "https://myrealtrip.atlassian.net/",
+        "iconUrl": "http://localhost:2990/",
         "name": "Backlog",
         "id": "10100",
         "statusCategory": {
-          "self": "https://myrealtrip.atlassian.net/rest/api/2/statuscategory/2",
+          "self": "http://localhost:2990/rest/api/2/statuscategory/2",
           "id": 2,
           "key": "new",
           "colorName": "blue-gray",
@@ -212,13 +212,13 @@
         }
       },
       {
-        "self": "https://myrealtrip.atlassian.net/rest/api/2/status/10101",
+        "self": "http://localhost:2990/rest/api/2/status/10101",
         "description": "",
-        "iconUrl": "https://myrealtrip.atlassian.net/",
+        "iconUrl": "http://localhost:2990/",
         "name": "Selected for Development",
         "id": "10101",
         "statusCategory": {
-          "self": "https://myrealtrip.atlassian.net/rest/api/2/statuscategory/2",
+          "self": "http://localhost:2990/rest/api/2/statuscategory/2",
           "id": 2,
           "key": "new",
           "colorName": "blue-gray",
@@ -226,13 +226,13 @@
         }
       },
       {
-        "self": "https://myrealtrip.atlassian.net/rest/api/2/status/3",
+        "self": "http://localhost:2990/rest/api/2/status/3",
         "description": "This issue is being actively worked on at the moment by the assignee.",
-        "iconUrl": "https://myrealtrip.atlassian.net/images/icons/statuses/inprogress.png",
+        "iconUrl": "http://localhost:2990/images/icons/statuses/inprogress.png",
         "name": "In Progress",
         "id": "3",
         "statusCategory": {
-          "self": "https://myrealtrip.atlassian.net/rest/api/2/statuscategory/4",
+          "self": "http://localhost:2990/rest/api/2/statuscategory/4",
           "id": 4,
           "key": "indeterminate",
           "colorName": "yellow",
@@ -240,13 +240,13 @@
         }
       },
       {
-        "self": "https://myrealtrip.atlassian.net/rest/api/2/status/10002",
+        "self": "http://localhost:2990/rest/api/2/status/10002",
         "description": "",
-        "iconUrl": "https://myrealtrip.atlassian.net/",
+        "iconUrl": "http://localhost:2990/",
         "name": "Done",
         "id": "10002",
         "statusCategory": {
-          "self": "https://myrealtrip.atlassian.net/rest/api/2/statuscategory/3",
+          "self": "http://localhost:2990/rest/api/2/statuscategory/3",
           "id": 3,
           "key": "done",
           "colorName": "green",
@@ -256,19 +256,19 @@
     ]
   },
   {
-    "self": "https://myrealtrip.atlassian.net/rest/api/2/issuetype/10000",
+    "self": "http://localhost:2990/rest/api/2/issuetype/10000",
     "id": "10000",
     "name": "Epic",
     "subtask": false,
     "statuses": [
       {
-        "self": "https://myrealtrip.atlassian.net/rest/api/2/status/10100",
+        "self": "http://localhost:2990/rest/api/2/status/10100",
         "description": "",
-        "iconUrl": "https://myrealtrip.atlassian.net/",
+        "iconUrl": "http://localhost:2990/",
         "name": "Backlog",
         "id": "10100",
         "statusCategory": {
-          "self": "https://myrealtrip.atlassian.net/rest/api/2/statuscategory/2",
+          "self": "http://localhost:2990/rest/api/2/statuscategory/2",
           "id": 2,
           "key": "new",
           "colorName": "blue-gray",
@@ -276,13 +276,13 @@
         }
       },
       {
-        "self": "https://myrealtrip.atlassian.net/rest/api/2/status/10101",
+        "self": "http://localhost:2990/rest/api/2/status/10101",
         "description": "",
-        "iconUrl": "https://myrealtrip.atlassian.net/",
+        "iconUrl": "http://localhost:2990/",
         "name": "Selected for Development",
         "id": "10101",
         "statusCategory": {
-          "self": "https://myrealtrip.atlassian.net/rest/api/2/statuscategory/2",
+          "self": "http://localhost:2990/rest/api/2/statuscategory/2",
           "id": 2,
           "key": "new",
           "colorName": "blue-gray",
@@ -290,13 +290,13 @@
         }
       },
       {
-        "self": "https://myrealtrip.atlassian.net/rest/api/2/status/3",
+        "self": "http://localhost:2990/rest/api/2/status/3",
         "description": "This issue is being actively worked on at the moment by the assignee.",
-        "iconUrl": "https://myrealtrip.atlassian.net/images/icons/statuses/inprogress.png",
+        "iconUrl": "http://localhost:2990/images/icons/statuses/inprogress.png",
         "name": "In Progress",
         "id": "3",
         "statusCategory": {
-          "self": "https://myrealtrip.atlassian.net/rest/api/2/statuscategory/4",
+          "self": "http://localhost:2990/rest/api/2/statuscategory/4",
           "id": 4,
           "key": "indeterminate",
           "colorName": "yellow",
@@ -304,13 +304,13 @@
         }
       },
       {
-        "self": "https://myrealtrip.atlassian.net/rest/api/2/status/10002",
+        "self": "http://localhost:2990/rest/api/2/status/10002",
         "description": "",
-        "iconUrl": "https://myrealtrip.atlassian.net/",
+        "iconUrl": "http://localhost:2990/",
         "name": "Done",
         "id": "10002",
         "statusCategory": {
-          "self": "https://myrealtrip.atlassian.net/rest/api/2/statuscategory/3",
+          "self": "http://localhost:2990/rest/api/2/statuscategory/3",
           "id": 3,
           "key": "done",
           "colorName": "green",

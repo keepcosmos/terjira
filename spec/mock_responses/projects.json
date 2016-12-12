@@ -1,74 +1,74 @@
 [
   {
     "expand": "description,lead,issueTypes,url,projectKeys",
-    "self": "https://myrealtrip.atlassian.net/rest/api/2/project/10400",
+    "self": "http://localhost:2990/rest/api/2/project/10400",
     "id": "10400",
     "key": "DT",
     "description": "",
     "lead": {
-      "self": "https://myrealtrip.atlassian.net/rest/api/2/user?username=Hongseok",
+      "self": "http://localhost:2990/rest/api/2/user?username=Hongseok",
       "key": "admin",
       "name": "Hongseok",
       "avatarUrls": {
-        "16x16": "https://avatar-cdn.atlassian.com/ca4e2fb947c56c7fc71226506068c004?s=16&d=https%3A%2F%2Fmyrealtrip.atlassian.net%2Fsecure%2Fuseravatar%3Fsize%3Dxsmall%26avatarId%3D10349%26noRedirect%3Dtrue",
-        "24x24": "https://avatar-cdn.atlassian.com/ca4e2fb947c56c7fc71226506068c004?s=24&d=https%3A%2F%2Fmyrealtrip.atlassian.net%2Fsecure%2Fuseravatar%3Fsize%3Dsmall%26avatarId%3D10349%26noRedirect%3Dtrue",
-        "32x32": "https://avatar-cdn.atlassian.com/ca4e2fb947c56c7fc71226506068c004?s=32&d=https%3A%2F%2Fmyrealtrip.atlassian.net%2Fsecure%2Fuseravatar%3Fsize%3Dmedium%26avatarId%3D10349%26noRedirect%3Dtrue",
-        "48x48": "https://avatar-cdn.atlassian.com/ca4e2fb947c56c7fc71226506068c004?s=48&d=https%3A%2F%2Fmyrealtrip.atlassian.net%2Fsecure%2Fuseravatar%3FavatarId%3D10349%26noRedirect%3Dtrue"
+        "16x16": "http://avatar-cdn.atlassian.com/ca4e2fb947c56c7fc71226506068c004?s=16&d=http%3A%2F%2Flocalhost:2990%2Fsecure%2Fuseravatar%3Fsize%3Dxsmall%26avatarId%3D10349%26noRedirect%3Dtrue",
+        "24x24": "http://avatar-cdn.atlassian.com/ca4e2fb947c56c7fc71226506068c004?s=24&d=http%3A%2F%2Flocalhost:2990%2Fsecure%2Fuseravatar%3Fsize%3Dsmall%26avatarId%3D10349%26noRedirect%3Dtrue",
+        "32x32": "http://avatar-cdn.atlassian.com/ca4e2fb947c56c7fc71226506068c004?s=32&d=http%3A%2F%2Flocalhost:2990%2Fsecure%2Fuseravatar%3Fsize%3Dmedium%26avatarId%3D10349%26noRedirect%3Dtrue",
+        "48x48": "http://avatar-cdn.atlassian.com/ca4e2fb947c56c7fc71226506068c004?s=48&d=http%3A%2F%2Flocalhost:2990%2Fsecure%2Fuseravatar%3FavatarId%3D10349%26noRedirect%3Dtrue"
       },
       "displayName": "Hongseok Jang",
       "active": true
     },
     "issueTypes": [
       {
-        "self": "https://myrealtrip.atlassian.net/rest/api/2/issuetype/10002",
+        "self": "http://localhost:2990/rest/api/2/issuetype/10002",
         "id": "10002",
         "description": "A task that needs to be done.",
-        "iconUrl": "https://myrealtrip.atlassian.net/secure/viewavatar?size=xsmall&avatarId=10318&avatarType=issuetype",
+        "iconUrl": "http://localhost:2990/secure/viewavatar?size=xsmall&avatarId=10318&avatarType=issuetype",
         "name": "Task",
         "subtask": false,
         "avatarId": 10318
       },
       {
-        "self": "https://myrealtrip.atlassian.net/rest/api/2/issuetype/10003",
+        "self": "http://localhost:2990/rest/api/2/issuetype/10003",
         "id": "10003",
         "description": "The sub-task of the issue",
-        "iconUrl": "https://myrealtrip.atlassian.net/secure/viewavatar?size=xsmall&avatarId=10316&avatarType=issuetype",
+        "iconUrl": "http://localhost:2990/secure/viewavatar?size=xsmall&avatarId=10316&avatarType=issuetype",
         "name": "Sub-task",
         "subtask": true,
         "avatarId": 10316
       },
       {
-        "self": "https://myrealtrip.atlassian.net/rest/api/2/issuetype/10001",
+        "self": "http://localhost:2990/rest/api/2/issuetype/10001",
         "id": "10001",
         "description": "A user story. Created by JIRA Software - do not edit or delete.",
-        "iconUrl": "https://myrealtrip.atlassian.net/images/icons/issuetypes/story.svg",
+        "iconUrl": "http://localhost:2990/images/icons/issuetypes/story.svg",
         "name": "Story",
         "subtask": false
       },
       {
-        "self": "https://myrealtrip.atlassian.net/rest/api/2/issuetype/10004",
+        "self": "http://localhost:2990/rest/api/2/issuetype/10004",
         "id": "10004",
         "description": "A problem which impairs or prevents the functions of the product.",
-        "iconUrl": "https://myrealtrip.atlassian.net/secure/viewavatar?size=xsmall&avatarId=10303&avatarType=issuetype",
+        "iconUrl": "http://localhost:2990/secure/viewavatar?size=xsmall&avatarId=10303&avatarType=issuetype",
         "name": "Bug",
         "subtask": false,
         "avatarId": 10303
       },
       {
-        "self": "https://myrealtrip.atlassian.net/rest/api/2/issuetype/10000",
+        "self": "http://localhost:2990/rest/api/2/issuetype/10000",
         "id": "10000",
         "description": "A big user story that needs to be broken down. Created by JIRA Software - do not edit or delete.",
-        "iconUrl": "https://myrealtrip.atlassian.net/images/icons/issuetypes/epic.svg",
+        "iconUrl": "http://localhost:2990/images/icons/issuetypes/epic.svg",
         "name": "Epic",
         "subtask": false
       }
     ],
     "name": "Data Treasure",
     "avatarUrls": {
-      "48x48": "https://myrealtrip.atlassian.net/secure/projectavatar?avatarId=10324",
-      "24x24": "https://myrealtrip.atlassian.net/secure/projectavatar?size=small&avatarId=10324",
-      "16x16": "https://myrealtrip.atlassian.net/secure/projectavatar?size=xsmall&avatarId=10324",
-      "32x32": "https://myrealtrip.atlassian.net/secure/projectavatar?size=medium&avatarId=10324"
+      "48x48": "http://localhost:2990/secure/projectavatar?avatarId=10324",
+      "24x24": "http://localhost:2990/secure/projectavatar?size=small&avatarId=10324",
+      "16x16": "http://localhost:2990/secure/projectavatar?size=xsmall&avatarId=10324",
+      "32x32": "http://localhost:2990/secure/projectavatar?size=medium&avatarId=10324"
     },
     "projectKeys": [
       "DT"
@@ -77,74 +77,74 @@
   },
   {
     "expand": "description,lead,issueTypes,url,projectKeys",
-    "self": "https://myrealtrip.atlassian.net/rest/api/2/project/10602",
+    "self": "http://localhost:2990/rest/api/2/project/10602",
     "id": "10602",
     "key": "SKP",
     "description": "",
     "lead": {
-      "self": "https://myrealtrip.atlassian.net/rest/api/2/user?username=keepcosmos",
+      "self": "http://localhost:2990/rest/api/2/user?username=keepcosmos",
       "key": "keepcosmos",
       "name": "keepcosmos",
       "avatarUrls": {
-        "16x16": "https://avatar-cdn.atlassian.com/5ec1f085a63ce4f6f4530e333216a129?s=16&d=https%3A%2F%2Fmyrealtrip.atlassian.net%2Fsecure%2Fuseravatar%3Fsize%3Dxsmall%26ownerId%3Dkeepcosmos%26avatarId%3D10703%26noRedirect%3Dtrue",
-        "24x24": "https://avatar-cdn.atlassian.com/5ec1f085a63ce4f6f4530e333216a129?s=24&d=https%3A%2F%2Fmyrealtrip.atlassian.net%2Fsecure%2Fuseravatar%3Fsize%3Dsmall%26ownerId%3Dkeepcosmos%26avatarId%3D10703%26noRedirect%3Dtrue",
-        "32x32": "https://avatar-cdn.atlassian.com/5ec1f085a63ce4f6f4530e333216a129?s=32&d=https%3A%2F%2Fmyrealtrip.atlassian.net%2Fsecure%2Fuseravatar%3Fsize%3Dmedium%26ownerId%3Dkeepcosmos%26avatarId%3D10703%26noRedirect%3Dtrue",
-        "48x48": "https://avatar-cdn.atlassian.com/5ec1f085a63ce4f6f4530e333216a129?s=48&d=https%3A%2F%2Fmyrealtrip.atlassian.net%2Fsecure%2Fuseravatar%3FownerId%3Dkeepcosmos%26avatarId%3D10703%26noRedirect%3Dtrue"
+        "16x16": "http://avatar-cdn.atlassian.com/5ec1f085a63ce4f6f4530e333216a129?s=16&d=http%3A%2F%2Flocalhost:2990%2Fsecure%2Fuseravatar%3Fsize%3Dxsmall%26ownerId%3Dkeepcosmos%26avatarId%3D10703%26noRedirect%3Dtrue",
+        "24x24": "http://avatar-cdn.atlassian.com/5ec1f085a63ce4f6f4530e333216a129?s=24&d=http%3A%2F%2Flocalhost:2990%2Fsecure%2Fuseravatar%3Fsize%3Dsmall%26ownerId%3Dkeepcosmos%26avatarId%3D10703%26noRedirect%3Dtrue",
+        "32x32": "http://avatar-cdn.atlassian.com/5ec1f085a63ce4f6f4530e333216a129?s=32&d=http%3A%2F%2Flocalhost:2990%2Fsecure%2Fuseravatar%3Fsize%3Dmedium%26ownerId%3Dkeepcosmos%26avatarId%3D10703%26noRedirect%3Dtrue",
+        "48x48": "http://avatar-cdn.atlassian.com/5ec1f085a63ce4f6f4530e333216a129?s=48&d=http%3A%2F%2Flocalhost:2990%2Fsecure%2Fuseravatar%3FownerId%3Dkeepcosmos%26avatarId%3D10703%26noRedirect%3Dtrue"
       },
       "displayName": "Jaehyun Shin",
       "active": true
     },
     "issueTypes": [
       {
-        "self": "https://myrealtrip.atlassian.net/rest/api/2/issuetype/10002",
+        "self": "http://localhost:2990/rest/api/2/issuetype/10002",
         "id": "10002",
         "description": "A task that needs to be done.",
-        "iconUrl": "https://myrealtrip.atlassian.net/secure/viewavatar?size=xsmall&avatarId=10318&avatarType=issuetype",
+        "iconUrl": "http://localhost:2990/secure/viewavatar?size=xsmall&avatarId=10318&avatarType=issuetype",
         "name": "Task",
         "subtask": false,
         "avatarId": 10318
       },
       {
-        "self": "https://myrealtrip.atlassian.net/rest/api/2/issuetype/10003",
+        "self": "http://localhost:2990/rest/api/2/issuetype/10003",
         "id": "10003",
         "description": "The sub-task of the issue",
-        "iconUrl": "https://myrealtrip.atlassian.net/secure/viewavatar?size=xsmall&avatarId=10316&avatarType=issuetype",
+        "iconUrl": "http://localhost:2990/secure/viewavatar?size=xsmall&avatarId=10316&avatarType=issuetype",
         "name": "Sub-task",
         "subtask": true,
         "avatarId": 10316
       },
       {
-        "self": "https://myrealtrip.atlassian.net/rest/api/2/issuetype/10001",
+        "self": "http://localhost:2990/rest/api/2/issuetype/10001",
         "id": "10001",
         "description": "A user story. Created by JIRA Software - do not edit or delete.",
-        "iconUrl": "https://myrealtrip.atlassian.net/images/icons/issuetypes/story.svg",
+        "iconUrl": "http://localhost:2990/images/icons/issuetypes/story.svg",
         "name": "Story",
         "subtask": false
       },
       {
-        "self": "https://myrealtrip.atlassian.net/rest/api/2/issuetype/10004",
+        "self": "http://localhost:2990/rest/api/2/issuetype/10004",
         "id": "10004",
         "description": "A problem which impairs or prevents the functions of the product.",
-        "iconUrl": "https://myrealtrip.atlassian.net/secure/viewavatar?size=xsmall&avatarId=10303&avatarType=issuetype",
+        "iconUrl": "http://localhost:2990/secure/viewavatar?size=xsmall&avatarId=10303&avatarType=issuetype",
         "name": "Bug",
         "subtask": false,
         "avatarId": 10303
       },
       {
-        "self": "https://myrealtrip.atlassian.net/rest/api/2/issuetype/10000",
+        "self": "http://localhost:2990/rest/api/2/issuetype/10000",
         "id": "10000",
         "description": "A big user story that needs to be broken down. Created by JIRA Software - do not edit or delete.",
-        "iconUrl": "https://myrealtrip.atlassian.net/images/icons/issuetypes/epic.svg",
+        "iconUrl": "http://localhost:2990/images/icons/issuetypes/epic.svg",
         "name": "Epic",
         "subtask": false
       }
     ],
     "name": "Sample Kanban Project",
     "avatarUrls": {
-      "48x48": "https://myrealtrip.atlassian.net/secure/projectavatar?avatarId=10324",
-      "24x24": "https://myrealtrip.atlassian.net/secure/projectavatar?size=small&avatarId=10324",
-      "16x16": "https://myrealtrip.atlassian.net/secure/projectavatar?size=xsmall&avatarId=10324",
-      "32x32": "https://myrealtrip.atlassian.net/secure/projectavatar?size=medium&avatarId=10324"
+      "48x48": "http://localhost:2990/secure/projectavatar?avatarId=10324",
+      "24x24": "http://localhost:2990/secure/projectavatar?size=small&avatarId=10324",
+      "16x16": "http://localhost:2990/secure/projectavatar?size=xsmall&avatarId=10324",
+      "32x32": "http://localhost:2990/secure/projectavatar?size=medium&avatarId=10324"
     },
     "projectKeys": [
       "SKP"
