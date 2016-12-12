@@ -15,3 +15,6 @@ before_install:
   - gem install i18n --no-rdoc --no-ri --no-document
 
 script: bundle exec rspec spec/
+
+after_success:
+  - bundle exec codeclimate-test-reporter

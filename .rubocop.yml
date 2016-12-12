@@ -1,3 +1,7 @@
+AllCops:
+  Exclude:
+    - '*.gemspec'
+
 Style/Documentation:
   Enabled: false
 Style/EachWithObject:
