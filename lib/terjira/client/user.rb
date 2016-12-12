@@ -6,10 +6,10 @@ module Terjira
       class << self
         def assignables_by_project(project)
           if project.is_a? Array
-            keys = project.map(&:key_value).join(",")
-            fetch_assignables "user/assignable/multiProjectSearch", {projectKeys: keys }
+            keys = project.map(&:key_value).join(',')
+            fetch_assignables 'user/assignable/multiProjectSearch', projectKeys: keys
           else
-            fetch_assignables "user/assignable/search", { project: project.key_value }
+            fetch_assignables 'user/assignable/search', project: project.key_value
           end
         end
 
@@ -28,15 +28,14 @@ module Terjira
         end
 
         def assignables_by_issue(issue)
-          fetch_assignables "user/assignable/search", {issueKey: issue.key_value }
+          fetch_assignables 'user/assignable/search', issueKey: issue.key_value
         end
 
         private
 
         def fetch_assignables(path, params)
           resp = api_get(path, params)
-          resp.map { |user| build(user) }.
-            reject { |user| user.key_value =~ /^addon/ }
+          resp.map { |user| build(user) }.reject { |user| user.key_value =~ /^addon/ }
         end
       end
     end

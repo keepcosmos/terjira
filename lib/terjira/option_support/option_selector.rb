@@ -79,14 +79,14 @@ module Terjira
       fetch(:status) do
         statuses = fetch(:statuses) do
           project = if issue = get(:issue)
-            if issue.respond_to?(:project)
-              issue.project
-            else
-              set(:issue, Client::Issue.find(issue)).project
-            end
-          else
-            select_project
-          end
+                      if issue.respond_to?(:project)
+                        issue.project
+                      else
+                        set(:issue, Client::Issue.find(issue)).project
+                      end
+                    else
+                      select_project
+                    end
           Client::Status.all(project)
         end
 

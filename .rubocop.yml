@@ -1,6 +1,9 @@
 AllCops:
   Exclude:
+    - 'bin/*'
     - '*.gemspec'
+    - 'lib/terjira/ext/**/*'
+    - 'Rakefile'
 
 Style/Documentation:
   Enabled: false
@@ -8,6 +11,8 @@ Style/EachWithObject:
   Enabled: false
 
 Lint/AssignmentInCondition:
+  Enabled: false
+Lint/Eval:
   Enabled: false
 
 Metrics/BlockLength:

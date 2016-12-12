@@ -13,7 +13,6 @@ module Terjira
 end
 
 describe Terjira::OptionSupportable do
-
   subject { Terjira::TestCLI.new }
   let(:resource_store) { Terjira::ResourceStore.instance }
 
@@ -28,8 +27,7 @@ describe Terjira::OptionSupportable do
     resource_store.clear
   end
 
-  context "#select" do
-
+  context '#select' do
     before :each do
       prompt.input << "\r"
       prompt.input.rewind
@@ -38,7 +36,7 @@ describe Terjira::OptionSupportable do
     it 'suggests proejcts' do
       allow(Terjira::Client::Project).to receive(:all).and_return(projects)
 
-      subject.options = { "project" => "project" }
+      subject.options = { 'project' => 'project' }
       subject.suggest_options
 
       expect(resource_store).to be_exists(:project)
@@ -47,7 +45,7 @@ describe Terjira::OptionSupportable do
     it 'suggests boards' do
       allow(Terjira::Client::Board).to receive(:all).and_return(boards)
 
-      subject.options = { "board" => "board" }
+      subject.options = { 'board' => 'board' }
       subject.suggest_options
 
       expect(resource_store).to be_exists(:board)
@@ -56,17 +54,16 @@ describe Terjira::OptionSupportable do
     it 'suggeset sprints' do
       allow(Terjira::Client::Sprint).to receive(:all).and_return(sprints)
 
-      subject.options = { "sprint" => "sprint" }
-      subject.suggest_options(resources: { board: boards.first } )
+      subject.options = { 'sprint' => 'sprint' }
+      subject.suggest_options(resources: { board: boards.first })
 
       expect(resource_store).to be_exists(:sprint)
     end
 
-
     it 'suggests assignees' do
       allow(Terjira::Client::User).to receive(:fetch_assignables).and_return(users)
 
-      subject.options = { "assignee" => "assignee" }
+      subject.options = { 'assignee' => 'assignee' }
       subject.suggest_options(resources: { project: projects.first })
 
       expect(resource_store).to be_exists(:assignee)
@@ -75,14 +72,14 @@ describe Terjira::OptionSupportable do
     it 'suggests statuses' do
       allow(Terjira::Client::Status).to receive(:all).and_return(statuses)
 
-      subject.options = { "status" => "status" }
-      subject.suggest_options(resources: { project: projects.first } )
+      subject.options = { 'status' => 'status' }
+      subject.suggest_options(resources: { project: projects.first })
 
       expect(resource_store).to be_exists(:status)
     end
 
     it 'suggests issuetypes' do
-      subject.options = { "issuetype" => "issuetype" }
+      subject.options = { 'issuetype' => 'issuetype' }
       subject.suggest_options(resources: { project: projects.first })
 
       expect(resource_store).to be_exists(:issuetype)
@@ -91,7 +88,7 @@ describe Terjira::OptionSupportable do
     it 'suggests priority' do
       allow(Terjira::Client::Priority).to receive(:all).and_return(priorities)
 
-      subject.options = { "priority" => "priority" }
+      subject.options = { 'priority' => 'priority' }
       subject.suggest_options
 
       expect(resource_store).to be_exists(:priority)
@@ -100,7 +97,7 @@ describe Terjira::OptionSupportable do
     it 'suggests resolution' do
       allow(Terjira::Client::Resolution).to receive(:all).and_return(resolutions)
 
-      subject.options = { "resolution" => "resolution" }
+      subject.options = { 'resolution' => 'resolution' }
       subject.suggest_options
 
       expect(resource_store).to be_exists(:resolution)
@@ -111,18 +108,18 @@ describe Terjira::OptionSupportable do
     prompt.input << "test summary\r"
     prompt.input.rewind
 
-    subject.options = { "summary" => "summary" }
+    subject.options = { 'summary' => 'summary' }
 
     subject.suggest_options
 
-    expect(resource_store.get(:summary)).to be == "test summary"
+    expect(resource_store.get(:summary)).to be == 'test summary'
   end
 
   it 'opens comment ask prompt' do
     prompt.input << "multiline\ncomment"
     prompt.input.rewind
 
-    subject.options = { "comment" => "comment" }
+    subject.options = { 'comment' => 'comment' }
 
     subject.suggest_options
 
@@ -133,7 +130,7 @@ describe Terjira::OptionSupportable do
     prompt.input << "multiline\ndescription"
     prompt.input.rewind
 
-    subject.options = { "description" => "description" }
+    subject.options = { 'description' => 'description' }
 
     subject.suggest_options
 

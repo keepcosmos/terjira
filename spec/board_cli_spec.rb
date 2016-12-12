@@ -1,8 +1,7 @@
 require 'spec_helper'
 
 describe Terjira::BoardCLI do
-
-  context "#list" do
+  context '#list' do
     it 'must show boads' do
       boards = MockResource.boards
       allow(Terjira::Client::Board).to receive(:all).and_return(boards)

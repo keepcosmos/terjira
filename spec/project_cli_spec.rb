@@ -3,10 +3,10 @@ require 'spec_helper'
 describe Terjira::ProjectCLI do
   let(:projects) { MockResource.projects }
 
-  context "#list" do
+  context '#list' do
     it 'must show project list' do
       allow(Terjira::Client::Project).to receive(:all).and_return(projects)
-      result = capture(:stdout) { described_class.start(%w[ls]) }
+      result = capture(:stdout) { described_class.start %w(ls) }
 
       projects.each do |project|
         expect(result).to be_include project.key
@@ -17,12 +17,12 @@ describe Terjira::ProjectCLI do
 
     it 'must show empty with no project' do
       allow(Terjira::Client::Project).to receive(:all).and_return([])
-      result = capture(:stdout) { described_class.start(%w[ls]) }
-      expect(result).to match /nothing/i
+      result = capture(:stdout) { described_class.start(%w(ls)) }
+      expect(result).to match(/nothing/i)
     end
   end
 
-  context "#show" do
+  context '#show' do
     it 'must show a project by key' do
       project = projects.first
 
@@ -44,6 +44,7 @@ describe Terjira::ProjectCLI do
       allow(Terjira::Client::Project).to receive(:find).and_return(project)
       allow(project).to receive(:users).and_return([])
 
+      # Test
       expect(Terjira::Client::Project).to receive(:find).with(project.key_value)
 
       prompt = TTY::TestPrompt.new
@@ -52,9 +53,7 @@ describe Terjira::ProjectCLI do
       prompt.input << "\r"
       prompt.input.rewind
 
-      capture(:stdout) {
-        described_class.start([:show])
-      }
+      capture(:stdout) { described_class.start([:show]) }
     end
   end
 end

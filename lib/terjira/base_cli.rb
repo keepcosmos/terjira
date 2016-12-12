@@ -1,11 +1,13 @@
 require 'thor'
 
 require_relative 'option_supportable'
-Dir[File.dirname(__FILE__) + "/presenters/*.rb"].each { |f| require f }
+Dir[File.dirname(__FILE__) + '/presenters/*.rb'].each { |f| require f }
 
 module Terjira
+  # Jira client based on jira-ruby gem
   module Client
-    %w[Base Field Project Board Sprint Issue User Status Resolution Priority RapidView Agile].each do |klass|
+    %w(Base Field Project Board Sprint Issue User
+       Status Resolution Priority RapidView Agile).each do |klass|
       autoload klass, "terjira/client/#{klass.gsub(/(.)([A-Z](?=[a-z]))/,'\1_\2').downcase}"
     end
   end
@@ -19,7 +21,7 @@ module Terjira
     include BoardPresenter
     include SprintPresenter
 
-    def self.banner(command, namespace = nil, subcommand = false)
+    def self.banner(command, _namespace = nil, _subcommand = false)
       "#{basename} #{subcommand_prefix} #{command.usage}"
     end
 

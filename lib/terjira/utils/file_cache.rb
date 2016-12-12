@@ -3,21 +3,20 @@ require 'fileutils'
 
 module Terjira
   class FileCache
-
     MAX_DEPTH = 32
-    ROOT_DIR = ENV["HOME"] ? "#{ENV["HOME"]}/.terjira/" : "~/.terjira/"
+    ROOT_DIR = ENV['HOME'] ? "#{ENV['HOME']}/.terjira/" : '~/.terjira/'
 
     def initialize(domain, expiry = 0, depth = 2)
       @domain  = domain
       @expiry  = expiry
       @depth   = depth > MAX_DEPTH ? MAX_DEPTH : depth
-      FileUtils.mkdir_p(get_root)
+      FileUtils.mkdir_p(root_path)
     end
 
     # Set a cache value for the given key. If the cache contains an existing value for
     # the key it will be overwritten.
     def set(key, value)
-      f = File.open(get_path(key), "w")
+      f = File.open(get_path(key), 'w')
       Marshal.dump(value, f)
       f.close
     end
@@ -31,14 +30,12 @@ module Terjira
         FileUtils.rm(path)
       end
 
-      if File.exist?(path)
-        f = File.open(path, "r")
+      return nil unless File.exist?(path)
+      result = nil
+      File.open(path, 'r') do |f|
         result = Marshal.load(f)
-        f.close
-        return result
-      else
-        return nil
       end
+      result
     end
 
     # Return the value for the specified key from the cache if the key exists in the
@@ -59,16 +56,15 @@ module Terjira
 
     # Delete ALL data from the cache, regardless of expiry time
     def clear
-      if File.exist?(get_root)
-        FileUtils.rm_r(get_root)
-        FileUtils.mkdir_p(get_root)
-      end
+      return unless File.exist?(root_path)
+      FileUtils.rm_r(root_path)
+      FileUtils.mkdir_p(root_path)
     end
 
     # Delete all expired data from the cache
     def purge
       @t_purge = Time.new
-      purge_dir(get_root) if @expiry > 0
+      purge_dir(root_path) if @expiry > 0
     end
 
     private
@@ -76,16 +72,14 @@ module Terjira
     def get_path(key)
       md5 = Digest::MD5.hexdigest(key.to_s).to_s
 
-      dir = File.join(get_root, md5.split(//)[0..@depth - 1])
+      dir = File.join(root_path, md5.split(//)[0..@depth - 1])
       FileUtils.mkdir_p(dir)
-      return File.join(dir, md5)
+      File.join(dir, md5)
     end
 
-    def get_root
-      if @root == nil
-        @root = File.join(ROOT_DIR, @domain)
-      end
-      return @root
+    def root_path
+      @root = File.join(ROOT_DIR, @domain) if @root.nil?
+      @root
     end
 
     def purge_dir(dir)
@@ -102,9 +96,7 @@ module Terjira
       end
 
       # Delete empty directories
-      if Dir.entries(dir).delete_if{|e| e =~ /^\.\.?$/}.empty?
-        Dir.delete(dir)
-      end
+      Dir.delete(dir) if Dir.entries(dir).delete_if { |e| e =~ /^\.\.?$/ }.empty?
     end
   end
 end

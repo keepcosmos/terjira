@@ -5,7 +5,7 @@ module Terjira
     class Priority < Base
       class << self
         def all
-          resp = api_get "priority"
+          resp = api_get 'priority'
           resp.map { |priority| build(priority) }
         end
       end

@@ -5,13 +5,11 @@ module Terjira
     class Issue < Base
       class << self
         delegate :build, :find, to: :resource
-        ISSUE_JQL_KEYS = [:sprint, :assignee, :reporter, :project, :issuetype, :priority, :status, :statusCategory]
 
         def all(options = {})
-          opts = options.slice(*ISSUE_JQL_KEYS)
           return resource.all if options.blank?
           max_results = options.delete(:max_results) || 500
-          resource.jql(build_jql_query(opts), max_results: max_results)
+          resource.jql(build_jql_query(options), max_results: max_results)
         end
 
         def find(issue, options = {})
@@ -20,7 +18,7 @@ module Terjira
         end
 
         def current_my_issues
-          jql("assignee = #{self.key_value} AND statusCategory != 'Done'")
+          jql("assignee = #{key_value} AND statusCategory != 'Done'")
         end
 
         def assign(issue, assignee)
@@ -29,7 +27,7 @@ module Terjira
         end
 
         def write_comment(issue, message)
-          resp = api_post("issue/#{issue.key_value}/comment", { body: message }.to_json)
+          api_post("issue/#{issue.key_value}/comment", { body: message }.to_json)
           find(issue)
         end
 
@@ -39,9 +37,8 @@ module Terjira
             params.merge!(transition_param)
           end
 
-          resp = api_post "issue", params.to_json
-          result_id = resp["id"]
-          find(result_id)
+          resp = api_post 'issue', params.to_json
+          find(resp['id'])
         end
 
         def update(issue, options = {})
@@ -80,7 +77,7 @@ module Terjira
           params = {}
 
           custom_fields = options.keys.select { |k| k.to_s =~ /^customfield/ }
-          (custom_fields + [:summary, :description]).each do |k, v|
+          (custom_fields + [:summary, :description]).each do |k, _v|
             params[k] = opts.delete(k) if opts.key?(k)
           end
 

@@ -9,15 +9,14 @@ module Terjira
       extend AuthOptionBuilder
 
       DEFAULT_CACHE_SEC = 60
-      DEFAULT_API_PATH = "/rest/api/2/"
-      AGILE_API_PATH = "/rest/agile/1.0/"
+      DEFAULT_API_PATH = '/rest/api/2/'.freeze
+      AGILE_API_PATH = '/rest/agile/1.0/'.freeze
 
       class << self
-
         delegate :build, to: :resource
 
         def client
-          @@client ||= JIRA::Client.new(build_auth_options)
+          @client ||= JIRA::Client.new(build_auth_options)
         end
 
         def resource
@@ -29,7 +28,7 @@ module Terjira
         end
 
         def class_name
-          self.to_s.split("::").last
+          to_s.split('::').last
         end
 
         def cache(options = {})
@@ -38,16 +37,14 @@ module Terjira
         end
 
         # define `#api_get(post, put, delete)` and `#agile_api_get(post, put, delete)`
-        { DEFAULT_API_PATH => "api_",
-          AGILE_API_PATH => "agile_api_"
-        }.each do |url_prefix, method_prefix|
-
+        { DEFAULT_API_PATH => 'api_',
+          AGILE_API_PATH => 'agile_api_' }.each do |url_prefix, method_prefix|
           [:get, :delete].each do |http_method|
             method_name = "#{method_prefix}#{http_method}"
             define_method(method_name) do |path, params = {}, headers = {}|
               url = url_prefix + path
               if params.present?
-                params.reject! { |k, v| v.blank? }
+                params.reject! { |_k, v| v.blank? }
                 url += "?#{URI.encode_www_form(params)}"
               end
               parse_body client.send(http_method, url, headers)

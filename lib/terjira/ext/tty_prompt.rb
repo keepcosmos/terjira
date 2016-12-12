@@ -3,9 +3,6 @@ require 'tty-prompt'
 module TTY
   class Prompt
     class Question
-      # Decide how to handle input from user
-      #
-      # @api private
       def process_input
         @input = read_input
         if Utils.blank?(@input)

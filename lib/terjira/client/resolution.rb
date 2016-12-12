@@ -5,7 +5,7 @@ module Terjira
     class Resolution < Base
       class << self
         def all
-          resp = api_get("resolution")
+          resp = api_get('resolution')
           resp.map { |resolution| build(resolution) }
         end
       end

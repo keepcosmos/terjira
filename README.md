@@ -5,42 +5,39 @@
 
 # Terjira
 
-Terjira is a very interactive and easy to use command line interface for Jira.
+Terjira is interactive and easy to use command line interface (or Application) for Jira. You do not need to remember reosurce key or id. Terjira suggests with interactive prompt.
 
 
-I'm working now..
+**I'm working now..**
 
 ## Installation
 
-Add this line to your application's Gemfile:
-
-```ruby
-gem 'terjira'
-```
-
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
+Install it yourself as:
 
     $ gem install terjira
 
+If you have permission problem,
+
+    $ sudo gem install terjira
+
+    # or
+
+    $ gem install terjira --user-install
+    # You need to export your gem path
+
 ## Usage
 
-TODO: Write usage instructions here
 
-* Mock data is from jira-ruby
 
 ## Development
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake test` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+After checking out the repo, run `bin/setup` to install dependencies. Then, run `rspec spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+To install this gem onto your local machine, run `bundle exec rake install`.
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/terjira. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
+Bug reports and pull requests are welcome on GitHub at https://github.com/keepcosmos/terjira. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
 
 
 ## License

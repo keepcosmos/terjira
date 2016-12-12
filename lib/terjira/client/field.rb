@@ -9,7 +9,7 @@ module Terjira
         end
 
         def epic_name
-          all.find { |field| field.name == "Epic Name" }
+          all.find { |field| field.name == 'Epic Name' }
         end
       end
     end
