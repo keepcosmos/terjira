@@ -7,6 +7,8 @@ require 'pastel'
 module Terjira
   module IssuePresenter
     def render_issues(issues, opts = {})
+      return render('Empty') if issues.blank?
+
       header = [pastel.bold('Key'), pastel.bold('Summary')] if opts[:header]
 
       rows = issues.map do |issue|

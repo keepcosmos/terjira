@@ -8,6 +8,6 @@ engines:
         - ruby
 ratings:
   paths:
-    - lib/**
+    - lib/**/*
 exclude_paths:
   - spec/**/*

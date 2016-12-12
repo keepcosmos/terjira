@@ -1,3 +1,7 @@
+[![Build Status](https://travis-ci.org/keepcosmos/terjira.svg?branch=master)](https://travis-ci.org/keepcosmos/terjira)
+[![Test Coverage](https://codeclimate.com/github/keepcosmos/terjira/badges/coverage.svg)](https://codeclimate.com/github/keepcosmos/terjira/coverage)
+[![Code Climate](https://codeclimate.com/github/keepcosmos/terjira/badges/gpa.svg)](https://codeclimate.com/github/keepcosmos/terjira)
+
 # Terjira
 
 Terjira is a very interactive and easy to use command line interface for Jira.

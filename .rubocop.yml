@@ -3,6 +3,9 @@ Style/Documentation:
 Style/EachWithObject:
   Enabled: false
 
+Lint/AssignmentInCondition:
+  Enabled: false
+
 Metrics/BlockLength:
   Enabled: false
 
