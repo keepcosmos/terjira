@@ -1,11 +1,11 @@
-require_relative 'jql_query_builer'
+require_relative 'jql_builder'
 require_relative 'auth_option_builder'
 
 module Terjira
   module Client
     # Abstract class to delegate jira-ruby resource class
     class Base
-      extend JQLQueryBuilder
+      extend JQLBuilder
       extend AuthOptionBuilder
 
       DEFAULT_CACHE_SEC = 60

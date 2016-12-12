@@ -27,6 +27,7 @@ module Terjira
     def active
       opts = suggest_options(required: [:board])
       board = opts[:board]
+
       sprints = client_class.find_active(board)
 
       opts[:assignee] ||= current_username

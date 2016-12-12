@@ -1,9 +1,9 @@
 module Terjira
   module Client
-    module JQLQueryBuilder
+    module JQLBuilder
       JQL_KEYS = %w(board sprint assignee issuetype priority project status statusCategory).freeze
 
-      def build_jql_query(options = {})
+      def build_jql(options = {})
         q_options = options.inject({}) do |memo, (k, v)|
           memo[k.to_s] = v
           memo

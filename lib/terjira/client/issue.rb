@@ -9,16 +9,12 @@ module Terjira
         def all(options = {})
           return resource.all if options.blank?
           max_results = options.delete(:max_results) || 500
-          resource.jql(build_jql_query(options), max_results: max_results)
+          resource.jql(build_jql(options), max_results: max_results)
         end
 
         def find(issue, options = {})
           resp = api_get("issue/#{issue.key_value}", options)
           build(resp)
-        end
-
-        def current_my_issues
-          jql("assignee = #{key_value} AND statusCategory != 'Done'")
         end
 
         def assign(issue, assignee)

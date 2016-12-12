@@ -13,7 +13,7 @@ describe Terjira::SprintCLI do
   end
 
   context '#list' do
-    it 'must show sprints' do
+    it 'presents sprints' do
       allow(Terjira::Client::Board).to receive(:all).and_return(scrum_boards)
       allow(Terjira::Client::Sprint).to receive(:all).and_return(sprints)
 
@@ -31,7 +31,7 @@ describe Terjira::SprintCLI do
   end
 
   context '#show' do
-    it 'must sprint with issues' do
+    it 'presents the sprint with issues' do
       sprint = sprints.first
       allow(Terjira::Client::Sprint).to receive(:find).and_return(sprint)
       allow(Terjira::Client::Issue).to receive(:all).and_return(issues)
@@ -41,6 +41,28 @@ describe Terjira::SprintCLI do
       expect(result).to be_include sprint.id.to_s
       expect(result).to be_include sprint.name
       expect(result).to be_include sprint.goal
+      issues.each do |issue|
+        expect(result).to be_include issue.key
+        expect(result).to be_include issue.summary
+      end
+    end
+  end
+
+  context '#active' do
+    it 'presents active sprints with issues' do
+      board = boards.first
+      allow(Terjira::Client::Sprint).to receive(:find_active).with(board.id).and_return(sprints)
+      allow(Terjira::Client::Issue).to receive(:all).and_return(issues)
+
+      result = capture(:stdout) do
+        described_class.start ['active', '--board', board.id]
+      end
+
+      sprints.each do |sprint|
+        expect(result).to be_include sprint.id.to_s
+        expect(result).to be_include sprint.name
+        expect(result).to be_include sprint.goal
+      end
       issues.each do |issue|
         expect(result).to be_include issue.key
         expect(result).to be_include issue.summary
