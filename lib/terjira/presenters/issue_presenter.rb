@@ -6,6 +6,8 @@ require 'pastel'
 
 module Terjira
   module IssuePresenter
+    COMMENTS_SIZE = 3
+
     def render_issues(issues, opts = {})
       return render('Empty') if issues.blank?
 
@@ -41,7 +43,7 @@ module Terjira
       rows = []
       rows << pastel.underline.bold(issue.summary)
       rows << ''
-      rows << issue_sutats_bar(issue)
+      rows << issue_sutats_partial(issue)
       rows << ''
 
       rows << [pastel.bold('Assignee'), username_with_email(issue.assignee)].join(' ')
@@ -55,15 +57,20 @@ module Terjira
         rows << issue.environment
       end
 
+      if issue.respond_to? :timetracking
+        rows << ''
+        rows << "#{pastel.bold('Estimate')} #{estimate_partial(issue)}"
+      end
+
       if issue.comments.present?
         rows << ''
         rows << pastel.bold('Comments')
         remain_comments = issue.comments
-        comments = remain_comments.pop(4)
+        comments = remain_comments.pop(COMMENTS_SIZE)
 
         if comments.size.zero?
           rows << 'None'
-        elsif remain_comments.empty?
+        elsif remain_comments.present?
           rows << pastel.dim("- #{remain_comments.size} previous comments exist -")
         end
 
@@ -106,11 +113,18 @@ module Terjira
       "#{reporter} ⇨ #{assignee}"
     end
 
-    def issue_sutats_bar(issue)
+    def issue_sutats_partial(issue)
       bar = ["#{pastel.bold('Type')}: #{colorize_issue_type(issue.issuetype)}",
              "#{pastel.bold('Status')}: #{colorize_issue_stastus(issue.status)}",
              "#{pastel.bold('priority')}: #{colorize_priority(issue.priority, title: true)}"]
       bar.join("\s\s\s")
+    end
+
+    def estimate_partial(issue)
+      return unless issue.timetracking.is_a? Hash
+      original_estimate = issue.timetracking['originalEstimate']
+      remaining_estimate = issue.timetracking['remainingEstimate']
+      "#{remaining_estimate} / #{original_estimate}"
     end
 
     def colorize_issue_type(issue_type)

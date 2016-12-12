@@ -13,7 +13,7 @@ module Terjira
         end
 
         def find(issue, options = {})
-          resp = api_get("issue/#{issue.key_value}", options)
+          resp = agile_api_get("issue/#{issue.key_value}", options)
           build(resp)
         end
 

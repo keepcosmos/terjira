@@ -1,0 +1,16 @@
+#!/usr/bin/env ruby
+
+#!/usr/bin/env ruby
+# Do I need bundler setup?
+require 'bundler/setup'
+require 'terjira'
+require 'json'
+
+begin
+  Terjira::CLI.start(ARGV)
+rescue JIRA::HTTPError => e
+  message = JSON.parse(e.response.body)
+  error_message = message['errorMessages']
+  error_message = error_message.join(' ') if error_message.is_a? Array
+  puts "#{e.message} :: #{error_message}"
+end

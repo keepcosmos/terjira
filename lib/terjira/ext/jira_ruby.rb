@@ -33,8 +33,15 @@ module JIRA
     class BoardFactory < JIRA::BaseFactory # :nodoc:
     end
 
+    class EpicFactory < JIRA::BaseFactory # :nodoc:
+    end
+
     class Board < JIRA::Base
       def self.key_attribute; :id; end
+    end
+
+    class Epic < JIRA::Base
+      def self.key_attribute; :key; end
     end
 
     class User
@@ -43,6 +50,8 @@ module JIRA
 
     class Issue
       def self.key_attribute; :key; end
+      has_one :epic, class: JIRA::Resource::Epic, nested_under: 'fields'
+      has_one :sprint, class: JIRA::Resource::Sprint, nested_under: 'fields'
     end
 
     class Issuetype

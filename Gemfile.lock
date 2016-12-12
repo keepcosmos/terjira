@@ -6,9 +6,9 @@ PATH
       jira-ruby (~> 1.1)
       pastel (~> 0.6.1)
       thor (~> 0.19)
-      tty-prompt (~> 0.8.0)
-      tty-spinner (~> 0.4.1)
-      tty-table (~> 0.6.0)
+      tty-prompt (~> 0.8)
+      tty-spinner (~> 0.4)
+      tty-table (~> 0.6)
 
 GEM
   remote: https://rubygems.org/

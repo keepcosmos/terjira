@@ -7,6 +7,8 @@
 
 Terjira is interactive and easy to use command line interface (or Application) for Jira. You do not need to remember reosurce key or id. Terjira suggests with interactive prompt.
 
+Your Jira must support Rest API 2.0 and Agile Rest API 1.0
+
 
 **I'm working now..**
 
