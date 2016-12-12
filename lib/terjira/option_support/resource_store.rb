@@ -11,10 +11,11 @@ module Terjira
       initialize_store
     end
 
-    def fetch(resource_name, &block)
-      if resouce = get(resource_name)
+    def fetch(resource_name)
+      resouce = get(resource_name)
+      if resouce
         resouce
-      else
+      elsif block_given?
         resouce = yield
         set(resource_name, resouce)
       end

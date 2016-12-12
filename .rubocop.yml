@@ -1,5 +1,7 @@
 Style/Documentation:
   Enabled: false
+Style/EachWithObject:
+  Enabled: false
 
 Metrics/BlockLength:
   Enabled: false

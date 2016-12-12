@@ -12,14 +12,14 @@ module Terjira
 
     default_task :show
 
-    desc '[ISSUE_KEY]', 'DEFAULT, Show detail of the issue'
+    desc '[ISSUE_KEY]', 'Show detail of the issue'
     def show(issue_key = nil)
       return invoke(:help) unless issue_key
       issue = client_class.find(issue_key)
       render_issue_detail(issue)
     end
 
-    desc '( ls | list )', ''
+    desc '( ls | list )', 'List of issues'
     jira_options :assignee, :status, :project, :issuetype, :priority
     map ls: :list
     def list
@@ -32,7 +32,7 @@ module Terjira
       render_issues(issues)
     end
 
-    desc 'trans [KEY] [STATUS]', 'Do Transition'
+    desc 'trans [ISSUE_KEY] ([STATUS])', 'Do Transition'
     jira_options :comment, :assignee, :resolution
     def trans(*args)
       issue = args.shift
@@ -80,7 +80,7 @@ module Terjira
       render_issue_detail(issue)
     end
 
-    desc 'comment', 'write comment on the issue'
+    desc 'comment', 'Write comment on the issue'
     jira_options :comment
     def comment(issue)
       opts = suggest_options(required: [:comment])
@@ -88,12 +88,12 @@ module Terjira
       render_issue_detail(issue)
     end
 
-    desc 'take [ISSUE_KEY]', 'assign issue to self'
+    desc 'take [ISSUE_KEY]', 'Assign issue to self'
     def take(issue)
       assign(issue, current_username)
     end
 
-    desc 'assign [ISSUE_KEY] ([ASSIGNEE])', 'assing issue to user'
+    desc 'assign [ISSUE_KEY] ([ASSIGNEE])', 'Assing issue to user'
     def assign(*keys)
       issue = keys[0]
       assignee = keys[1]

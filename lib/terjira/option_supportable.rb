@@ -32,7 +32,7 @@ module Terjira
       origin = options.dup
 
       if opts[:required].is_a? Array
-        opts[:required].each_with_object(origin) do |memo, opt|
+        opts[:required].inject(origin) do |memo, opt|
           memo[opt] ||= opt.to_s
           memo
         end
