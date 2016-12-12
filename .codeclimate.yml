@@ -1,0 +1,13 @@
+engines:
+  rubocop:
+    enabled: true
+  duplication:
+    enabled: true
+    config:
+      languages:
+        - ruby
+ratings:
+  paths:
+    - lib/**
+exclude_paths:
+  - spec/**/*

@@ -1,8 +1,8 @@
 require 'terjira'
 require_relative 'mock_resource'
-require 'jira-ruby'
-require 'json'
 require 'pry'
+require 'simplecov'
+SimpleCov.start
 
 RSpec.configure do |config|
   config.expect_with :rspec do |expectations|

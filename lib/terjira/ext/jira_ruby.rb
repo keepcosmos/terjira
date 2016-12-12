@@ -3,21 +3,21 @@ require 'tty-screen'
 require 'tty-spinner'
 require 'pastel'
 
-# Extend jira-ruby for command line interface.
 module JIRA
+  # Extend jira-ruby for command line interface.
   class HttpClient
-    alias_method  :origin_make_request, :make_request
+    alias origin_make_request make_request
 
-    def make_request(http_method, path, body='', headers={})
-      title = http_method.to_s.upcase + " " + URI.decode(path)
+    def make_request(http_method, path, body = '', headers = {})
+      title = http_method.to_s.upcase
       title = Pastel.new.dim(title)
-      puts body
-      spinner = TTY::Spinner.new ":spinner #{title}", format: :dots, clear: false
+      spinner = TTY::Spinner.new ":spinner #{title}", format: :dots, clear: true
       result = nil
 
-      spinner.run {
+      spinner.run do
         result = origin_make_request(http_method, path, body, headers)
-      }
+      end
+
       result
     end
   end

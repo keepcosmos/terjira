@@ -6,23 +6,25 @@ require 'tty-table'
 module Terjira
   module ProjectPresenter
     def render_projects_summary(projects)
-      return render("Nothing.") if projects.blank?
-      head = ["KEY", "NAME", "TYPE"].map do |v|
-               { value: v, alignment: :center }
-             end
+      return render('Nothing.') if projects.blank?
+      head = %w(KEY NAME TYPE).map do |v|
+        { value: v, alignment: :center }
+      end
 
       rows = projects.map do |project|
-               [{ value: project.key, alignment: :center },
-                project.name,
-                { value: project.projectTypeKey, alignment: :center} ]
-             end
+        [project.key, project.name, project.projectTypeKey]
+      end
 
       table = TTY::Table.new head, rows
       pastel = Pastel.new
 
       result = table.render(:unicode, padding: [0, 1, 0, 1]) do |renderer|
         renderer.filter = proc do |val, ri, ci|
-          (ri == 0 || ci == 0) ? pastel.bold(val) : val
+          if ri.zero? || ci.zero?
+            pastel.bold(val)
+          else
+            val
+          end
         end
       end
 
@@ -32,16 +34,16 @@ module Terjira
     def redner_project_detail(project)
       head = nil
       rows = []
-      rows << (pastel.blue.bold(project.key) + " " + project.name)
+      rows << (pastel.blue.bold(project.key) + ' ' + project.name)
       if project.respond_to?(:description)
         rows << ''
-        rows << pastel.bold("Description")
-        rows << (project.description.strip.empty? ? "None" : project.description)
+        rows << pastel.bold('Description')
+        rows << (project.description.strip.empty? ? 'None' : project.description)
       end
       rows << ''
-      lead = project.lead
-      rows << pastel.bold("Lead")
-      rows << "#{lead.displayName} (#{lead.name})"
+
+      rows << pastel.bold('Lead')
+      rows << username_with_email(project.lead)
       rows << ''
       rows << render_components_and_versions(project)
 
@@ -52,11 +54,12 @@ module Terjira
 
     def render_components_and_versions(project)
       componets = project.components.map(&:name)
-      componets = componets.size == 0 ? "Empty" : componets.join("\n")
-      versions = project.versions.reject { |v| v.released }.map(&:name)
-      versions = versions.size == 0 ? "Empty" : versions.join("\n")
+      componets = componets.size.zero? ? 'Empty' : componets.join("\n")
+      versions = project.versions.reject(&:released).map(&:name)
+      versions = versions.size.zero? ? 'Empty' : versions.join("\n")
 
-      header = [pastel.bold("Components"), pastel.bold("Unreleased versions")]
+      header = [pastel.bold('Components'),
+                pastel.bold('Unreleased versions')]
       row = [[componets, versions]]
 
       table = TTY::Table.new(header, row)

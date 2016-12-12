@@ -19,14 +19,16 @@ module Terjira
 
     def formatted_date(date_str)
       return nil if date_str.nil? || date_str.empty?
-      Time.parse(date_str).strftime("%c")
+      Time.parse(date_str).strftime('%c')
     end
 
     def username_with_email(user)
       if user.nil?
-        "None"
+        'None'
       else
-        "#{user.name}, #{user.displayName} <#{user.emailAddress}>"
+        title = "#{user.name}, #{user.displayName}"
+        title += " <#{user.emailAddress}>" if user.respond_to?(:emailAddress)
+        title
       end
     end
 
@@ -34,8 +36,10 @@ module Terjira
       TTY::Screen.width
     end
 
+    # Insert new line(`\n`)
+    # when string display length is longger than length argument
     def insert_new_line(str, length)
-      str.split("\n").map do |line|
+      str.split(/\r\n|\n/).map do |line|
         if line.display_width < 1
           line
         else

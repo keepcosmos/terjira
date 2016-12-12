@@ -1,63 +1,63 @@
 module Terjira
   module SharedOptions
     OPTIONS = {
-      "project" => {
+      'project' => {
         type: :string,
         aliases: '-p',
         desc: 'project key'
       },
-      "board" => {
+      'board' => {
         type: :numeric,
         aliases: '-b',
         banner: 'BOARD_ID',
-        lazy_default: 'board',
+        lazy_default: 'board'
       },
-      "sprint" => {
+      'sprint' => {
         type: :numeric,
         banner: 'SPRINT_ID',
         lazy_default: 'sprint'
       },
-      "assignee" => {
+      'assignee' => {
         type: :string,
-        aliases: "-a"
+        aliases: '-a'
       },
-      "state" => {
+      'state' => {
         type: :array,
         aliases: '-s',
-        default: ['Active', 'Future'],
-        lazy_default: ['Active', 'Future'],
-        enum: ['Active', 'Future', 'Closed', 'ALL']
+        default: %w(Active Future),
+        lazy_default: %w(Active Future),
+        enum: %w(Active Future Closed)
       },
-      "status" => {
+      'status' => {
         type: :string,
         aliases: '-s',
         desc: 'status'
       },
-      "resolution" => {
+      'resolution' => {
         type: :string,
         aliases: '-r'
       },
-      "issuetype" => {
+      'issuetype' => {
         type: :string,
         aliases: '-t'
       },
-      "priority" => {
+      'priority' => {
         type: :string,
         aliases: '-P'
       },
-      "summary" => {
+      'summary' => {
         type: :string,
         aliases: '-S'
       },
-      "description" => {
+      'description' => {
         type: :string,
         aliases: '-d'
       },
-      "comment" => {
+      'comment' => {
         type: :string,
         aliases: '-m'
       }
-    }
+    }.freeze
 
     def jira_options(*keys)
       keys.each { |key| jira_option(key) }

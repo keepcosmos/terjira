@@ -4,8 +4,7 @@ module Terjira
   class ProjectCLI < BaseCLI
     default_task :show
 
-    desc "[PROJECT_KEY]", "show detail of project"
-    map ls: :lsit
+    desc '[PROJECT_KEY]', 'Show detail of project'
     def show(project_key = nil)
       if project_key.nil?
         project = select_project
@@ -16,9 +15,9 @@ module Terjira
       redner_project_detail(project)
     end
 
-    desc "list(ls)", "list projects"
+    desc '( ls | list )', 'list of projects'
     map ls: :list
-    def list(name = nil)
+    def list
       projects = Client::Project.all
       render_projects_summary(projects)
     end

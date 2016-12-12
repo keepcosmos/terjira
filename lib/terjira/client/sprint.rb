@@ -9,7 +9,7 @@ module Terjira
         def all(board, options = {})
           params = options.slice(:state, :maxResults)
           resp = agile_api_get "board/#{board.key_value}/sprint", params
-          resp["values"].map { |value| build(value) }
+          resp['values'].map { |value| build(value) }
         end
 
         def find(sprint)
@@ -20,7 +20,7 @@ module Terjira
         def find_active(board)
           params = { state: 'active' }
           resp = agile_api_get "board/#{board.key_value}/sprint", params
-          resp["values"].map { |value| build(value) }
+          resp['values'].map { |value| build(value) }
         end
       end
     end

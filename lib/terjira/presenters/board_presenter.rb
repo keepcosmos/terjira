@@ -2,11 +2,10 @@
 
 module Terjira
   module BoardPresenter
-
     def render_boards_summary(boards)
       pastel = Pastel.new
 
-      header = ["ID", "Name", "Type"].map { |title| pastel.bold(title) }
+      header = %w(ID Name Type).map { |title| pastel.bold(title) }
       rows = []
       boards.each do |board|
         rows << [pastel.bold(board.id), board.name, board.type]

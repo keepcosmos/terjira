@@ -7,12 +7,15 @@ require 'pastel'
 module Terjira
   module IssuePresenter
     def render_issues(issues, opts = {})
-      header = [pastel.bold("Key"), pastel.bold("Summary")] if opts[:header]
+      header = [pastel.bold('Key'), pastel.bold('Summary')] if opts[:header]
 
-      rows = issues.map { |issue| [pastel.bold(issue.key), summarise_issue(issue)] }
+      rows = issues.map do |issue|
+        [pastel.bold(issue.key), summarise_issue(issue)]
+      end
 
       table = TTY::Table.new header, rows
-      result = table.render(:unicode, padding: [0, 1, 0, 1], multiline: true) do |renderer|
+      table_opts = { padding: [0, 1, 0, 1], multiline: true }
+      result = table.render(:unicode, table_opts) do |renderer|
         renderer.border.separator = :each_row
       end
 
@@ -30,68 +33,82 @@ module Terjira
     end
 
     def render_issue_detail(issue)
-      title_pastel = pastel.bold.detach
-
       header_title = "#{pastel.bold(issue.key)} in #{issue.project.name}"
-
       header = [insert_new_line(header_title, screen_width - 10)]
 
       rows = []
-      summary = issue.summary
-      rows << pastel.underline.bold(summary)
-      rows << ""
-      rows << "#{title_pastel.("Type")}: #{colorize_issue_type(issue.issuetype)}\s\s\s#{title_pastel.("Status")}: #{colorize_issue_stastus(issue.status)}\s\s\s#{title_pastel.("priority")}: #{colorize_priority(issue.priority, title: true)}"
-      rows << ""
+      rows << pastel.underline.bold(issue.summary)
+      rows << ''
+      rows << issue_sutats_bar(issue)
+      rows << ''
 
-      rows << title_pastel.("Assignee") + " " +  username_with_email(issue.assignee)
-      rows << title_pastel.("Reporter") + " " + username_with_email(issue.reporter)
-      rows << ""
-      rows << title_pastel.("Description")
-      rows << (issue.description.blank? ? "None" : issue.description.gsub("\r", ""))
+      rows << [pastel.bold('Assignee'), username_with_email(issue.assignee)].join(' ')
+      rows << [pastel.bold('Reporter'), username_with_email(issue.reporter)].join(' ')
+      rows << ''
+      rows << pastel.bold('Description')
+      rows << (issue.description.blank? ? 'None' : issue.description)
+
+      if issue.respond_to?(:environment) && issue.environment.present?
+        rows << pastel.bold('Environment')
+        rows << issue.environment
+      end
 
       if issue.comments.present?
-        rows << ""
-        rows << title_pastel.("Comments")
+        rows << ''
+        rows << pastel.bold('Comments')
         remain_comments = issue.comments
         comments = remain_comments.pop(4)
 
-        if comments.size == 0
-          rows << "None"
-        elsif remain_comments.size > 0
+        if comments.size.zero?
+          rows << 'None'
+        elsif remain_comments.empty?
           rows << pastel.dim("- #{remain_comments.size} previous comments exist -")
         end
 
         comments.each do |comment|
-          rows << "#{pastel.bold(comment.author["displayName"])} <#{comment.author["emailAddress"]}> | #{formatted_date(comment.created)}"
+          comment_title = pastel.bold(comment.author['displayName'])
+          comment_title += " #{formatted_date(comment.created)}"
+          rows << comment_title
           rows << comment.body
-          rows << ""
+          rows << ''
         end
       end
 
       rows = rows.map { |row| insert_new_line(row, screen_width - 10) }
 
       table = TTY::Table.new header, rows.map { |r| [r] }
-      result = table.render(:unicode, padding: [0, 1, 0, 1], multiline: true) do |renderer|
-      end
+      result = table.render(:unicode, padding: [0, 1, 0, 1], multiline: true)
 
       render(result)
     end
 
     def summarise_issue(issue)
-      first_line = colorize_issue_stastus(issue.status) + issue.summary.gsub("\t", " ")
+      first_line = [colorize_issue_stastus(issue.status),
+                    issue.summary.tr("\t", ' ')].join
 
-      second_line = "#{colorize_priority(issue.priority)} #{colorize_issue_type(issue.issuetype)} "
-      second_line += assign_info(issue)
+      second_line = [colorize_priority(issue.priority),
+                     colorize_issue_type(issue.issuetype),
+                     assign_info(issue)].join(' ')
 
-      [first_line, second_line].map { |line| insert_new_line(line, screen_width - 30) }.join("\n")
+      lines = [first_line, second_line].map do |line|
+        insert_new_line(line, screen_width - 30)
+      end
+      lines.join("\n")
     end
 
     private
 
     def assign_info(issue)
-      reporter = issue.reporter ? issue.reporter.name : "None"
-      assignee = issue.assignee ? issue.assignee.name : "None"
+      reporter = issue.reporter ? issue.reporter.name : 'None'
+      assignee = issue.assignee ? issue.assignee.name : 'None'
       "#{reporter} ⇨ #{assignee}"
+    end
+
+    def issue_sutats_bar(issue)
+      bar = ["#{pastel.bold('Type')}: #{colorize_issue_type(issue.issuetype)}",
+             "#{pastel.bold('Status')}: #{colorize_issue_stastus(issue.status)}",
+             "#{pastel.bold('priority')}: #{colorize_priority(issue.priority, title: true)}"]
+      bar.join("\s\s\s")
     end
 
     def colorize_issue_type(issue_type)
@@ -111,12 +128,15 @@ module Terjira
 
     def colorize_issue_stastus(status)
       title = "#{status.name} "
-      category = status.try(:statusCategory).try(:[], "name") || ""
-      if title =~ /to\sdo|open/i
+      category = title
+      if status.respond_to? :statusCategory
+        category = (status.statusCategory || {})['name'] || ''
+      end
+      if category =~ /to\sdo|open/i
         pastel.blue.bold(title)
-      elsif title =~ /in\sprogress/i
+      elsif category =~ /in\sprogress/i
         pastel.yellow.bold(title)
-      elsif title =~ /done|close/i
+      elsif category =~ /done|close/i
         pastel.green.bold(title)
       else
         pastel.magenta.bold(title)
@@ -127,26 +147,27 @@ module Terjira
       return '' unless priority.respond_to? :name
       name = priority.name
       info = if name =~ /high|major|critic/i
-               { color: :red, icon: "⬆"}
+               { color: :red, icon: '⬆' }
              elsif name =~ /medium|default/i
-               { color: :yellow, icon: "⬆"}
+               { color: :yellow, icon: '⬆' }
              elsif name =~ /minor|low|trivial/i
-               { color: :green, icon: "⬇"}
+               { color: :green, icon: '⬇' }
              else
-               { color: :green, icon: "•"}
+               { color: :green, icon: '•' }
              end
       title = opts[:title] ? "#{info[:icon]} #{name}" : info[:icon]
       pastel.send(info[:color], title)
     end
 
     def extract_status_names(issues)
-      issues.sort_by do |issue|
-        status_key = %w[new indeterminate done]
+      issue_names = issues.sort_by do |issue|
+        status_key = %w(new indeterminate done)
         idx = if issue.status.respond_to? :statusCategory
-                status_key.index(issue.status.statusCategory["key"])
+                status_key.index(issue.status.statusCategory['key'])
               end
         idx || status_key.size
-      end.map { |issue| issue.status.name }.uniq
+      end
+      issue_names.map { |issue| issue.status.name }.uniq
     end
   end
 end
