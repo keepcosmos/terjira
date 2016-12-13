@@ -9,10 +9,14 @@ Style/Documentation:
   Enabled: false
 Style/EachWithObject:
   Enabled: false
+Style/RescueModifier:
+  Enabled: false
 
 Lint/AssignmentInCondition:
   Enabled: false
 Lint/Eval:
+  Enabled: false
+Lint/ImplicitStringConcatenation:
   Enabled: false
 
 Metrics/BlockLength:
@@ -25,7 +29,7 @@ Metrics/AbcSize:
   Max: 20
 
 Metrics/MethodLength:
-  Max: 20
+  Max: 30
 
 Metrics/LineLength:
   Max: 100

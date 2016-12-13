@@ -9,8 +9,8 @@ describe Terjira::Client::JQLBuilder do
   subject { TestJQLBuilder }
 
   it 'builds string value jql' do
-    result = subject.build_jql(board: 1)
-    expect(result).to be == 'board=1'
+    result = subject.build_jql(sprint: 1)
+    expect(result).to be == 'sprint=1'
 
     result = subject.build_jql(issuetype: 'Task')
     expect(result).to be == 'issuetype=Task'

@@ -17,6 +17,10 @@ module Terjira
       @pastel ||= Pastel.new
     end
 
+    def bold(text)
+      pastel.bold(text)
+    end
+
     def formatted_date(date_str)
       return nil if date_str.nil? || date_str.empty?
       Time.parse(date_str).strftime('%c')
@@ -40,6 +44,7 @@ module Terjira
     # when string display length is longger than length argument
     def insert_new_line(str, length)
       str.split(/\r\n|\n/).map do |line|
+        line.strip!
         if line.display_width < 1
           line
         else

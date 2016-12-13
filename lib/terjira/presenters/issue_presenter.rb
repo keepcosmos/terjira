@@ -3,6 +3,7 @@
 require 'tty-prompt'
 require 'tty-table'
 require 'pastel'
+require 'erb'
 
 module Terjira
   module IssuePresenter
@@ -37,58 +38,11 @@ module Terjira
     end
 
     def render_issue_detail(issue)
-      header_title = "#{pastel.bold(issue.key)} in #{issue.project.name}"
-      header = [insert_new_line(header_title, screen_width - 10)]
-
-      rows = []
-      rows << pastel.underline.bold(issue.summary)
-      rows << ''
-      rows << issue_sutats_partial(issue)
-      rows << ''
-
-      rows << [pastel.bold('Assignee'), username_with_email(issue.assignee)].join(' ')
-      rows << [pastel.bold('Reporter'), username_with_email(issue.reporter)].join(' ')
-      rows << ''
-      rows << pastel.bold('Description')
-      rows << (issue.description.blank? ? 'None' : issue.description)
-
-      if issue.respond_to?(:environment) && issue.environment.present?
-        rows << pastel.bold('Environment')
-        rows << issue.environment
-      end
-
-      if issue.respond_to? :timetracking
-        rows << ''
-        rows << "#{pastel.bold('Estimate')} #{estimate_partial(issue)}"
-      end
-
-      if issue.comments.present?
-        rows << ''
-        rows << pastel.bold('Comments')
-        remain_comments = issue.comments
-        comments = remain_comments.pop(COMMENTS_SIZE)
-
-        if comments.size.zero?
-          rows << 'None'
-        elsif remain_comments.present?
-          rows << pastel.dim("- #{remain_comments.size} previous comments exist -")
-        end
-
-        comments.each do |comment|
-          comment_title = pastel.bold(comment.author['displayName'])
-          comment_title += " #{formatted_date(comment.created)}"
-          rows << comment_title
-          rows << comment.body
-          rows << ''
-        end
-      end
-
-      rows = rows.map { |row| insert_new_line(row, screen_width - 10) }
-
-      table = TTY::Table.new header, rows.map { |r| [r] }
-      result = table.render(:unicode, padding: [0, 1, 0, 1], multiline: true)
-
-      render(result)
+      result = ERB.new(issue_detail_template, nil, '-').result(binding)
+      result += ERB.new(comments_template, nil, '-').result(binding)
+      rows = insert_new_line(result, screen_width - 10)
+      table = TTY::Table.new nil, [[rows]]
+      render table.render(:unicode, padding: [0, 1, 0, 1], multiline: true)
     end
 
     def summarise_issue(issue)
@@ -105,6 +59,54 @@ module Terjira
       lines.join("\n")
     end
 
+    def issue_detail_template
+      """
+      <%= bold(issue.key) + ' in ' + issue.project.name %>
+
+      <%= pastel.underline.bold(issue.summary) %>
+
+      <%= bold('Type') %>: <%= colorize_issue_type(issue.issuetype) %>\s\s\s<%= bold('Status') %>: <%= colorize_issue_stastus(issue.status) %>\s\s\s<%= bold('priority') %>: <%= colorize_priority(issue.priority, title: true) %>
+
+      <%= bold('Assignee') %>: <%= username_with_email(issue.assignee) %>
+      <%= bold('Reporter') %>: <%= username_with_email(issue.reporter) %>
+
+      <%= bold('Description') %>
+      <%= issue.description || 'None' %>
+
+      <% if issue.respond_to?(:timetracking) && issue.timetracking.is_a?(Hash) -%>
+
+        <%= bold('Estimate') %>
+        <% if issue.timetracking['original_estimate'] -%>
+          <%= issue.timetracking['originalEstimate'] %> / <%= issue.timetracking['remainingEstimate'] %>
+        <% else -%>
+          None
+        <% end -%>
+      <% end -%>
+      <% if issue.respond_to?(:environment) && issue.environment -%>
+
+        <%= bold('Environment') %>
+        <%= issue.environment %>
+      <% end -%>
+      """
+    end
+
+    def comments_template
+      """
+      <% remain_comments = issue.comments -%>
+      <% visiable_comments = remain_comments.pop(COMMENTS_SIZE) -%>
+      <%= bold('Comments') %>
+      <% if visiable_comments.empty? -%>
+        None
+      <% elsif remain_comments.present? -%>
+        <%= pastel.dim('- ' + remain_comments.size.to_s + ' previous comments exist -') %>
+      <% end -%>
+      <% visiable_comments.each do |comment| -%>
+        <%=  pastel.bold(comment.author['displayName']) %> <%= formatted_date(comment.created) %>
+        <%= comment.body %>
+
+      <% end -%>
+      """
+    end
     private
 
     def assign_info(issue)
@@ -113,66 +115,53 @@ module Terjira
       "#{reporter} ⇨ #{assignee}"
     end
 
-    def issue_sutats_partial(issue)
-      bar = ["#{pastel.bold('Type')}: #{colorize_issue_type(issue.issuetype)}",
-             "#{pastel.bold('Status')}: #{colorize_issue_stastus(issue.status)}",
-             "#{pastel.bold('priority')}: #{colorize_priority(issue.priority, title: true)}"]
-      bar.join("\s\s\s")
-    end
-
-    def estimate_partial(issue)
-      return unless issue.timetracking.is_a? Hash
-      original_estimate = issue.timetracking['originalEstimate']
-      remaining_estimate = issue.timetracking['remainingEstimate']
-      "#{remaining_estimate} / #{original_estimate}"
-    end
-
     def colorize_issue_type(issue_type)
       title = " #{issue_type.name} "
-      if title =~ /bug/i
-        pastel.on_red.white.bold(title)
-      elsif title =~ /task/i
-        pastel.on_blue.white.bold(title)
-      elsif title =~ /story/i
-        pastel.on_green.white.bold(title)
-      elsif title =~ /epic/i
-        pastel.on_magenta.white.bold(title)
-      else
-        pastel.on_cyan.white.bold(title)
-      end
+      background = if title =~ /bug/i
+                     :on_red
+                   elsif title =~ /task/i
+                     :on_blue
+                   elsif title =~ /story/i
+                     :on_green
+                   elsif title =~ /epic/i
+                     :on_magenta
+                   else
+                     :on_cyan
+                   end
+      pastel.decorate(title, :white, background, :bold)
     end
 
     def colorize_issue_stastus(status)
+      category = status.statusCategory['name'] rescue nil
+      category ||= status.name
       title = "#{status.name} "
-      category = title
-      if status.respond_to? :statusCategory
-        category = (status.statusCategory || {})['name'] || ''
-      end
-      if category =~ /to\sdo|open/i
-        pastel.blue.bold(title)
-      elsif category =~ /in\sprogress/i
-        pastel.yellow.bold(title)
-      elsif category =~ /done|close/i
-        pastel.green.bold(title)
-      else
-        pastel.magenta.bold(title)
-      end
+
+      color = if category =~ /to\sdo|open/i
+                :blue
+              elsif category =~ /in\sprogress/i
+                :yellow
+              elsif category =~ /done|close/i
+                :green
+              else
+                :magenta
+              end
+      pastel.decorate(title, color, :bold)
     end
 
     def colorize_priority(priority, opts = {})
       return '' unless priority.respond_to? :name
       name = priority.name
-      info = if name =~ /high|major|critic/i
-               { color: :red, icon: '⬆' }
-             elsif name =~ /medium|default/i
-               { color: :yellow, icon: '⬆' }
-             elsif name =~ /minor|low|trivial/i
-               { color: :green, icon: '⬇' }
-             else
-               { color: :green, icon: '•' }
-             end
-      title = opts[:title] ? "#{info[:icon]} #{name}" : info[:icon]
-      pastel.send(info[:color], title)
+      infos = if name =~ /high|major|critic/i
+                [:red, '⬆']
+              elsif name =~ /medium|default/i
+                [:yellow, '⬆']
+              elsif name =~ /minor|low|trivial/i
+                [:green, '⬇']
+              else
+                [:green, '•']
+              end
+      title = opts[:title] ? "#{infos[1]} #{name}" : info[1]
+      pastel.decorate(title, infos[0])
     end
 
     def extract_status_names(issues)

@@ -10,7 +10,8 @@ module JIRA
 
     def make_request(http_method, path, body = '', headers = {})
       title = http_method.to_s.upcase
-      title = Pastel.new.dim(title)
+      title = Pastel.new.dim(title + path)
+      puts body
       spinner = TTY::Spinner.new ":spinner #{title}", format: :dots, clear: true
       result = nil
 
