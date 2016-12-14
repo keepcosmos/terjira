@@ -16,7 +16,12 @@ module Terjira
     def show(issue_key = nil)
       return invoke(:help) unless issue_key
       issue = client_class.find(issue_key)
-      render_issue_detail(issue)
+      if issue.issuetype.name.casecmp('epic').zero?
+        epic_issues = client_class.all_epic_issues(issue)
+        render_issue_detail(issue, epic_issues)
+      else
+        render_issue_detail(issue)
+      end
     end
 
     desc '( ls | list )', 'List of issues'
@@ -56,14 +61,11 @@ module Terjira
 
     desc 'new', 'Create issue'
     jira_options :summary, :description, :project, :issuetype,
-                 :priority, :assignee
+                 :priority, :assignee, :parent
     def new
       opts = suggest_options(required: [:project, :summary, :issuetype])
 
-      if opts[:issuetype].key_value.casecmp('epic').zero?
-        epic_name_field = Client::Field.epic_name
-        opts[epic_name_field.key] = write_epic_name
-      end
+      suggest_related_value_options(opts)
 
       issue = client_class.create(opts)
       render_issue_detail(issue)

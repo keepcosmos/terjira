@@ -10,7 +10,7 @@ module JIRA
 
     def make_request(http_method, path, body = '', headers = {})
       title = http_method.to_s.upcase
-      title = Pastel.new.dim(title + path)
+      title = Pastel.new.dim(title + path[0..50])
       puts body
       spinner = TTY::Spinner.new ":spinner #{title}", format: :dots, clear: true
       result = nil
@@ -53,6 +53,8 @@ module JIRA
       def self.key_attribute; :key; end
       has_one :epic, class: JIRA::Resource::Epic, nested_under: 'fields'
       has_one :sprint, class: JIRA::Resource::Sprint, nested_under: 'fields'
+      has_one :parent, class: JIRA::Resource::Issue, nested_under: 'fields'
+      has_many :subtasks, class: JIRA::Resource::Issue, nested_under: 'fields'
     end
 
     class Issuetype

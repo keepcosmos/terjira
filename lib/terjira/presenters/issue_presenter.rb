@@ -37,21 +37,21 @@ module Terjira
       end
     end
 
-    def render_issue_detail(issue)
+    def render_issue_detail(issue, epic_issues = [])
       result = ERB.new(issue_detail_template, nil, '-').result(binding)
       result += ERB.new(comments_template, nil, '-').result(binding)
       rows = insert_new_line(result, screen_width - 10)
-      table = TTY::Table.new nil, [[rows]]
+      table = TTY::Table.new nil, rows.split("\n").map { |r| [r] }
       render table.render(:unicode, padding: [0, 1, 0, 1], multiline: true)
     end
 
     def summarise_issue(issue)
       first_line = [colorize_issue_stastus(issue.status),
-                    issue.summary.tr("\t", ' ')].join
+                    issue.summary.tr("\t", ' ')].join(' ')
 
       second_line = [colorize_priority(issue.priority),
                      colorize_issue_type(issue.issuetype),
-                     assign_info(issue)].join(' ')
+                     issue.assignee.try(:name)].join(' ')
 
       lines = [first_line, second_line].map do |line|
         insert_new_line(line, screen_width - 30)
@@ -60,32 +60,50 @@ module Terjira
     end
 
     def issue_detail_template
-      """
-      <%= bold(issue.key) + ' in ' + issue.project.name %>
+      """<%= bold(issue.key) + ' in ' + issue.project.name %>
 
       <%= pastel.underline.bold(issue.summary) %>
 
       <%= bold('Type') %>: <%= colorize_issue_type(issue.issuetype) %>\s\s\s<%= bold('Status') %>: <%= colorize_issue_stastus(issue.status) %>\s\s\s<%= bold('priority') %>: <%= colorize_priority(issue.priority, title: true) %>
+      <%= bold('Epic Link') %>: <%= issue.try(:epic).try(:name) || 'None' %> <%= issue.try(:epic).try(:key) %>
+      <% if issue.try(:parent) -%>
+        <%= bold('Parent') %>: <%= issue.parent.key %>
+      <% end %>
+      <% if issue.try(:sprint) -%>
+        <%= bold('Sprint') %>: <%= colorize_sprint_state(issue.try(:sprint).try(:state)) %> <%= issue.try(:sprint).try(:id) %>. <%= issue.try(:sprint).try(:name) %>
+      <% end -%>
 
       <%= bold('Assignee') %>: <%= username_with_email(issue.assignee) %>
       <%= bold('Reporter') %>: <%= username_with_email(issue.reporter) %>
 
       <%= bold('Description') %>
       <%= issue.description || 'None' %>
-
-      <% if issue.respond_to?(:timetracking) && issue.timetracking.is_a?(Hash) -%>
+      <% if issue.try(:timetracking).is_a? Hash -%>
 
         <%= bold('Estimate') %>
-        <% if issue.timetracking['original_estimate'] -%>
+        <% if issue.timetracking['originalEstimate'] -%>
           <%= issue.timetracking['originalEstimate'] %> / <%= issue.timetracking['remainingEstimate'] %>
         <% else -%>
           None
         <% end -%>
       <% end -%>
-      <% if issue.respond_to?(:environment) && issue.environment -%>
+      <% if issue.try(:environment) -%>
 
         <%= bold('Environment') %>
         <%= issue.environment %>
+      <% end -%>
+
+      <% if issue.subtasks.size > 0 -%>
+        <%= bold('SubTasks') %>
+        <% issue.subtasks.each do |subtask| -%>
+          * <%= bold(subtask.key) %> <%= colorize_issue_stastus(subtask.status) %> <%= subtask.summary %>
+        <% end -%>
+      <% end -%>
+      <% if epic_issues.present? -%>
+        <%= bold('Issues in Epic') %>
+        <% epic_issues.each do |epic_issue| -%>
+          * <%= bold(epic_issue.key) %> <%= colorize_issue_stastus(epic_issue.status) %> <%= epic_issue.summary %> <%= issue.assignee.try(:name) %>
+        <% end -%>
       <% end -%>
       """
     end
@@ -97,7 +115,7 @@ module Terjira
       <%= bold('Comments') %>
       <% if visiable_comments.empty? -%>
         None
-      <% elsif remain_comments.present? -%>
+      <% elsif remain_comments.size != 0 -%>
         <%= pastel.dim('- ' + remain_comments.size.to_s + ' previous comments exist -') %>
       <% end -%>
       <% visiable_comments.each do |comment| -%>
@@ -107,13 +125,8 @@ module Terjira
       <% end -%>
       """
     end
-    private
 
-    def assign_info(issue)
-      reporter = issue.reporter ? issue.reporter.name : 'None'
-      assignee = issue.assignee ? issue.assignee.name : 'None'
-      "#{reporter} ⇨ #{assignee}"
-    end
+    private
 
     def colorize_issue_type(issue_type)
       title = " #{issue_type.name} "
@@ -134,7 +147,7 @@ module Terjira
     def colorize_issue_stastus(status)
       category = status.statusCategory['name'] rescue nil
       category ||= status.name
-      title = "#{status.name} "
+      title = "#{status.name}"
 
       color = if category =~ /to\sdo|open/i
                 :blue
@@ -160,7 +173,7 @@ module Terjira
               else
                 [:green, '•']
               end
-      title = opts[:title] ? "#{infos[1]} #{name}" : info[1]
+      title = opts[:title] ? "#{infos[1]} #{name}" : infos[1]
       pastel.decorate(title, infos[0])
     end
 

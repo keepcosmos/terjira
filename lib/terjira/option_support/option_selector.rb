@@ -61,7 +61,8 @@ module Terjira
 
     def select_issuetype
       fetch(:issuetype) do
-        project = select_project
+        project = get(:issue).try(:project).try(:key)
+        project ||= select_project
         if project.is_a? String
           project = Client::Project.find(project)
           set(:project, project)
@@ -140,6 +141,10 @@ module Terjira
 
     def write_summary
       fetch(:summary) { option_prompt.ask('Summary?') }
+    end
+
+    def write_parent_issue_key
+      fetch(:parent) { option_prompt.ask('Parent issue key?') }
     end
 
     private

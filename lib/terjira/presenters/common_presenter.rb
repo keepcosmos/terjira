@@ -21,9 +21,9 @@ module Terjira
       pastel.bold(text)
     end
 
-    def formatted_date(date_str)
+    def formatted_date(date_str, date_format = '%c')
       return nil if date_str.nil? || date_str.empty?
-      Time.parse(date_str).strftime('%c')
+      Time.parse(date_str).strftime(date_format)
     end
 
     def username_with_email(user)
@@ -50,7 +50,7 @@ module Terjira
         else
           display_length = pastel.strip(line).display_width
           split_length = (line.length * length / display_length).to_i
-          line.scan(/.{1,#{split_length}}/).join("\n")
+          line.scan(/.{1,#{split_length}}/).join("\n") rescue line
         end
       end.join("\n")
     end

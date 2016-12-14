@@ -73,6 +73,23 @@ module Terjira
       origin.merge! default_value_options
     end
 
+    def suggest_related_value_options(opts = {})
+      if opts[:issuetype]
+        if opts[:issuetype].key_value.casecmp('epic').zero?
+          # Suggest epic name
+          epic_name_field = Client::Field.epic_name
+          opts[epic_name_field.key] ||= write_epic_name
+        else
+          subtask_issuetypes = Client::Issuetype.subtask_issuetypes.map(&:name)
+          if subtask_issuetypes.include? opts[:issuetype].key_value
+            # Suggest parent issue
+            opts[:parent] ||= write_parent_issue_key
+          end
+        end
+      end
+      opts
+    end
+
     def resource_store
       ResourceStore.instance
     end

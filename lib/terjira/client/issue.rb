@@ -12,6 +12,11 @@ module Terjira
           resource.jql(build_jql(options), max_results: max_results)
         end
 
+        def all_epic_issues(epic)
+          resp = agile_api_get("epic/#{epic.key}/issue")
+          resp["issues"].map { |issue| build(issue) }
+        end
+
         def find(issue, options = {})
           resp = agile_api_get("issue/#{issue.key_value}", options)
           build(resp)
@@ -79,6 +84,10 @@ module Terjira
 
           if opts.key?(:project)
             params[:project] = { key: opts.delete(:project).key_value }
+          end
+
+          if opts.key?(:parent)
+            params[:parent] = { key: opts.delete(:parent).key_value }
           end
 
           opts.each do |k, v|
