@@ -1,16 +1,22 @@
 #!/usr/bin/env ruby
 
-#!/usr/bin/env ruby
 # Do I need bundler setup?
 require 'bundler/setup'
 require 'terjira'
 require 'json'
+require 'pastel'
 
 begin
   Terjira::CLI.start(ARGV)
+rescue SystemExit, Interrupt
 rescue JIRA::HTTPError => e
   message = JSON.parse(e.response.body)
-  error_message = message['errorMessages']
-  error_message = error_message.join(' ') if error_message.is_a? Array
-  puts e.message.to_s + "\n" + e.response.body
+  pastel = Pastel.new
+  if message['errorMessages'].present?
+    puts pastel.red(message['errorMessages'].join("\n"))
+  else
+    puts pastel.red(e.message.to_s + "\n" + e.response.body)
+  end
+rescue => e
+  puts Pastel.new.dim(e.message)
 end

@@ -23,6 +23,7 @@ module Terjira
       status: :select_issue_status,
       priority: :select_priority,
       resolution: :select_resolution,
+      epiclink: :write_epiclink_key,
       comment: :write_comment
     }.freeze
 
@@ -87,6 +88,12 @@ module Terjira
           end
         end
       end
+
+      if opts[:epiclink]
+        epiclink_field = Client::Field.epiclink
+        opts[epiclink_field.key] ||= opts.delete(:epiclink)
+      end
+
       opts
     end
 

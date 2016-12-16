@@ -4,7 +4,6 @@ module Terjira
       'project' => {
         type: :string,
         aliases: '-p',
-        desc: 'project key'
       },
       'board' => {
         type: :numeric,
@@ -31,7 +30,6 @@ module Terjira
       'status' => {
         type: :string,
         aliases: '-s',
-        desc: 'status'
       },
       'resolution' => {
         type: :string,
@@ -56,6 +54,10 @@ module Terjira
       'comment' => {
         type: :string,
         aliases: '-m'
+      },
+      'epiclink' => {
+        type: :string,
+        aliases: '-e'
       }
     }.freeze
 

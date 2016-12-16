@@ -9,16 +9,12 @@ module JIRA
     alias origin_make_request make_request
 
     def make_request(http_method, path, body = '', headers = {})
-      title = http_method.to_s.upcase
-      title = Pastel.new.dim(title + path[0..50])
-      puts body
+      title = Pastel.new.dim(http_method.to_s.upcase)
       spinner = TTY::Spinner.new ":spinner #{title}", format: :dots, clear: true
       result = nil
-
       spinner.run do
         result = origin_make_request(http_method, path, body, headers)
       end
-
       result
     end
   end

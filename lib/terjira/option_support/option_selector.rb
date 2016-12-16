@@ -121,6 +121,12 @@ module Terjira
       end
     end
 
+    def write_epiclink_key
+      fetch(:epiclink) do
+        option_prompt.ask('Epic key?')
+      end
+    end
+
     def write_epic_name
       option_prompt.ask('Epic name?')
     end

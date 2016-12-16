@@ -65,8 +65,10 @@ module Terjira
       <%= pastel.underline.bold(issue.summary) %>
 
       <%= bold('Type') %>: <%= colorize_issue_type(issue.issuetype) %>\s\s\s<%= bold('Status') %>: <%= colorize_issue_stastus(issue.status) %>\s\s\s<%= bold('priority') %>: <%= colorize_priority(issue.priority, title: true) %>
-      <%= bold('Epic Link') %>: <%= issue.try(:epic).try(:name) || 'None' %> <%= issue.try(:epic).try(:key) %>
-      <% if issue.try(:parent) -%>
+      <% if issue.parent.nil?  -%>
+      <%= bold('Epic Link') %>: <%= issue.try(:epic).try(:key) %> <%= issue.try(:epic).try(:name) || dim_none %>
+      <% end -%>
+      <% if issue.try(:parent) && issue.epic.nil? -%>
         <%= bold('Parent') %>: <%= issue.parent.key %>
       <% end %>
       <% if issue.try(:sprint) -%>
@@ -77,14 +79,14 @@ module Terjira
       <%= bold('Reporter') %>: <%= username_with_email(issue.reporter) %>
 
       <%= bold('Description') %>
-      <%= issue.description || 'None' %>
+      <%= issue.description || dim_none %>
       <% if issue.try(:timetracking).is_a? Hash -%>
 
         <%= bold('Estimate') %>
         <% if issue.timetracking['originalEstimate'] -%>
           <%= issue.timetracking['originalEstimate'] %> / <%= issue.timetracking['remainingEstimate'] %>
         <% else -%>
-          None
+          <%= dim_none %>
         <% end -%>
       <% end -%>
       <% if issue.try(:environment) -%>
@@ -92,8 +94,8 @@ module Terjira
         <%= bold('Environment') %>
         <%= issue.environment %>
       <% end -%>
-
       <% if issue.subtasks.size > 0 -%>
+
         <%= bold('SubTasks') %>
         <% issue.subtasks.each do |subtask| -%>
           * <%= bold(subtask.key) %> <%= colorize_issue_stastus(subtask.status) %> <%= subtask.summary %>
@@ -114,7 +116,7 @@ module Terjira
       <% visiable_comments = remain_comments.pop(COMMENTS_SIZE) -%>
       <%= bold('Comments') %>
       <% if visiable_comments.empty? -%>
-        None
+        <%= dim_none %>
       <% elsif remain_comments.size != 0 -%>
         <%= pastel.dim('- ' + remain_comments.size.to_s + ' previous comments exist -') %>
       <% end -%>

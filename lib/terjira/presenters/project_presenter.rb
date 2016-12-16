@@ -12,7 +12,7 @@ module Terjira
       end
 
       rows = projects.map do |project|
-        [project.key, project.name, project.projectTypeKey]
+        [project.key, project.name, project.try(:projectTypeKey)]
       end
 
       table = TTY::Table.new head, rows

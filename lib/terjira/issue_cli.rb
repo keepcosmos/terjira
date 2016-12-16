@@ -61,7 +61,7 @@ module Terjira
 
     desc 'new', 'Create issue'
     jira_options :summary, :description, :project, :issuetype,
-                 :priority, :assignee, :parent
+                 :priority, :assignee, :parent, :epiclink
     def new
       opts = suggest_options(required: [:project, :summary, :issuetype])
 
@@ -73,11 +73,13 @@ module Terjira
 
     desc 'edit', 'Edit issue'
     jira_options :summary, :description, :project, :issuetype,
-                 :priority, :assignee
+                 :priority, :assignee, :epiclink
     def edit(issue)
       return if options.blank?
       issue = client_class.find(issue)
       opts = suggest_options(resources: { issue: issue })
+      suggest_related_value_options(opts)
+
       issue = client_class.update(issue, opts)
       render_issue_detail(issue)
     end

@@ -5,6 +5,10 @@ require 'pastel'
 
 module Terjira
   module CommonPresenter
+    extend Forwardable
+
+    def_delegators :pastel, :bold, :dim
+
     def render(text)
       if text.is_a? Array
         puts text.join("\n")
@@ -17,8 +21,8 @@ module Terjira
       @pastel ||= Pastel.new
     end
 
-    def bold(text)
-      pastel.bold(text)
+    def dim_none
+      dim('None')
     end
 
     def formatted_date(date_str, date_format = '%c')
@@ -28,7 +32,7 @@ module Terjira
 
     def username_with_email(user)
       if user.nil?
-        'None'
+        dim_none
       else
         title = "#{user.name}, #{user.displayName}"
         title += " <#{user.emailAddress}>" if user.respond_to?(:emailAddress)

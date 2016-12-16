@@ -17,7 +17,7 @@ module Terjira
       end
 
       def expire_auth_options(cache_key = AUTH_CACHE_KEY)
-        auth_file_cache.delete(cache_key)
+        Terjira::FileCache.clear_all
       end
 
       def build_auth_options_by_tty

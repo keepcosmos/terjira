@@ -5,11 +5,21 @@ module Terjira
     class Field < Base
       class << self
         def all
-          @all_fields ||= resource.all
+          @all_fields ||= file_cache.fetch("all") do
+            resource.all
+          end
         end
 
         def epic_name
           all.find { |field| field.name == 'Epic Name' }
+        end
+
+        def epiclink
+          all.find { |field| field.name == 'Epic Link' }
+        end
+
+        def file_cache
+          Terjira::FileCache.new("resource/fields", 60 * 60 * 24)
         end
       end
     end

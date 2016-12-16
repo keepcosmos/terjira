@@ -6,6 +6,14 @@ module Terjira
     MAX_DEPTH = 32
     ROOT_DIR = ENV['HOME'] ? "#{ENV['HOME']}/.terjira/" : '~/.terjira/'
 
+    class << self
+      def clear_all
+        return unless File.exist?(ROOT_DIR)
+        FileUtils.rm_r(ROOT_DIR)
+        FileUtils.mkdir_p(ROOT_DIR)
+      end
+    end
+
     def initialize(domain, expiry = 0, depth = 2)
       @domain  = domain
       @expiry  = expiry
@@ -51,7 +59,7 @@ module Terjira
 
     # Delete the value for the given key from the cache
     def delete(key)
-      FileUtils.rm(get_path(key))
+      FileUtils.rm(get_path(key)) if File.exists? get_path(key)
     end
 
     # Delete ALL data from the cache, regardless of expiry time

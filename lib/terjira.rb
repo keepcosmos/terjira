@@ -13,8 +13,19 @@ module Terjira
   class CLI < Thor
     desc 'login', 'login your Jira'
     def login
+      pastel = Pastel.new
       Client::Base.expire_auth_options
       Client::Base.build_auth_options
+
+      # for touch base resource
+      Client::Field.all
+      puts pastel.blue("Login successful")
+    rescue JIRA::HTTPError => e
+      puts pastel.red(e.message)
+      Client::Base.expire_auth_options
+    rescue => e
+      Client::Base.expire_auth_options
+      raise e
     end
 
     desc 'logout', 'logout your Jira'
