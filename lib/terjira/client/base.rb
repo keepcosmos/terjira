@@ -23,6 +23,11 @@ module Terjira
           client.send(class_name) if client.respond_to?(class_name)
         end
 
+        def site_url
+          auth_options = build_auth_options
+          "#{auth_options[:site]}/#{auth_options[:context_path]}"
+        end
+
         def username
           client.options[:username]
         end

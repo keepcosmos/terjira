@@ -14,8 +14,8 @@ rescue JIRA::HTTPError => e
   pastel = Pastel.new
   if message['errorMessages'].present?
     puts pastel.red(message['errorMessages'].join("\n"))
-  else
-    puts pastel.red(e.message.to_s + "\n" + e.response.body)
+  elsif message['errors'].present?
+    puts pastel.red(message['errors'].map { |k, v| "#{k}: #{v}" }.join(", "))
   end
 rescue => e
   puts Pastel.new.dim(e.message)

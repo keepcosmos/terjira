@@ -30,6 +30,11 @@ If you have permission problem,
 ## Usage
 
 
+## Todo
+**Contributions are welcome!**
+- [ ] Manage worklog and estimate of issues
+- [ ] Manage component and version of issues
+- [ ] More friendly help
 
 ## Development
 

@@ -13,15 +13,20 @@ module Terjira
     default_task :show
 
     desc '[ISSUE_KEY]', 'Show detail of the issue'
-    def show(issue_key = nil)
-      return invoke(:help) unless issue_key
-      issue = client_class.find(issue_key)
+    def show(issue = nil)
+      return invoke(:help) unless issue
+      issue = client_class.find(issue)
       if issue.issuetype.name.casecmp('epic').zero?
         epic_issues = client_class.all_epic_issues(issue)
         render_issue_detail(issue, epic_issues)
       else
         render_issue_detail(issue)
       end
+    end
+
+    desc 'open [ISSUE_KEY]', 'Open browser'
+    def open(issue)
+      open_url(client_class.site_url + "/browse/#{issue}")
     end
 
     desc '( ls | list )', 'List of issues'
@@ -35,28 +40,6 @@ module Terjira
 
       issues = client_class.all(opts)
       render_issues(issues)
-    end
-
-    desc 'trans [ISSUE_KEY] ([STATUS])', 'Do Transition'
-    jira_options :comment, :assignee, :resolution
-    def trans(*args)
-      issue = args.shift
-      raise 'must pass issue key or id' unless issue
-      status = args.join(' ') if args.present?
-      issue = client_class.find(issue, expand: 'transitions.fields')
-
-      transitions = issue.transitions
-      transition = transitions.find { |t| t.name.casecmp(status.to_s).zero? }
-
-      resources = if transition
-                    { status: transition, issue: issue }
-                  else
-                    { statuses: transitions, issue: issue }
-                  end
-
-      opts = suggest_options(required: [:status], resources: resources)
-      issue = client_class.trans(issue, opts)
-      render_issue_detail(issue)
     end
 
     desc 'new', 'Create issue'
@@ -84,6 +67,12 @@ module Terjira
       render_issue_detail(issue)
     end
 
+    desc 'delete', 'Delete the issue'
+    def delete(issue)
+      client_class.delete(issue)
+      render("Deleted")
+    end
+
     desc 'comment', 'Write comment on the issue'
     jira_options :comment
     def comment(issue)
@@ -109,6 +98,28 @@ module Terjira
       end
       client_class.assign(issue, assignee)
       show(issue.key_value)
+    end
+
+    desc 'trans [ISSUE_KEY] ([STATUS])', 'Do transition'
+    jira_options :comment, :assignee, :resolution
+    def trans(*args)
+      issue = args.shift
+      raise 'must pass issue key or id' unless issue
+      status = args.join(' ') if args.present?
+      issue = client_class.find(issue, expand: 'transitions.fields')
+
+      transitions = issue.transitions
+      transition = transitions.find { |t| t.name.casecmp(status.to_s).zero? }
+
+      resources = if transition
+                    { status: transition, issue: issue }
+                  else
+                    { statuses: transitions, issue: issue }
+                  end
+
+      opts = suggest_options(required: [:status], resources: resources)
+      issue = client_class.trans(issue, opts)
+      render_issue_detail(issue)
     end
   end
 end

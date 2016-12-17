@@ -33,6 +33,18 @@ module Terjira
       def current_username
         @current_username ||= Client::Base.username
       end
+
+      def open_url(url)
+        ostype = `echo $OSTYPE`
+        open_cmd = case ostype
+                   when /darwin/ then 'open'
+                   when  /cygwin/ then 'cygstart'
+                   when /linux/ then 'xdg-open'
+                   when /msys/ then 'start ""'
+                   else puts "Platform $OSTYPE not supported"
+                   end
+        `#{open_cmd} #{url}`
+      end
     end
   end
 end

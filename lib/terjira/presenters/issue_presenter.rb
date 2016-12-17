@@ -40,7 +40,7 @@ module Terjira
     def render_issue_detail(issue, epic_issues = [])
       result = ERB.new(issue_detail_template, nil, '-').result(binding)
       result += ERB.new(comments_template, nil, '-').result(binding)
-      rows = insert_new_line(result, screen_width - 10)
+      rows = insert_new_line(result, screen_width - 15)
       table = TTY::Table.new nil, rows.split("\n").map { |r| [r] }
       render table.render(:unicode, padding: [0, 1, 0, 1], multiline: true)
     end
@@ -60,7 +60,7 @@ module Terjira
     end
 
     def issue_detail_template
-      """<%= bold(issue.key) + ' in ' + issue.project.name %>
+      %{<%= bold(issue.key) + ' in ' + issue.project.name %>
 
       <%= pastel.underline.bold(issue.summary) %>
 
@@ -102,12 +102,13 @@ module Terjira
         <% end -%>
       <% end -%>
       <% if epic_issues.present? -%>
+
         <%= bold('Issues in Epic') %>
         <% epic_issues.each do |epic_issue| -%>
-          * <%= bold(epic_issue.key) %> <%= colorize_issue_stastus(epic_issue.status) %> <%= epic_issue.summary %> <%= issue.assignee.try(:name) %>
+          * <%= bold(epic_issue.key) %> <%= colorize_issue_stastus(epic_issue.status) %> <%= epic_issue.summary %>
         <% end -%>
       <% end -%>
-      """
+      }
     end
 
     def comments_template
@@ -121,9 +122,8 @@ module Terjira
         <%= pastel.dim('- ' + remain_comments.size.to_s + ' previous comments exist -') %>
       <% end -%>
       <% visiable_comments.each do |comment| -%>
-        <%=  pastel.bold(comment.author['displayName']) %> <%= formatted_date(comment.created) %>
         <%= comment.body %>
-
+        - <%= comment.author['displayName'] %> <%= formatted_date(comment.created) %>
       <% end -%>
       """
     end
