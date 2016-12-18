@@ -75,8 +75,8 @@ module Terjira
         <%= bold('Sprint') %>: <%= colorize_sprint_state(issue.try(:sprint).try(:state)) %> <%= issue.try(:sprint).try(:id) %>. <%= issue.try(:sprint).try(:name) %>
       <% end -%>
 
-      <%= bold('Assignee') %>: <%= username_with_email(issue.assignee) %>
-      <%= bold('Reporter') %>: <%= username_with_email(issue.reporter) %>
+      <%= bold('Assignee') %>: <%= username(issue.assignee) %>
+      <%= bold('Reporter') %>: <%= username(issue.reporter) %>
 
       <%= bold('Description') %>
       <%= issue.description || dim_none %>
@@ -93,6 +93,11 @@ module Terjira
 
         <%= bold('Environment') %>
         <%= issue.environment %>
+      <% end -%>
+      <% if issue.try(:attachment).present? -%>
+
+        <%= bold('Attachment') %>
+        <%= issue.attachment.map { |item| item['filename'] }.join(", ") %>
       <% end -%>
       <% if issue.subtasks.size > 0 -%>
 

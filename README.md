@@ -5,12 +5,14 @@
 
 # Terjira
 
-Terjira is interactive and easy to use command line interface (or Application) for Jira. You do not need to remember reosurce key or id. Terjira suggests with interactive prompt.
+Terjira is an interactive and easy to use command line interface (or Application) for Jira. You do not need to remember resource key or id. Terjira suggests it with interactive prompt.
 
 Your Jira must support Rest API 2.0 and Agile Rest API 1.0
 
+## Domo
+[Watch Demo](https://www.youtube.com/watch?v=T0hbhaXtH-Y)
 
-**I'm working now..**
+[![Sample](./sample.png)](https://www.youtube.com/watch?v=T0hbhaXtH-Y)
 
 ## Installation
 
@@ -28,13 +30,50 @@ If you have permission problem,
     # You need to export your gem path
 
 ## Usage
+```
+Authentication:
+  jira login                      # Login your Jira
+  jira logout                     # Logout your Jira
 
+Project:
+  jira project help [COMMAND]     # Describe one specific subcommand
+  jira project ( ls | list )      # List of all projects
+  jira project [PROJECT_KEY]      # Show detail of the project
+
+Board:
+  jira board help [COMMAND]       # Describe one specific subcommand
+  jira board ( ls | list)         # List of all boards
+  jira board backlog              # Backlog from the board
+
+
+Sprint:
+  jira sprint help [COMMAND]      # Describe one specific subcommand
+  jira sprint ( ls | list )       # List of all sprint from the board
+  jira sprint [SPRINT_ID]         # Show the sprint
+  jira sprint active              # Show active sprints and issues
+
+Issue:
+  jira issue help [COMMAND]       # Describe one specific subcommand
+  jira issue ( ls | list )        # List of issues
+  jira issue [ISSUE_KEY]          # Show detail of the issue
+  jira issue assign [ISSUE_KEY] ([ASSIGNEE])  # Assign the issue to user
+  jira issue comment              # Write comment on the issue
+  jira issue delete               # Delete the issue
+  jira issue edit                 # Edit the issue
+  jira issue new                  # Create an issue
+  jira issue open [ISSUE_KEY]     # Open browser
+  jira issue take [ISSUE_KEY]     # Assign the issue to self
+  jira issue trans [ISSUE_KEY] ([STATUS])     # Do transition
+
+```
 
 ## Todo
 **Contributions are welcome!**
 - [ ] Manage worklog and estimate of issues
 - [ ] Manage component and version of issues
+- [ ] Track history of transitions
 - [ ] More friendly help
+- [ ] Improve test coverage
 
 ## Development
 

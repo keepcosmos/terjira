@@ -10,6 +10,10 @@ module Terjira
           end
         end
 
+        def find_by_key(key)
+          all.find { |field| field.key == key }
+        end
+
         def epic_name
           all.find { |field| field.name == 'Epic Name' }
         end

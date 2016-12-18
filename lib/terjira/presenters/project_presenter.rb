@@ -43,7 +43,7 @@ module Terjira
       rows << ''
 
       rows << pastel.bold('Lead')
-      rows << username_with_email(project.lead)
+      rows << username(project.lead)
       rows << ''
       rows << render_components_and_versions(project)
 

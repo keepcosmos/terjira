@@ -8,7 +8,7 @@ module Terjira
       end
     end
 
-    desc "( ls | list)", "list all boards"
+    desc "( ls | list)", "List all boards"
     map ls: :list
     def list
       boards = client_class.all

@@ -17,7 +17,10 @@ RSpec.configure do |config|
 
   config.before :example do
     Terjira::ResourceStore.instance.clear
+
     allow(Terjira::Client::Base).to receive(:client).and_return(JIRA::Client.new({}))
+
+    stub_const("Terjira::FileCache::ROOT_DIR", "#{ENV['HOME']}/.testterjira")
   end
 
   def capture(stream)

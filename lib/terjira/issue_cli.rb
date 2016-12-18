@@ -42,7 +42,7 @@ module Terjira
       render_issues(issues)
     end
 
-    desc 'new', 'Create issue'
+    desc 'new', 'Create an issue'
     jira_options :summary, :description, :project, :issuetype,
                  :priority, :assignee, :parent, :epiclink
     def new
@@ -54,7 +54,7 @@ module Terjira
       render_issue_detail(issue)
     end
 
-    desc 'edit', 'Edit issue'
+    desc 'edit', 'Edit the issue'
     jira_options :summary, :description, :project, :issuetype,
                  :priority, :assignee, :epiclink
     def edit(issue)
@@ -81,12 +81,12 @@ module Terjira
       render_issue_detail(issue)
     end
 
-    desc 'take [ISSUE_KEY]', 'Assign issue to self'
+    desc 'take [ISSUE_KEY]', 'Assign the issue to self'
     def take(issue)
       assign(issue, current_username)
     end
 
-    desc 'assign [ISSUE_KEY] ([ASSIGNEE])', 'Assing issue to user'
+    desc 'assign [ISSUE_KEY] ([ASSIGNEE])', 'Assign the issue to user'
     def assign(*keys)
       issue = keys[0]
       assignee = keys[1]

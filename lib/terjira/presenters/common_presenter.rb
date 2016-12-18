@@ -30,13 +30,11 @@ module Terjira
       Time.parse(date_str).strftime(date_format)
     end
 
-    def username_with_email(user)
+    def username(user)
       if user.nil?
         dim_none
       else
-        title = "#{user.name}, #{user.displayName}"
-        title += " <#{user.emailAddress}>" if user.respond_to?(:emailAddress)
-        title
+        "#{user.name}, #{user.displayName}"
       end
     end
 

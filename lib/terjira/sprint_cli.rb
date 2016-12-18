@@ -11,7 +11,7 @@ module Terjira
 
     default_task :show
 
-    desc '[SPRINT_ID]', 'Default, show sprint'
+    desc '[SPRINT_ID]', 'Show the sprint'
     jira_option(:assignee)
     def show(sprint = nil)
       opts = suggest_options(required: [:sprint], resources: { sprint: sprint })
@@ -38,7 +38,7 @@ module Terjira
       end
     end
 
-    desc '( ls | list )', 'list all sprint from the board'
+    desc '( ls | list )', 'List of all sprint from the board'
     jira_options :board, :state
     map ls: :list
     def list
