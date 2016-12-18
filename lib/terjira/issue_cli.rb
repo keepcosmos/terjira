@@ -54,7 +54,7 @@ module Terjira
       render_issue_detail(issue)
     end
 
-    desc 'edit', 'Edit the issue'
+    desc 'edit [ISSUE_KEY]', 'Edit the issue'
     jira_options :summary, :description, :project, :issuetype,
                  :priority, :assignee, :epiclink
     def edit(issue)
@@ -67,13 +67,13 @@ module Terjira
       render_issue_detail(issue)
     end
 
-    desc 'delete', 'Delete the issue'
+    desc 'delete [ISSUE_KEY]', 'Delete the issue'
     def delete(issue)
       client_class.delete(issue)
       render("Deleted")
     end
 
-    desc 'comment', 'Write comment on the issue'
+    desc 'comment [ISSUE_KEY]', 'Write comment on the issue'
     jira_options :comment
     def comment(issue)
       opts = suggest_options(required: [:comment])
