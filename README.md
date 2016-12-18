@@ -12,7 +12,7 @@ Your Jira must support Rest API 2.0 and Agile Rest API 1.0
 ## Domo
 [Watch Demo](https://www.youtube.com/watch?v=T0hbhaXtH-Y)
 
-[![Sample](./sample.png)](https://www.youtube.com/watch?v=T0hbhaXtH-Y)
+[![Sample](./dev/sample.jpg)](https://www.youtube.com/watch?v=T0hbhaXtH-Y)
 
 ## Installation
 
