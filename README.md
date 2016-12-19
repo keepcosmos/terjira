@@ -72,6 +72,7 @@ Issue:
 
 ## Todo
 **Contributions are welcome!**
+- [ ] Add JQL command for find issues
 - [ ] Manage worklog and estimate of issues
 - [ ] Manage component and version of issues
 - [ ] Track history of transitions
