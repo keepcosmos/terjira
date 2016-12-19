@@ -68,7 +68,7 @@ module Terjira
           set(:project, project)
         end
 
-        option_prompt.select('Choose isseu type?') do |menu|
+        option_prompt.select('Choose issue type?') do |menu|
           project.issuetypes.each do |issuetype|
             menu.choice issuetype.name, issuetype
           end
