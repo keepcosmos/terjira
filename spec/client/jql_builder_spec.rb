@@ -13,7 +13,7 @@ describe Terjira::Client::JQLBuilder do
     expect(result).to be == 'sprint=1'
 
     result = subject.build_jql(issuetype: 'Task')
-    expect(result).to be == 'issuetype=Task'
+    expect(result).to be == 'issuetype="Task"'
   end
 
   it 'builds array value jql' do
