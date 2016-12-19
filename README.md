@@ -55,6 +55,9 @@ Sprint:
 Issue:
   jira issue help [COMMAND]          # Describe one specific subcommand
   jira issue ( ls | list )           # List of issues
+                                     #   default assignee option is current loggined user
+                                     #   To show issues of all users(include no assignee)
+                                     #   pass `--assignee ALL` option.
   jira issue [ISSUE_KEY]             # Show detail of the issue
   jira issue assign [ISSUE_KEY] ([ASSIGNEE])  # Assign the issue to user
   jira issue comment [ISSUE_KEY]     # Write comment on the issue
