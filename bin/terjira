@@ -8,6 +8,7 @@ require 'pastel'
 
 begin
   Terjira::CLI.start(ARGV)
+  Terjira::VersionChecker.check_version
 rescue SystemExit, Interrupt
 rescue JIRA::HTTPError => e
   message = JSON.parse(e.response.body)
