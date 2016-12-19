@@ -14,7 +14,11 @@ module Terjira
             values = value.map { |v| "\"#{v.key_value}\"" }.join(',')
             "#{key} IN (#{values})"
           else
-            "#{key}=\"#{value.key_value}\""
+            if value.key_value.to_s =~ /^\d+$/
+              "#{key}=#{value.key_value}"
+            else
+              "#{key}=\"#{value.key_value}\""
+            end
           end
         end.reject(&:blank?).join(' AND ')
 
