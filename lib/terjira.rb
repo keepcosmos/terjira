@@ -33,7 +33,7 @@ module Terjira
       Client::Base.expire_auth_options
     end
 
-    desc 'project SUBCOMMAND ...ARGS', 'Manage proejcts'
+    desc 'project SUBCOMMAND ...ARGS', 'Manage projects'
     subcommand 'project', ProjectCLI
 
     desc 'board SUBCOMMAND ...ARGS', 'Manage boards'
