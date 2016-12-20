@@ -5,11 +5,11 @@
 
 # Terjira
 
-Terjira is an interactive and easy to use command line interface (or Application) for Jira. You do not need to remember resource key or id. Terjira suggests it with interactive prompt.
+Terjira is an interactive and easy to use command line interface (or Application) for Jira. You do not need to remember the resource key or id. Terjira suggests it with an interactive prompt.
 
 Your Jira must support Rest API 2.0 and Agile Rest API 1.0
 
-## Domo
+## Demo
 [Watch full demo](https://www.youtube.com/watch?v=T0hbhaXtH-Y)
 
 [![Sample](./dev/demo.gif)](https://www.youtube.com/watch?v=T0hbhaXtH-Y)
