@@ -1,7 +1,7 @@
 module Terjira
   module Client
     module JQLBuilder
-      JQL_KEYS = %w(sprint assignee issuetype priority project status statusCategory).freeze
+      JQL_KEYS = %w(summary sprint assignee issuetype priority project status statusCategory).freeze
 
       def build_jql(options = {})
         q_options = options.inject({}) do |memo, (k, v)|
@@ -10,15 +10,16 @@ module Terjira
         end.slice(*JQL_KEYS)
 
         query = q_options.map do |key, value|
-          if value.is_a? Array
+          case
+          when value.is_a?(Array)
             values = value.map { |v| "\"#{v.key_value}\"" }.join(',')
             "#{key} IN (#{values})"
+          when value.key_value.to_s =~ /^\d+$/
+            "#{key}=#{value.key_value}"
+          when key.eql?('summary')
+            "#{key}~\"#{value.key_value}\""
           else
-            if value.key_value.to_s =~ /^\d+$/
-              "#{key}=#{value.key_value}"
-            else
-              "#{key}=\"#{value.key_value}\""
-            end
+            "#{key}=\"#{value.key_value}\""
           end
         end.reject(&:blank?).join(' AND ')
 

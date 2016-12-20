@@ -57,6 +57,10 @@ module Terjira
           find(issue)
         end
 
+        def search(options = {})
+          resource.jql(build_jql(options), max_results: 10)
+        end
+
         private
 
         def extract_to_update_params(options = {})

@@ -121,5 +121,11 @@ module Terjira
       issue = client_class.trans(issue, opts)
       render_issue_detail(issue)
     end
+
+    desc 'search \'[ISSUE_SUMMARY]\'', 'Search for an issue by summary'
+    def search(*keys)
+      search_term = client_class.search(summary: keys[0])
+      render_issues(search_term)
+    end
   end
 end

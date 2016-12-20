@@ -25,9 +25,19 @@ describe Terjira::Client::JQLBuilder do
   end
 
   it 'builds multiple key values jql' do
-    result = subject.build_jql(sprint: 1, issuetype: %w(Task Done))
+    result = subject.build_jql(
+      sprint: 1, issuetype: %w(Task Done), summary: 'urgent task'
+    )
 
-    expect(result).to be == 'sprint=1 AND issuetype IN ("Task","Done")'
+    expect(result).to eq(
+      'summary~"urgent task" AND sprint=1 AND issuetype IN ("Task","Done")'
+    )
+  end
+
+  it 'builds the ~ query with summary' do
+    result = subject.build_jql(summary: "My very special task")
+
+    expect(result).to be == 'summary~"My very special task"'
   end
 
   it 'filters unkown jql key' do
