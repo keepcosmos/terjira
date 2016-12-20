@@ -10,18 +10,16 @@ module Terjira
         end.slice(*JQL_KEYS)
 
         query = q_options.map do |key, value|
-          if value.is_a? Array
+          case
+          when value.is_a?(Array)
             values = value.map { |v| "\"#{v.key_value}\"" }.join(',')
             "#{key} IN (#{values})"
+          when value.key_value.to_s =~ /^\d+$/
+            "#{key}=#{value.key_value}"
+          when key.eql?('summary')
+            "#{key}~\"#{value.key_value}\""
           else
-            case
-            when value.key_value.to_s =~ /^\d+$/
-              "#{key}=#{value.key_value}"
-            when key.eql?('summary')
-              "#{key}~\"#{value.key_value}\""
-            else
-              "#{key}=\"#{value.key_value}\""
-            end
+            "#{key}=\"#{value.key_value}\""
           end
         end.reject(&:blank?).join(' AND ')
 
