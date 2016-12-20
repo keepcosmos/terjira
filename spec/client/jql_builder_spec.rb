@@ -29,7 +29,9 @@ describe Terjira::Client::JQLBuilder do
       sprint: 1, issuetype: %w(Task Done), summary: 'urgent task'
     )
 
-    expect(result).to be == 'summary~"urgent task" AND sprint=1 AND issuetype IN ("Task","Done")'
+    expect(result).to eq(
+      'summary~"urgent task" AND sprint=1 AND issuetype IN ("Task","Done")'
+    )
   end
 
   it 'builds the ~ query with summary' do
