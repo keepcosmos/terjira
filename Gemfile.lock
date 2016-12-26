@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    terjira (0.2.5)
+    terjira (0.2.6)
       activesupport (= 4.0.13)
       jira-ruby (~> 1.1)
       pastel (~> 0.6.1)
