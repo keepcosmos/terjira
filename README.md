@@ -58,6 +58,9 @@ Issue:
                                      #   default assignee option is current loggined user
                                      #   To show issues of all users(include no assignee)
                                      #   pass `--assignee ALL` option.
+  jira issue jql "[QUERY]"           # Search issues with JQL
+                                     # ex)
+                                     #   jira issue jql "project = 'TEST' AND summary ~ 'authentication'"
   jira issue [ISSUE_KEY]             # Show detail of the issue
   jira issue assign [ISSUE_KEY] ([ASSIGNEE])  # Assign the issue to user
   jira issue comment [ISSUE_KEY]     # Write comment on the issue
@@ -72,7 +75,7 @@ Issue:
 
 ## Todo
 **Contributions are welcome!**
-- [ ] Add JQL command for find issues
+- [x] Add JQL command for find issues
 - [ ] Manage worklog and estimate of issues
 - [ ] Manage component and version of issues
 - [ ] Track history of transitions

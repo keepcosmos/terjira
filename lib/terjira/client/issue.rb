@@ -4,12 +4,12 @@ module Terjira
   module Client
     class Issue < Base
       class << self
-        delegate :find, to: :resource
+        delegate :jql, :find, to: :resource
 
         def all(options = {})
           return resource.all if options.blank?
           max_results = options.delete(:max_results) || 500
-          resource.jql(build_jql(options), max_results: max_results)
+          jql(build_jql(options), max_results: max_results)
         end
 
         def all_epic_issues(epic)

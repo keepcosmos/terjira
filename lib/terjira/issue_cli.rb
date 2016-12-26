@@ -42,6 +42,15 @@ module Terjira
       render_issues(issues)
     end
 
+    desc 'jql "[QUERY]"', "Search issues with JQL"
+    long_desc <<-EXAMPLE
+      jira issue jql "project = 'IST' AND assignee = currentuser()"
+    EXAMPLE
+    def jql(*query)
+      jql = query.join(" ")
+      render_issues Client::Issue.jql(jql)
+    end
+
     desc 'new', 'Create an issue'
     jira_options :summary, :description, :project, :issuetype,
                  :priority, :assignee, :parent, :epiclink
