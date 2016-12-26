@@ -34,7 +34,7 @@ module Terjira
     map ls: :list
     def list
       opts = suggest_options
-      opts[:statusCategory] ||= %w(To\ Do In\ Progress) unless opts[:status]
+      opts[:statusCategory] ||= default_status_categories unless opts[:status]
       opts[:assignee] ||= current_username
       opts.delete(:assignee) if opts[:assignee] =~ /^all/i
 
@@ -120,6 +120,12 @@ module Terjira
       opts = suggest_options(required: [:status], resources: resources)
       issue = client_class.trans(issue, opts)
       render_issue_detail(issue)
+    end
+
+    no_commands do
+      def default_status_categories
+        Client::StatusCategory.all.reject { |category| category.key =~ /done/i }.map(&:name)
+      end
     end
   end
 end

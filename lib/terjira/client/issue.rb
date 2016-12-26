@@ -4,7 +4,7 @@ module Terjira
   module Client
     class Issue < Base
       class << self
-        delegate :build, :find, to: :resource
+        delegate :find, to: :resource
 
         def all(options = {})
           return resource.all if options.blank?
