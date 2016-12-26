@@ -41,7 +41,7 @@ module Terjira
     end
 
     def colorize_sprint_state(state)
-      state = state.to_s.capitalize
+      state = " #{state.to_s.capitalize} "
       if state =~ /active/i
         pastel.on_blue.bold(state)
       elsif state =~ /close/i

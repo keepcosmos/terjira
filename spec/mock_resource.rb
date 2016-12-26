@@ -44,6 +44,18 @@ class MockResource
       end
     end
 
+    def fields
+      load_response('fields').map do |field|
+        Terjira::Client::Field.build(field)
+      end
+    end
+
+    def status_categories
+      load_response('status_categories').map do |field|
+        Terjira::Client::StatusCategory.build(field)
+      end
+    end
+
     def resolutions
       load_response('resolutions').map do |resolution|
         Terjira::Client::Resolution.build(resolution)
