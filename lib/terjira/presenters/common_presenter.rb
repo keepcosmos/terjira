@@ -34,7 +34,7 @@ module Terjira
       if user.nil?
         dim_none
       else
-        "#{user.name}, #{user.displayName}"
+        "#{user.displayName}(#{user.name})"
       end
     end
 

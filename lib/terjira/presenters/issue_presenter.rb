@@ -62,32 +62,31 @@ module Terjira
     def issue_detail_template
       %{<%= bold(issue.key) + ' in ' + issue.project.name %>
 
-      <%= pastel.underline.bold(issue.summary) %>
+      <%= bold(issue.summary) %>
 
-      <%= bold('Type') %>: <%= colorize_issue_type(issue.issuetype) %>\s\s\s<%= bold('Status') %>: <%= colorize_issue_stastus(issue.status) %>\s\s\s<%= bold('Priority') %>: <%= colorize_priority(issue.priority, title: true) %>
+      Type: <%= colorize_issue_type(issue.issuetype) %>\s\sStatus: <%= colorize_issue_stastus(issue.status) %>\s\sPriority: <%= colorize_priority(issue.priority, title: true) %>
       <% if issue.parent.nil?  -%>
 
-        <%= bold('Epic Link') %>: <%= issue.try(:epic).try(:key) %> <%= issue.try(:epic).try(:name) || dim_none %>
+        Epic: <%= issue.try(:epic).try(:key) %> <%= issue.try(:epic).try(:name) || dim_none %>
       <% end -%>
       <% if issue.try(:parent) && issue.epic.nil? -%>
-        <%= bold('Parent') %>: <%= issue.parent.key %>
+        Parent: <%= issue.parent.key %>
       <% end %>
       <% if issue.try(:sprint) -%>
-        <%= bold('Sprint') %>: <%= colorize_sprint_state(issue.try(:sprint).try(:state)) %> <%= issue.try(:sprint).try(:id) %>. <%= issue.try(:sprint).try(:name) %>
+        Sprint: <%= colorize_sprint_state(issue.try(:sprint).try(:state)) %> <%= issue.try(:sprint).try(:id) %>. <%= issue.try(:sprint).try(:name) %>
       <% end -%>
       <% if estimate = issue_estimate(issue) -%>
 
         <%= estimate[0] %>: <%= estimate[1] %>
       <% end -%>
 
-      <%= bold('Assignee') %>: <%= username(issue.assignee) %>
-      <%= bold('Reporter') %>: <%= username(issue.reporter) %>
+      Assignee: <%= username(issue.assignee) %>
+      Reporter: <%= username(issue.reporter) %>
 
-      <%= bold('Description') %>
-      <%= issue.description || dim_none %>
+      <%= issue.description || dim("No description") %>
       <% if issue.try(:environment) -%>
 
-        <%= bold('Environment') %>
+        <%= Environment %>:
         <%= issue.environment %>
       <% end -%>
       <% if issue.try(:attachment).present? -%>
@@ -116,7 +115,7 @@ module Terjira
       """
       <% remain_comments = issue.comments -%>
       <% visiable_comments = remain_comments.pop(COMMENTS_SIZE) -%>
-      <%= bold('Comments') %>
+      Comments:
       <% if visiable_comments.empty? -%>
         <%= dim_none %>
       <% elsif remain_comments.size != 0 -%>
@@ -185,15 +184,15 @@ module Terjira
     def issue_estimate(issue)
       field = Client::Field.story_points
       story_points = issue.try(field.key) if field.respond_to? :key
-      return [bold('Story Points'), story_points] if story_points
+      return ['Story Points', story_points] if story_points
 
       return unless issue.try(:timetracking).is_a? Hash
 
       if origin = issue.timetracking['originalEstimate']
         remain = issue.timetracking['remainingEstimate']
-        [bold('Estimate'), "#{remain} / #{origin}"]
+        ['Estimate', "#{remain} / #{origin}"]
       else
-        [bold('Estimate'), dim_none]
+        ['Estimate', dim_none]
       end
     end
 
