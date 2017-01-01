@@ -22,6 +22,10 @@ module Terjira
           build(resp)
         end
 
+        def search(options = {})
+          resource.jql(build_jql(options))
+        end
+
         def delete(issue)
           api_delete("issue/#{issue.key_value}")
         end

@@ -109,6 +109,12 @@ module Terjira
       show(issue.key_value)
     end
 
+    desc 'search [SUMMARY]', 'Search for an issue by summary'
+    def search(*keys)
+      search_term = client_class.search(summary: keys[0])
+      render_issues(search_term)
+    end
+
     desc 'trans [ISSUE_KEY] ([STATUS])', 'Do transition'
     jira_options :comment, :assignee, :resolution
     def trans(*args)
