@@ -61,6 +61,7 @@ Issue:
   jira issue jql "[QUERY]"           # Search issues with JQL
                                      # ex)
                                      #   jira issue jql "project = 'TEST' AND summary ~ 'authentication'"
+  jira issue search "[SUMMARY]"      # Search for an issues by summary
   jira issue [ISSUE_KEY]             # Show detail of the issue
   jira issue assign [ISSUE_KEY] ([ASSIGNEE])  # Assign the issue to user
   jira issue comment [ISSUE_KEY]     # Write comment on the issue
@@ -76,6 +77,7 @@ Issue:
 ## Todo
 **Contributions are welcome!**
 - [x] Add JQL command for find issues
+- [x] Search issues by keyword
 - [ ] Manage worklog and estimate of issues
 - [ ] Manage component and version of issues
 - [ ] Track history of transitions

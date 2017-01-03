@@ -109,7 +109,7 @@ module Terjira
       show(issue.key_value)
     end
 
-    desc 'search [SUMMARY]', 'Search for an issue by summary'
+    desc 'search [SUMMARY]', 'Search for issues by summary'
     def search(*keys)
       search_term = client_class.search(summary: keys[0])
       render_issues(search_term)
