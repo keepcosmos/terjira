@@ -1,5 +1,4 @@
 require_relative 'terjira/ext/jira_ruby'
-require_relative 'terjira/ext/tty_prompt'
 require 'terjira/version'
 require 'thor'
 
