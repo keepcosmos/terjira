@@ -24,10 +24,9 @@ Gem::Specification.new do |spec|
   spec.add_dependency "jira-ruby", "~> 1.1.3"
   spec.add_dependency "activesupport", "4.0.13"
 
-  spec.add_dependency "tty-table", "~> 0.6"
-  spec.add_dependency "tty-prompt", "~> 0.9"
-  spec.add_dependency "tty-spinner", "~> 0.4"
-  spec.add_dependency "pastel", "~> 0.6.1"
+  spec.add_dependency "tty-table", "~> 0.6.0"
+  spec.add_dependency "tty-prompt", "~> 0.9.0"
+  spec.add_dependency "tty-spinner", "~> 0.4.1"
 
   spec.add_development_dependency "bundler", "~> 1.11"
   spec.add_development_dependency "rake", "~> 10.0"
