@@ -35,6 +35,8 @@ or check OSX 10.11 issue [#12](https://github.com/keepcosmos/terjira/issues/12)
 ```
 Authentication:
   jira login                         # Login your Jira
+                                     #   [--ssl-config]  with ssl configuration
+                                     #   [--proxy-config] with proxy configuration
   jira logout                        # Logout your Jira
 
 Project:
@@ -53,13 +55,15 @@ Sprint:
   jira sprint ( ls | list )          # List of all sprint from the board
   jira sprint [SPRINT_ID]            # Show the sprint
   jira sprint active                 # Show active sprints and issues
+                                     #   To show issues on the sprint(include no assignee)
+                                     #   pass `--assignee ALL` or `-a ALL`.
 
 Issue:
   jira issue help [COMMAND]          # Describe one specific subcommand
   jira issue ( ls | list )           # List of issues
                                      #   default assignee option is current loggined user
                                      #   To show issues of all users(include no assignee)
-                                     #   pass `--assignee ALL` option.
+                                     #   pass `--assignee ALL` or `-a ALL`.
   jira issue jql "[QUERY]"           # Search issues with JQL
                                      # ex)
                                      #   jira issue jql "project = 'TEST' AND summary ~ 'authentication'"
@@ -76,7 +80,8 @@ Issue:
 
 ```
 
-## Todo
+
+## Feature Todo
 **Contributions are welcome!**
 - [x] Add JQL command for find issues
 - [x] Search issues by keyword
@@ -84,7 +89,6 @@ Issue:
 - [ ] Manage component and version of issues
 - [ ] Track history of transitions
 - [ ] More friendly help
-- [ ] Improve test coverage
 
 ## Development
 
