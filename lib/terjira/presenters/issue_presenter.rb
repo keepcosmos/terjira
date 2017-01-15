@@ -86,7 +86,7 @@ module Terjira
       <%= issue.description || dim("No description") %>
       <% if issue.try(:environment) -%>
 
-        <%= Environment %>:
+        Environment:
         <%= issue.environment %>
       <% end -%>
       <% if issue.try(:attachment).present? -%>
