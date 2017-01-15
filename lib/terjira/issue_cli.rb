@@ -139,7 +139,7 @@ module Terjira
 
     no_commands do
       def default_status_categories
-        Client::StatusCategory.all.reject { |category| category.key =~ /done/i }.map(&:name)
+        Client::StatusCategory.all.reject { |category| category.key =~ /done/i }.map(&:key)
       end
     end
   end
