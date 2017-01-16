@@ -1,3 +1,5 @@
+require_relative 'base'
+
 module Terjira
   module Client
     class Board < Base
