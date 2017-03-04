@@ -10,7 +10,7 @@ module Terjira
     def select_project
       fetch :project do
         projects = fetch(:projects) { Client::Project.all }
-        option_prompt.select('Choose project?', per_page: per_page(projects)) do |menu|
+        option_prompt.select('Choose project?') do |menu|
           projects.each { |project| menu.choice project_choice_title(project), project }
         end
       end
@@ -19,7 +19,7 @@ module Terjira
     def select_board(type = nil)
       fetch(:board) do
         boards = fetch(:boards) { Client::Board.all(type: type) }
-        option_prompt.select('Choose board?', per_page: per_page(boards)) do |menu|
+        option_prompt.select('Choose board?') do |menu|
           boards.sort_by(&:id).each do |board|
             menu.choice "#{board.key_value} - #{board.name}", board
           end
@@ -53,7 +53,7 @@ module Terjira
           end
         end
 
-        option_prompt.select('Choose assignee?', per_page: per_page(users)) do |menu|
+        option_prompt.select('Choose assignee?') do |menu|
           users.each { |user| menu.choice user_choice_title(user), user }
         end
       end
@@ -146,7 +146,7 @@ module Terjira
     end
 
     def write_summary
-      fetch(:summary) { option_prompt.ask('Summary?') }
+      fetch(:summary) { option_prompt.ask('Summary?', required: true) }
     end
 
     def write_parent_issue_key
@@ -173,15 +173,6 @@ module Terjira
 
     def option_prompt
       @option_prompt ||= TTY::Prompt.new
-    end
-
-    def per_page(objects)
-      default_per_page = 10
-      if objects.size < default_per_page
-        objects.size
-      else
-        default_per_page
-      end
     end
   end
 end

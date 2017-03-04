@@ -9,6 +9,10 @@ module JIRA
     alias origin_make_request make_request
 
     def make_request(http_method, path, body = '', headers = {})
+      if $debug
+        puts "path: #{path}"
+        puts "body: #{body}" if body.present?
+      end
       title = Pastel.new.dim(http_method.to_s.upcase)
       spinner = TTY::Spinner.new ":spinner #{title}", format: :dots, clear: true
       result = nil

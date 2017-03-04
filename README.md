@@ -7,7 +7,7 @@
 
 Terjira is an interactive and easy to use command line interface (or Application) for Jira. You do not need to remember the resource key or id. Terjira suggests it with an interactive prompt.
 
-Your Jira must support Rest API 2.0 and Agile Rest API 1.0
+Terjira supports Jira Rest API 2.0 and Agile Rest API 1.0
 
 ## Demo
 [Watch full demo](https://www.youtube.com/watch?v=T0hbhaXtH-Y)
@@ -81,14 +81,11 @@ Issue:
 ```
 
 
-## Feature Todo
+## Todo
 **Contributions are welcome!**
-- [x] Add JQL command for find issues
-- [x] Search issues by keyword
 - [ ] Manage worklog and estimate of issues
 - [ ] Manage component and version of issues
 - [ ] Track history of transitions
-- [ ] More friendly help
 
 ## Development
 

@@ -7,6 +7,7 @@ require 'json'
 require 'pastel'
 
 begin
+  $debug = true
   Terjira::CLI.start(ARGV)
   Terjira::VersionChecker.check_version
 rescue SystemExit, Interrupt
