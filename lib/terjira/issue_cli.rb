@@ -67,7 +67,7 @@ module Terjira
     jira_options :summary, :description, :project, :issuetype,
                  :priority, :assignee, :epiclink
     def edit(issue)
-      return if options.blank?
+      return puts "Pass options you need to update" if options.blank?
       issue = client_class.find(issue)
       opts = suggest_options(resources: { issue: issue })
       suggest_related_value_options(opts)
