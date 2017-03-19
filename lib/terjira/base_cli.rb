@@ -28,15 +28,19 @@ module Terjira
       end
 
       def open_url(url)
-        ostype = `echo $OSTYPE`
-        open_cmd = case ostype
+        open_cmd = case RUBY_PLATFORM
                    when /darwin/ then 'open'
                    when  /cygwin/ then 'cygstart'
                    when /linux/ then 'xdg-open'
                    when /msys/ then 'start ""'
-                   else puts "Platform $OSTYPE not supported"
+                   else nil
                    end
-        `#{open_cmd} #{url}`
+
+        if open_cmd
+          `#{open_cmd} #{url}`
+        else
+          puts "#{RUBY_PLATFORM} is not supported"
+        end
       end
     end
   end
