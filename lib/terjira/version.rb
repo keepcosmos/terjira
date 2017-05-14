@@ -1,7 +1,7 @@
 require 'terjira/utils/file_cache'
 
 module Terjira
-  VERSION = '0.3.3'.freeze
+  VERSION = '0.3.4'.freeze
 
   class VersionChecker
     VERSION_CHECK_DURATION = (60 * 60 * 24 * 5).freeze
