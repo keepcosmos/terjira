@@ -134,14 +134,14 @@ module Terjira
     def write_comment
       fetch(:comment) do
         comment = option_prompt.multiline("Comment? (Return empty line for finish)\n")
-        comment.join("\n") if comment
+        comment.join("") if comment
       end
     end
 
     def write_description
       fetch(:description) do
         desc = option_prompt.multiline("Description? (Return empty line for finish)\n")
-        desc.join("\n") if desc
+        desc.join("") if desc
       end
     end
 
