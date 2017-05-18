@@ -26,7 +26,7 @@ module Terjira
 
     desc 'open [ISSUE_KEY]', 'Open browser'
     def open(issue)
-      open_url(client_class.site_url + "/browse/#{issue}")
+      open_url("#{client_class.site_url}/browse/#{issue}".gsub(/[^:](\/\/)/, '/'))
     end
 
     desc '( ls | list )', 'List of issues'
