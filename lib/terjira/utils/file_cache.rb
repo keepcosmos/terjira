@@ -25,6 +25,7 @@ module Terjira
     # the key it will be overwritten.
     def set(key, value)
       f = File.open(get_path(key), 'w')
+      File.chmod(0600, f) unless File.stat(f).mode.to_s(8) =~ /600/
       Marshal.dump(value, f)
       f.close
     end

@@ -26,8 +26,8 @@ describe Terjira::Client::AuthOptionBuilder do
     prompt.input.rewind
 
     capture(:stdout) do
-      TestClass.build_auth_options('testauthpath')
-      result = TestClass.build_auth_options_by_cached('testauthpath')
+      TestClass.build_auth_options(cache_key: 'testauthpath')
+      result = TestClass.build_auth_options_by_cached(cache_key: 'testauthpath')
       expect(result).to eq(auth_options)
     end
   end
@@ -36,9 +36,9 @@ describe Terjira::Client::AuthOptionBuilder do
     prompt.input << inputs
     prompt.input.rewind
     capture(:stdout) do
-      TestClass.build_auth_options('testauthpath')
-      TestClass.expire_auth_options('testauthpath')
-      result = TestClass.build_auth_options_by_cached('testauthpath')
+      TestClass.build_auth_options(cache_key: 'testauthpath')
+      TestClass.expire_auth_options
+      result = TestClass.build_auth_options_by_cached(cache_key: 'testauthpath')
       expect(result).to eq(nil)
     end
   end

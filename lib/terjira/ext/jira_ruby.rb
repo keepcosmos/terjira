@@ -27,18 +27,16 @@ module JIRA
   end
 
   module Resource
-    class BoardFactory < JIRA::BaseFactory # :nodoc:
-    end
-
-    class EpicFactory < JIRA::BaseFactory # :nodoc:
-    end
-
     class Board < JIRA::Base
       def self.key_attribute; :id; end
     end
 
     class Epic < JIRA::Base
       def self.key_attribute; :key; end
+    end
+
+    class StatusCategory < JIRA::Base
+      def self.key_attribute; :name; end
     end
 
     class User
@@ -60,11 +58,28 @@ module JIRA
     class Resolution
       def self.key_attribute; :name; end
     end
+
+    class BoardFactory < JIRA::BaseFactory
+    end
+
+    class EpicFactory < JIRA::BaseFactory
+    end
+
+    class StatusCategoryFactory < JIRA::BaseFactory
+    end
   end
 
   class Client
     def Board # :nodoc:
       JIRA::Resource::BoardFactory.new(self)
+    end
+
+    def Epic
+      JIRA::Resource::EpicFactory.new(self)
+    end
+
+    def StatusCategory
+      JIRA::Resource::StatusCategoryFactory.new(self)
     end
   end
 end

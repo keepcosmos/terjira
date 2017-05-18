@@ -2,16 +2,9 @@ require 'thor'
 
 require_relative 'option_supportable'
 Dir[File.dirname(__FILE__) + '/presenters/*.rb'].each { |f| require f }
+Dir[File.dirname(__FILE__) + '/client/*.rb'].each { |f| require f }
 
 module Terjira
-  # Jira client based on jira-ruby gem
-  module Client
-    %w(Base Field Issuetype Project Board Sprint Issue User
-       Status Resolution Priority RapidView Agile).each do |klass|
-      autoload klass, "terjira/client/#{klass.gsub(/(.)([A-Z](?=[a-z]))/,'\1_\2').downcase}"
-    end
-  end
-
   class BaseCLI < Thor
     include OptionSupportable
 
@@ -35,15 +28,19 @@ module Terjira
       end
 
       def open_url(url)
-        ostype = `echo $OSTYPE`
-        open_cmd = case ostype
+        open_cmd = case RUBY_PLATFORM
                    when /darwin/ then 'open'
                    when  /cygwin/ then 'cygstart'
                    when /linux/ then 'xdg-open'
                    when /msys/ then 'start ""'
-                   else puts "Platform $OSTYPE not supported"
+                   else nil
                    end
-        `#{open_cmd} #{url}`
+
+        if open_cmd
+          `#{open_cmd} #{url}`
+        else
+          puts "#{RUBY_PLATFORM} is not supported"
+        end
       end
     end
   end

@@ -1,5 +1,4 @@
 require_relative 'terjira/ext/jira_ruby'
-require_relative 'terjira/ext/tty_prompt'
 require 'terjira/version'
 require 'thor'
 
@@ -12,10 +11,12 @@ module Terjira
   # Main CLI
   class CLI < Thor
     desc 'login', 'login your Jira'
+    option "ssl-config", type: :boolean
+    option "proxy-config", type: :boolean
     def login
       pastel = Pastel.new
       Client::Base.expire_auth_options
-      Client::Base.build_auth_options
+      Client::Base.build_auth_options(options)
 
       # for touch base resource
       Client::Field.all
@@ -33,7 +34,7 @@ module Terjira
       Client::Base.expire_auth_options
     end
 
-    desc 'project SUBCOMMAND ...ARGS', 'Manage proejcts'
+    desc 'project SUBCOMMAND ...ARGS', 'Manage projects'
     subcommand 'project', ProjectCLI
 
     desc 'board SUBCOMMAND ...ARGS', 'Manage boards'

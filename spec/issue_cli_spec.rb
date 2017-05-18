@@ -5,10 +5,14 @@ describe Terjira::IssueCLI do
   let(:boards) { MockResource.boards }
   let(:sprints) { MockResource.sprints }
   let(:issues) { MockResource.issues }
+  let(:fields) { MockResource.fields }
+  let(:status_categories) { MockResource.status_categories }
 
   before :each do
     allow(TTY::Screen).to receive(:width).and_return(10**4)
     allow(TTY::Prompt).to receive(:new).and_return(prompt)
+    allow(Terjira::Client::Field).to receive(:all).and_return(fields)
+    allow(Terjira::Client::StatusCategory).to receive(:all).and_return(status_categories)
   end
 
   context '#show' do

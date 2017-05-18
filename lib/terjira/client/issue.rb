@@ -4,12 +4,12 @@ module Terjira
   module Client
     class Issue < Base
       class << self
-        delegate :build, :find, to: :resource
+        delegate :jql, :find, to: :resource
 
         def all(options = {})
           return resource.all if options.blank?
           max_results = options.delete(:max_results) || 500
-          resource.jql(build_jql(options), max_results: max_results)
+          jql(build_jql(options), max_results: max_results)
         end
 
         def all_epic_issues(epic)
@@ -20,6 +20,10 @@ module Terjira
         def find(issue, options = {})
           resp = agile_api_get("issue/#{issue.key_value}", options)
           build(resp)
+        end
+
+        def search(options = {})
+          resource.jql(build_jql(options))
         end
 
         def delete(issue)

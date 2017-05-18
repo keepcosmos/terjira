@@ -47,6 +47,7 @@
         "updated": "2011-12-15T15:35:06.000+1300",
         "created": "2011-12-15T15:35:06.000+1300",
         "description": null,
+        "environment": "ios 7",
         "priority": {
           "self": "http://localhost:2990/jira/rest/api/2/priority/3",
           "iconUrl": "http://localhost:2990/jira/images/icons/priority_major.gif",
@@ -146,7 +147,8 @@
         "aggregatetimeoriginalestimate": null,
         "updated": "2011-12-15T15:34:58.000+1300",
         "created": "2011-12-15T15:34:58.000+1300",
-        "description": null,
+        "description": "descriptions...",
+        "environment": "ios 7",
         "priority": {
           "self": "http://localhost:2990/jira/rest/api/2/priority/3",
           "iconUrl": "http://localhost:2990/jira/images/icons/priority_major.gif",
@@ -247,6 +249,7 @@
         "updated": "2011-12-15T15:34:48.000+1300",
         "created": "2011-12-15T15:34:48.000+1300",
         "description": null,
+        "environment": "ios 7",
         "priority": {
           "self": "http://localhost:2990/jira/rest/api/2/priority/3",
           "iconUrl": "http://localhost:2990/jira/images/icons/priority_major.gif",
@@ -347,6 +350,7 @@
         "updated": "2011-12-15T15:11:57.000+1300",
         "created": "2011-12-15T15:11:57.000+1300",
         "description": null,
+        "environment": "ios 7",
         "priority": {
           "self": "http://localhost:2990/jira/rest/api/2/priority/3",
           "iconUrl": "http://localhost:2990/jira/images/icons/priority_major.gif",
@@ -447,6 +451,7 @@
         "updated": "2011-12-15T15:11:45.000+1300",
         "created": "2011-12-15T15:11:45.000+1300",
         "description": null,
+        "environment": "ios 7",
         "priority": {
           "self": "http://localhost:2990/jira/rest/api/2/priority/3",
           "iconUrl": "http://localhost:2990/jira/images/icons/priority_major.gif",
@@ -547,6 +552,7 @@
         "updated": "2011-12-15T14:19:49.000+1300",
         "created": "2011-12-15T14:19:49.000+1300",
         "description": null,
+        "environment": "ios 7",
         "priority": {
           "self": "http://localhost:2990/jira/rest/api/2/priority/3",
           "iconUrl": "http://localhost:2990/jira/images/icons/priority_major.gif",
@@ -647,6 +653,7 @@
         "updated": "2011-12-14T14:50:38.000+1300",
         "created": "2011-12-14T14:50:38.000+1300",
         "description": null,
+        "environment": "ios 7",
         "priority": {
           "self": "http://localhost:2990/jira/rest/api/2/priority/3",
           "iconUrl": "http://localhost:2990/jira/images/icons/priority_major.gif",

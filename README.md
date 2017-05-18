@@ -5,11 +5,11 @@
 
 # Terjira
 
-Terjira is an interactive and easy to use command line interface (or Application) for Jira. You do not need to remember resource key or id. Terjira suggests it with interactive prompt.
+Terjira is an interactive and easy to use command line interface (or Application) for Jira. You do not need to remember the resource key or id. Terjira suggests it with an interactive prompt.
 
 Your Jira must support Rest API 2.0 and Agile Rest API 1.0
 
-## Domo
+## Demo
 [Watch full demo](https://www.youtube.com/watch?v=T0hbhaXtH-Y)
 
 [![Sample](./dev/demo.gif)](https://www.youtube.com/watch?v=T0hbhaXtH-Y)
@@ -28,11 +28,15 @@ If you have permission problem,
 
     $ gem install terjira --user-install
     # You need to export your gem path
+or check OSX 10.11 issue [#12](https://github.com/keepcosmos/terjira/issues/12)
+
 
 ## Usage
 ```
 Authentication:
   jira login                         # Login your Jira
+                                     #   [--ssl-config]  with ssl configuration
+                                     #   [--proxy-config] with proxy configuration
   jira logout                        # Logout your Jira
 
 Project:
@@ -51,13 +55,19 @@ Sprint:
   jira sprint ( ls | list )          # List of all sprint from the board
   jira sprint [SPRINT_ID]            # Show the sprint
   jira sprint active                 # Show active sprints and issues
+                                     #   To show issues on the sprint(include no assignee)
+                                     #   pass `--assignee ALL` or `-a ALL`.
 
 Issue:
   jira issue help [COMMAND]          # Describe one specific subcommand
   jira issue ( ls | list )           # List of issues
                                      #   default assignee option is current loggined user
                                      #   To show issues of all users(include no assignee)
-                                     #   pass `--assignee ALL` option.
+                                     #   pass `--assignee ALL` or `-a ALL`.
+  jira issue jql "[QUERY]"           # Search issues with JQL
+                                     # ex)
+                                     #   jira issue jql "project = 'TEST' AND summary ~ 'authentication'"
+  jira issue search "[SUMMARY]"      # Search for an issues by summary
   jira issue [ISSUE_KEY]             # Show detail of the issue
   jira issue assign [ISSUE_KEY] ([ASSIGNEE])  # Assign the issue to user
   jira issue comment [ISSUE_KEY]     # Write comment on the issue
@@ -70,14 +80,15 @@ Issue:
 
 ```
 
-## Todo
+
+## Feature Todo
 **Contributions are welcome!**
-- [ ] Add JQL command for find issues
+- [x] Add JQL command for find issues
+- [x] Search issues by keyword
 - [ ] Manage worklog and estimate of issues
 - [ ] Manage component and version of issues
 - [ ] Track history of transitions
 - [ ] More friendly help
-- [ ] Improve test coverage
 
 ## Development
 

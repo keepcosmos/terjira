@@ -34,12 +34,21 @@ module Terjira
     map ls: :list
     def list
       opts = suggest_options
-      opts[:statusCategory] ||= %w(To\ Do In\ Progress) unless opts[:status]
+      opts[:statusCategory] ||= default_status_categories unless opts[:status]
       opts[:assignee] ||= current_username
       opts.delete(:assignee) if opts[:assignee] =~ /^all/i
 
       issues = client_class.all(opts)
       render_issues(issues)
+    end
+
+    desc 'jql "[QUERY]"', "Search issues with JQL"
+    long_desc <<-EXAMPLE
+      jira issue jql "project = 'IST' AND assignee = currentuser()"
+    EXAMPLE
+    def jql(*query)
+      jql = query.join(" ")
+      render_issues Client::Issue.jql(jql)
     end
 
     desc 'new', 'Create an issue'
@@ -58,7 +67,7 @@ module Terjira
     jira_options :summary, :description, :project, :issuetype,
                  :priority, :assignee, :epiclink
     def edit(issue)
-      return if options.blank?
+      return puts "Pass options you need to update" if options.blank?
       issue = client_class.find(issue)
       opts = suggest_options(resources: { issue: issue })
       suggest_related_value_options(opts)
@@ -100,6 +109,12 @@ module Terjira
       show(issue.key_value)
     end
 
+    desc 'search [SUMMARY]', 'Search for issues by summary'
+    def search(*keys)
+      search_term = client_class.search(summary: keys[0])
+      render_issues(search_term)
+    end
+
     desc 'trans [ISSUE_KEY] ([STATUS])', 'Do transition'
     jira_options :comment, :assignee, :resolution
     def trans(*args)
@@ -120,6 +135,12 @@ module Terjira
       opts = suggest_options(required: [:status], resources: resources)
       issue = client_class.trans(issue, opts)
       render_issue_detail(issue)
+    end
+
+    no_commands do
+      def default_status_categories
+        Client::StatusCategory.all.reject { |category| category.key =~ /done/i }.map(&:key)
+      end
     end
   end
 end

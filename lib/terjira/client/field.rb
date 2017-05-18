@@ -3,6 +3,8 @@ require_relative 'base'
 module Terjira
   module Client
     class Field < Base
+      CACHE_PATH = "resource/fields".freeze
+
       class << self
         def all
           @all_fields ||= file_cache.fetch("all") do
@@ -14,16 +16,24 @@ module Terjira
           all.find { |field| field.key == key }
         end
 
-        def epic_name
-          all.find { |field| field.name == 'Epic Name' }
+        def find_by_name(name)
+          all.find { |field| field.name == name }
         end
 
-        def epiclink
-          all.find { |field| field.name == 'Epic Link' }
+        def epic_name
+          find_by_name('Epic Name')
+        end
+
+        def epic_link
+          find_by_name('Epic Link')
+        end
+
+        def story_points
+          find_by_name('Story Points')
         end
 
         def file_cache
-          Terjira::FileCache.new("resource/fields", 60 * 60 * 24)
+          Terjira::FileCache.new(CACHE_PATH, 60 * 60 * 24)
         end
       end
     end
