@@ -27,8 +27,8 @@ module Terjira
         prompt = TTY::Prompt.new
 
         result = prompt.collect do
-          key(:site).ask('Site:', required: true)
-          key(:context_path).ask('Context path:', default: '')
+          key(:site).ask('Site (ex: https://myjira.atlassian.net):', required: true)
+          key(:context_path).ask('Jira path in your site (just press enter if you don\'t have):', default: '')
           key(:username).ask('Username:', required: true)
           key(:password).mask('Password:', required: true)
 

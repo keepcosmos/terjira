@@ -28,7 +28,6 @@ If you have permission problem,
 
     $ gem install terjira --user-install
     # You need to export your gem path
-or check OSX 10.11 issue [#12](https://github.com/keepcosmos/terjira/issues/12)
 
 
 ## Usage
