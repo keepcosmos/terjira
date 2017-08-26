@@ -2,6 +2,7 @@
 
 require 'tty-prompt'
 require_relative 'resource_store'
+require_relative 'editor'
 
 module Terjira
   module OptionSelector
@@ -133,15 +134,19 @@ module Terjira
 
     def write_comment
       fetch(:comment) do
-        comment = option_prompt.multiline("Comment? (Return empty line for finish)\n")
-        comment.join("") if comment
+        comment = Editor.editor_text
+        comment = prompt_multiline('Comment') if !comment || comment.empty?
+
+        comment
       end
     end
 
     def write_description
       fetch(:description) do
-        desc = option_prompt.multiline("Description? (Return empty line for finish)\n")
-        desc.join("") if desc
+        desc = Editor.editor_text
+        desc = prompt_multiline('Description') if !desc || desc.empty?
+
+        desc
       end
     end
 
@@ -154,6 +159,11 @@ module Terjira
     end
 
     private
+
+    def prompt_multiline(prompt_for)
+      result = option_prompt.multiline("#{prompt_for}? (Return empty line for finish)\n")
+      result.join("") if result
+    end
 
     def sprint_choice_title(sprint)
       "#{sprint.key_value} - #{sprint.name} (#{sprint.state.capitalize})"

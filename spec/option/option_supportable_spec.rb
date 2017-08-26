@@ -116,6 +116,7 @@ describe Terjira::OptionSupportable do
   end
 
   it 'opens comment ask prompt' do
+    expect_any_instance_of(Object).to receive(:system).and_return(false)
     prompt.input << "multiline\ncomment"
     prompt.input.rewind
 
@@ -126,7 +127,20 @@ describe Terjira::OptionSupportable do
     expect(resource_store.get(:comment)).to be == "multiline\ncomment"
   end
 
+  it 'opens default editor for comment' do
+    expect_any_instance_of(Object).to receive(:system).and_return(true)
+    expect(File).to receive(:read).and_return("editor\ncomment")
+
+    subject.options = { 'comment' => 'comment' }
+
+    subject.suggest_options
+
+    expect(resource_store.get(:comment)).to be == "editor\ncomment"
+  end
+
   it 'opens description ask prompt' do
+    expect_any_instance_of(Object).to receive(:system).and_return(false)
+
     prompt.input << "multiline\ndescription"
     prompt.input.rewind
 
@@ -135,5 +149,16 @@ describe Terjira::OptionSupportable do
     subject.suggest_options
 
     expect(resource_store.get(:description)).to be == "multiline\ndescription"
+  end
+
+  it 'opend default editor for description' do
+    expect_any_instance_of(Object).to receive(:system).and_return(true)
+    expect(File).to receive(:read).and_return("editor\ndescription")
+
+    subject.options = { 'description' => 'description' }
+
+    subject.suggest_options
+
+    expect(resource_store.get(:description)).to be == "editor\ndescription"
   end
 end
