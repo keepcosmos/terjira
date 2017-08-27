@@ -134,19 +134,21 @@ module Terjira
 
     def write_comment
       fetch(:comment) do
-        comment = Editor.editor_text
-        comment = prompt_multiline('Comment') if !comment || comment.empty?
-
-        comment
+        if get(:editor)
+          Editor.editor_text
+        else
+          prompt_multiline('Comment')
+        end
       end
     end
 
     def write_description
       fetch(:description) do
-        desc = Editor.editor_text
-        desc = prompt_multiline('Description') if !desc || desc.empty?
-
-        desc
+        if get(:editor)
+          Editor.editor_text
+        else
+          prompt_multiline('Description')
+        end
       end
     end
 

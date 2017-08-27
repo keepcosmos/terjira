@@ -70,9 +70,12 @@ Issue:
   jira issue [ISSUE_KEY]             # Show detail of the issue
   jira issue assign [ISSUE_KEY] ([ASSIGNEE])  # Assign the issue to user
   jira issue comment [ISSUE_KEY]     # Write comment on the issue
+                                     #   pass `-e` or `--editor` to open system default editor for composing comment
   jira issue delete [ISSUE_KEY]      # Delete the issue
   jira issue edit [ISSUE_KEY]        # Edit the issue
+                                     #   pass `-e` or `--editor` to open system default editor for composing issue description
   jira issue new                     # Create an issue
+                                     #   pass `-e` or `--editor` to open system default editor for composing issue description
   jira issue open [ISSUE_KEY]        # Open browser
   jira issue take [ISSUE_KEY]        # Assign the issue to self
   jira issue trans [ISSUE_KEY] ([STATUS])     # Do transition

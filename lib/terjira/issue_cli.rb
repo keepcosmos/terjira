@@ -54,8 +54,9 @@ module Terjira
     desc 'new', 'Create an issue'
     jira_options :summary, :description, :project, :issuetype,
                  :priority, :assignee, :parent, :epiclink
-    def new
-      opts = suggest_options(required: [:project, :summary, :issuetype])
+    def new(*keys)
+      opts = suggest_options(required: [:project, :summary, :issuetype],
+                             resources: { editor: use_editor(keys) })
 
       suggest_related_value_options(opts)
 
@@ -66,10 +67,11 @@ module Terjira
     desc 'edit [ISSUE_KEY]', 'Edit the issue'
     jira_options :summary, :description, :project, :issuetype,
                  :priority, :assignee, :epiclink
-    def edit(issue)
+    def edit(*keys)
+      issue = keys[0]
       return puts "Pass options you need to update" if options.blank?
       issue = client_class.find(issue)
-      opts = suggest_options(resources: { issue: issue })
+      opts = suggest_options(resources: { issue: issue, editor: use_editor(keys) })
       suggest_related_value_options(opts)
 
       issue = client_class.update(issue, opts)
@@ -84,8 +86,9 @@ module Terjira
 
     desc 'comment [ISSUE_KEY]', 'Write comment on the issue'
     jira_options :comment
-    def comment(issue)
-      opts = suggest_options(required: [:comment])
+    def comment(*keys)
+      issue = keys[0]
+      opts = suggest_options(required: [:comment], resources: { editor: use_editor(keys) })
       issue = client_class.write_comment(issue, opts[:comment])
       render_issue_detail(issue)
     end
@@ -141,6 +144,12 @@ module Terjira
       def default_status_categories
         Client::StatusCategory.all.reject { |category| category.key =~ /done/i }.map(&:key)
       end
+    end
+
+    private
+
+    def use_editor(keys)
+      keys.any? { |key| key == '-e' || key == '--editor' }
     end
   end
 end

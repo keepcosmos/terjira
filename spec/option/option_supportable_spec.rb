@@ -116,7 +116,6 @@ describe Terjira::OptionSupportable do
   end
 
   it 'opens comment ask prompt' do
-    expect_any_instance_of(Object).to receive(:system).and_return(false)
     prompt.input << "multiline\ncomment"
     prompt.input.rewind
 
@@ -133,14 +132,12 @@ describe Terjira::OptionSupportable do
 
     subject.options = { 'comment' => 'comment' }
 
-    subject.suggest_options
+    subject.suggest_options(resources: { editor: true })
 
     expect(resource_store.get(:comment)).to be == "editor\ncomment"
   end
 
   it 'opens description ask prompt' do
-    expect_any_instance_of(Object).to receive(:system).and_return(false)
-
     prompt.input << "multiline\ndescription"
     prompt.input.rewind
 
@@ -157,7 +154,7 @@ describe Terjira::OptionSupportable do
 
     subject.options = { 'description' => 'description' }
 
-    subject.suggest_options
+    subject.suggest_options(resources: { editor: true })
 
     expect(resource_store.get(:description)).to be == "editor\ndescription"
   end
