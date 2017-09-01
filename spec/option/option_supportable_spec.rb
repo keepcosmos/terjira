@@ -133,7 +133,7 @@ describe Terjira::OptionSupportable do
 
     subject.options = { 'comment' => 'comment' }
 
-    subject.suggest_options(resources: { editor: true })
+    subject.suggest_options(editor: true)
 
     expect(resource_store.get(:comment)).to be == "editor\ncomment"
   end
@@ -156,7 +156,7 @@ describe Terjira::OptionSupportable do
 
     subject.options = { 'description' => 'description' }
 
-    subject.suggest_options(resources: { editor: true })
+    subject.suggest_options(editor: true)
 
     expect(resource_store.get(:description)).to be == "editor\ndescription"
   end
@@ -165,7 +165,7 @@ describe Terjira::OptionSupportable do
     stub_const('ENV', 'EDITOR' => nil)
     subject.options = { 'description' => 'description' }
 
-    expect { subject.suggest_options(resources: { editor: true }) }
+    expect { subject.suggest_options(editor: true) }
       .to raise_error('EDITOR environment variable not found. Please set a default editor.')
   end
 
@@ -175,7 +175,7 @@ describe Terjira::OptionSupportable do
 
     subject.options = { 'description' => 'description' }
 
-    expect { subject.suggest_options(resources: { editor: true }) }
+    expect { subject.suggest_options(editor: true) }
       .to raise_error('Editor returned a non-zero exit code. Something must have gone wrong')
   end
 end

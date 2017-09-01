@@ -8,6 +8,14 @@ module Terjira
   module OptionSelector
     delegate :get, :set, :fetch, to: :resource_store
 
+    def with_editor=(with_editor = false)
+      @with_editor = with_editor
+    end
+
+    def with_editor?
+      @with_editor || false
+    end
+
     def select_project
       fetch :project do
         projects = fetch(:projects) { Client::Project.all }
@@ -134,7 +142,7 @@ module Terjira
 
     def write_comment
       fetch(:comment) do
-        if get(:editor)
+        if with_editor?
           Editor.editor_text
         else
           prompt_multiline('Comment')
@@ -144,7 +152,7 @@ module Terjira
 
     def write_description
       fetch(:description) do
-        if get(:editor)
+        if with_editor?
           Editor.editor_text
         else
           prompt_multiline('Description')

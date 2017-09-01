@@ -56,7 +56,7 @@ module Terjira
                  :priority, :assignee, :parent, :epiclink, :editor
     def new
       opts = suggest_options(required: [:project, :summary, :issuetype],
-                             resources: { editor: options.editor })
+                             editor: options.editor)
 
       suggest_related_value_options(opts)
 
@@ -70,7 +70,7 @@ module Terjira
     def edit(issue)
       return puts "Pass options you need to update" if options.blank?
       issue = client_class.find(issue)
-      opts = suggest_options(resources: { issue: issue, editor: options.editor })
+      opts = suggest_options(resources: { issue: issue }, editor: options.editor)
       suggest_related_value_options(opts)
 
       issue = client_class.update(issue, opts)
@@ -86,7 +86,7 @@ module Terjira
     desc 'comment [ISSUE_KEY]', 'Write comment on the issue'
     jira_options :comment, :editor
     def comment(issue)
-      opts = suggest_options(required: [:comment], resources: { editor: options.editor })
+      opts = suggest_options(required: [:comment], editor: options.editor)
       issue = client_class.write_comment(issue, opts[:comment])
       render_issue_detail(issue)
     end

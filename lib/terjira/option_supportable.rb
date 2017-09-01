@@ -31,6 +31,7 @@ module Terjira
     # and suggest list of option values
     def suggest_options(opts = {})
       origin = options.dup
+      self.with_editor = opts[:editor]
 
       if opts[:required].is_a? Array
         opts[:required].inject(origin) do |memo, opt|
