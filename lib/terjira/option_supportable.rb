@@ -30,8 +30,9 @@ module Terjira
     # Transforming and clening options
     # and suggest list of option values
     def suggest_options(opts = {})
+      self.with_editor = options[:editor]
       origin = options.dup
-      self.with_editor = opts[:editor]
+      origin.delete(:editor)
 
       if opts[:required].is_a? Array
         opts[:required].inject(origin) do |memo, opt|
