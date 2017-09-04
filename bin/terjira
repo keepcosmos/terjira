@@ -2,7 +2,7 @@
 
 # Do I need bundler setup?
 require 'bundler/setup'
-require 'terjira'
+require_relative '../lib/terjira'
 require 'json'
 require 'pastel'
 
@@ -19,5 +19,6 @@ rescue JIRA::HTTPError => e
     puts pastel.red(message['errors'].map { |k, v| "#{k}: #{v}" }.join(", "))
   end
 rescue => e
+  puts e.backtrace
   puts Pastel.new.dim(e.message)
 end

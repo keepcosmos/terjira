@@ -58,6 +58,10 @@ module Terjira
       'epiclink' => {
         type: :string,
         aliases: '-e'
+      },
+      'editor' => {
+        type: :boolean,
+        aliases: '-E'
       }
     }.freeze
 

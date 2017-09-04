@@ -126,6 +126,18 @@ describe Terjira::OptionSupportable do
     expect(resource_store.get(:comment)).to be == "multiline\ncomment"
   end
 
+  it 'opens default editor for comment' do
+    stub_const('ENV', 'EDITOR' => 'vim')
+    expect_any_instance_of(Object).to receive(:system).and_return(true)
+    expect(File).to receive(:read).and_return("editor\ncomment")
+
+    subject.options = { 'comment' => 'comment', :editor => true }
+
+    subject.suggest_options
+
+    expect(resource_store.get(:comment)).to be == "editor\ncomment"
+  end
+
   it 'opens description ask prompt' do
     prompt.input << "multiline\ndescription"
     prompt.input.rewind
@@ -135,5 +147,35 @@ describe Terjira::OptionSupportable do
     subject.suggest_options
 
     expect(resource_store.get(:description)).to be == "multiline\ndescription"
+  end
+
+  it 'opens default editor for description' do
+    stub_const('ENV', 'EDITOR' => 'vim')
+    expect_any_instance_of(Object).to receive(:system).and_return(true)
+    expect(File).to receive(:read).and_return("editor\ndescription")
+
+    subject.options = { 'description' => 'description', :editor => true }
+
+    subject.suggest_options
+
+    expect(resource_store.get(:description)).to be == "editor\ndescription"
+  end
+
+  it 'raises an error if there is no default editor' do
+    stub_const('ENV', 'EDITOR' => nil)
+    subject.options = { 'description' => 'description', :editor => true }
+
+    expect { subject.suggest_options }
+      .to raise_error('EDITOR environment variable not found. Please set a default editor.')
+  end
+
+  it 'raises an error if editor returns a non-zero exit code' do
+    stub_const('ENV', 'EDITOR' => 'vim')
+    expect_any_instance_of(Object).to receive(:system).and_return(false)
+
+    subject.options = { 'description' => 'description', :editor => true }
+
+    expect { subject.suggest_options }
+      .to raise_error('Editor returned a non-zero exit code. Something must have gone wrong')
   end
 end

@@ -2,10 +2,19 @@
 
 require 'tty-prompt'
 require_relative 'resource_store'
+require_relative 'editor'
 
 module Terjira
   module OptionSelector
     delegate :get, :set, :fetch, to: :resource_store
+
+    def with_editor=(with_editor = false)
+      @with_editor = with_editor
+    end
+
+    def with_editor?
+      @with_editor || false
+    end
 
     def select_project
       fetch :project do
@@ -133,15 +142,21 @@ module Terjira
 
     def write_comment
       fetch(:comment) do
-        comment = option_prompt.multiline("Comment? (Return empty line for finish)\n")
-        comment.join("") if comment
+        if with_editor?
+          Editor.editor_text
+        else
+          prompt_multiline('Comment')
+        end
       end
     end
 
     def write_description
       fetch(:description) do
-        desc = option_prompt.multiline("Description? (Return empty line for finish)\n")
-        desc.join("") if desc
+        if with_editor?
+          Editor.editor_text
+        else
+          prompt_multiline('Description')
+        end
       end
     end
 
@@ -154,6 +169,11 @@ module Terjira
     end
 
     private
+
+    def prompt_multiline(prompt_for)
+      result = option_prompt.multiline("#{prompt_for}?")
+      result.join("") if result
+    end
 
     def sprint_choice_title(sprint)
       "#{sprint.key_value} - #{sprint.name} (#{sprint.state.capitalize})"
@@ -172,7 +192,7 @@ module Terjira
     end
 
     def option_prompt
-      @option_prompt ||= TTY::Prompt.new
+      @option_prompt ||= TTY::Prompt.new(help_color: :cyan)
     end
 
     def per_page(objects)
