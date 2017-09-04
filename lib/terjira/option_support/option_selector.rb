@@ -19,7 +19,7 @@ module Terjira
     def select_project
       fetch :project do
         projects = fetch(:projects) { Client::Project.all }
-        option_prompt.select('Choose project?', per_page: per_page(projects)) do |menu|
+        option_select_prompt.select('Choose project?', per_page: per_page(projects)) do |menu|
           projects.each { |project| menu.choice project_choice_title(project), project }
         end
       end
@@ -28,7 +28,7 @@ module Terjira
     def select_board(type = nil)
       fetch(:board) do
         boards = fetch(:boards) { Client::Board.all(type: type) }
-        option_prompt.select('Choose board?', per_page: per_page(boards)) do |menu|
+        option_select_prompt.select('Choose board?', per_page: per_page(boards)) do |menu|
           boards.sort_by(&:id).each do |board|
             menu.choice "#{board.key_value} - #{board.name}", board
           end
@@ -40,7 +40,7 @@ module Terjira
       fetch(:sprint) do
         board = select_board('scrum')
         sprints = fetch(:sprints) { Client::Sprint.all(board) }
-        option_prompt.select('Choose sprint?') do |menu|
+        option_select_prompt.select('Choose sprint?') do |menu|
           sort_sprint_by_state(sprints).each do |sprint|
             menu.choice sprint_choice_title(sprint), sprint
           end
@@ -62,7 +62,7 @@ module Terjira
           end
         end
 
-        option_prompt.select('Choose assignee?', per_page: per_page(users)) do |menu|
+        option_select_prompt.select('Choose assignee?', per_page: per_page(users)) do |menu|
           users.each { |user| menu.choice user_choice_title(user), user }
         end
       end
@@ -77,7 +77,7 @@ module Terjira
           set(:project, project)
         end
 
-        option_prompt.select('Choose issue type?') do |menu|
+        option_select_prompt.select('Choose issue type?') do |menu|
           project.issuetypes.each do |issuetype|
             menu.choice issuetype.name, issuetype
           end
@@ -100,7 +100,7 @@ module Terjira
           Client::Status.all(project)
         end
 
-        option_prompt.select('Choose status?') do |menu|
+        option_select_prompt.select('Choose status?') do |menu|
           statuses.each do |status|
             menu.choice status.name, status
           end
@@ -111,7 +111,7 @@ module Terjira
     def select_priority
       fetch(:priority) do
         priorities = fetch(:priorities) { Terjira::Client::Priority.all }
-        option_prompt.select('Choose priority?') do |menu|
+        option_select_prompt.select('Choose priority?') do |menu|
           priorities.each do |priority|
             menu.choice priority.name, priority
           end
@@ -122,7 +122,7 @@ module Terjira
     def select_resolution
       fetch(:resolution) do
         resolutions = fetch(:resolutions) { Terjira::Client::Resolution.all }
-        option_prompt.select('Choose resolution?') do |menu|
+        option_select_prompt.select('Choose resolution?') do |menu|
           resolutions.each do |resolution|
             menu.choice resolution.name, resolution
           end
@@ -193,6 +193,26 @@ module Terjira
 
     def option_prompt
       @option_prompt ||= TTY::Prompt.new(help_color: :cyan)
+    end
+
+    def option_select_prompt
+      return @_option_select_prompt if @_option_select_prompt
+      @_option_select_prompt = TTY::Prompt.new(help_color: :cyan)
+      @_option_select_prompt.on(:keypress) do |event|
+        # emacs key binding
+        { "\u000E" => :keydown, "\u0010" => :keyup }.each do |key, action|
+          if event.value == key
+            @_option_select_prompt.trigger(action)
+          end
+        end
+        # vim key binding
+        { 'j' => :keydown, 'k' => :keyup, 'h' => :keyleft, 'l' => :keyright }.each do |key, action|
+          if event.value == key
+            @_option_select_prompt.trigger(action)
+          end
+        end
+      end
+      @_option_select_prompt
     end
 
     def per_page(objects)
