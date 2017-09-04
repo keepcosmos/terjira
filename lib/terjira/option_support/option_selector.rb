@@ -171,7 +171,7 @@ module Terjira
     private
 
     def prompt_multiline(prompt_for)
-      result = option_prompt.multiline("#{prompt_for}? (Return empty line for finish)\n")
+      result = option_prompt.multiline("#{prompt_for}?")
       result.join("") if result
     end
 
@@ -192,7 +192,7 @@ module Terjira
     end
 
     def option_prompt
-      @option_prompt ||= TTY::Prompt.new
+      @option_prompt ||= TTY::Prompt.new(help_color: :cyan)
     end
 
     def per_page(objects)
