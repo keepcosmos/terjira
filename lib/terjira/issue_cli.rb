@@ -36,7 +36,6 @@ module Terjira
       opts = suggest_options
       opts[:statusCategory] ||= default_status_categories unless opts[:status]
       opts[:assignee] ||= current_username
-      opts.delete(:assignee) if opts[:assignee] =~ /^all/i
 
       issues = client_class.all(opts)
       render_issues(issues)
