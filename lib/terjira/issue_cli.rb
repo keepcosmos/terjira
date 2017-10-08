@@ -31,7 +31,7 @@ module Terjira
 
     desc 'url [ISSUE_KEY]', 'Print url for issue'
     def url(issue)
-      issue_url(issue)
+      puts issue_url(issue)
     end
 
     desc '( ls | list )', 'List of issues'
