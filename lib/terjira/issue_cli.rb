@@ -26,7 +26,12 @@ module Terjira
 
     desc 'open [ISSUE_KEY]', 'Open browser'
     def open(issue)
-      open_url("#{client_class.site_url}/browse/#{issue}".gsub(/([^:])([\/]{2,})/, '\1/'))
+      open_url(issue_url(issue))
+    end
+
+    desc 'url [ISSUE_KEY]', 'Print url for issue'
+    def url(issue)
+      issue_url(issue)
     end
 
     desc '( ls | list )', 'List of issues'
@@ -140,6 +145,12 @@ module Terjira
       def default_status_categories
         Client::StatusCategory.all.reject { |category| category.key =~ /done/i }.map(&:key)
       end
+    end
+
+    private
+
+    def issue_url(issue)
+      "#{client_class.site_url}/browse/#{issue}".gsub(/([^:])([\/]{2,})/, '\1/')
     end
   end
 end
