@@ -77,6 +77,7 @@ Issue:
   jira issue new                     # Create an issue
                                      #   pass `-E` or `--editor` to open system default editor for composing issue description
   jira issue open [ISSUE_KEY]        # Open browser
+  jira issue url [ISSUE_KEY]         # return url of the issue
   jira issue take [ISSUE_KEY]        # Assign the issue to self
   jira issue trans [ISSUE_KEY] ([STATUS])     # Do transition
 
