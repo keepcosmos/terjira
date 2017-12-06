@@ -22,7 +22,7 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency "thor", "~> 0.19.0"
   spec.add_dependency "jira-ruby", "1.1.3"
-  spec.add_dependency "activesupport", "4.0.13"
+  spec.add_dependency "activesupport", "4.1.11"
 
   spec.add_dependency "tty-table", "~> 0.8.0"
   spec.add_dependency "tty-prompt", "~> 0.12.0"
