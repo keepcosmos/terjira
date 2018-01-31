@@ -36,6 +36,12 @@ module Terjira
           api_put("issue/#{issue.key_value}/assignee", body)
         end
 
+        def attach_file(issue, file)
+          attachment = JIRA::Resource::Attachment.new(client, issue: find(issue))
+          attachment.save!('file' => file)
+          find(issue)
+        end
+
         def write_comment(issue, message)
           api_post("issue/#{issue.key_value}/comment", { body: message }.to_json)
           find(issue)

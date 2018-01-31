@@ -94,6 +94,13 @@ module Terjira
       render_issue_detail(issue)
     end
 
+    desc 'attach_file [ISSUE_KEY] [FILE]', 'Attach a file to the issue'
+    jira_options :file
+    def attach_file(issue, file)
+      issue = client_class.attach_file(issue, file)
+      render_issue_detail(issue)
+    end
+
     desc 'take [ISSUE_KEY]', 'Assign the issue to self'
     def take(issue)
       assign(issue, current_username)

@@ -69,6 +69,7 @@ Issue:
   jira issue search "[SUMMARY]"      # Search for an issues by summary
   jira issue [ISSUE_KEY]             # Show detail of the issue
   jira issue assign [ISSUE_KEY] ([ASSIGNEE])  # Assign the issue to user
+  jira issue attach_file [ISSUE_KEY] ([FILE_PATH])  #Attach a file to issue
   jira issue comment [ISSUE_KEY]     # Write comment on the issue
                                      #   pass `-E` or `--editor` to open system default editor for composing comment
   jira issue delete [ISSUE_KEY]      # Delete the issue
