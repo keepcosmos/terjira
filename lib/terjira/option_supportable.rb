@@ -24,7 +24,8 @@ module Terjira
       priority: :select_priority,
       resolution: :select_resolution,
       epiclink: :write_epiclink_key,
-      comment: :write_comment
+      comment: :write_comment,
+      editable_comment: :select_comment
     }.freeze
 
     # Transforming and clening options

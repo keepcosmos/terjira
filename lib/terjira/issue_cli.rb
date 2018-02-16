@@ -94,6 +94,29 @@ module Terjira
       render_issue_detail(issue)
     end
 
+    desc 'edit_comment [ISSUE_KEY]', "Edit user's comment on the issue."
+    jira_options :comment_id, :editable_comment
+    def edit_comment(issue)
+      opts = suggest_options(
+        resources: { issue: issue },
+        required: [:editable_comment]
+      )
+
+      if opts['editable_comment'].present?
+        selected_comment = opts['editable_comment']['selected_comment']
+        new_content = opts['editable_comment']['new_content']
+
+        issue = client_class.edit_comment(
+          issue,
+          selected_comment.id,
+          new_content
+        )
+        render_issue_detail(issue)
+      else
+        render("You don't have any editable comment.")
+      end
+    end
+
     desc 'attach_file [ISSUE_KEY] [FILE]', 'Attach a file to the issue'
     jira_options :file
     def attach_file(issue, file)

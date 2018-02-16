@@ -2,13 +2,15 @@
 
 module Terjira
   class Editor
-    def self.editor_text
+    def self.editor_text(content = '')
       editor = ENV['EDITOR']
       if editor.nil? || editor.empty?
         raise 'EDITOR environment variable not found. Please set a default editor.'
       end
 
       tmp_file = Tempfile.new('content')
+      tmp_file.write(content)
+      tmp_file.close
       success = system "#{editor} #{tmp_file.path}"
       content = File.read(tmp_file.path) if success
 
