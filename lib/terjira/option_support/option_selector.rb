@@ -19,9 +19,12 @@ module Terjira
     def select_project
       fetch :project do
         projects = fetch(:projects) { Client::Project.all }
-        option_select_prompt.select('Choose project?', per_page: per_page(projects)) do |menu|
-          projects.each { |project| menu.choice project_choice_title(project), project }
-        end
+        selected_project =
+          option_select_prompt.select('Choose project?', per_page: per_page(projects)) do |menu|
+            projects.each { |project| menu.choice project_choice_title(project), project }
+          end
+
+        Client::Project.find(selected_project.id)
       end
     end
 

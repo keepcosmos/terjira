@@ -6,6 +6,12 @@ class MockResource
       end
     end
 
+    def project
+      load_response('project').map do |project|
+        Terjira::Client::Project.build(project)
+      end
+    end
+
     def boards
       load_response('boards')['values'].map do |board|
         Terjira::Client::Board.build(board)

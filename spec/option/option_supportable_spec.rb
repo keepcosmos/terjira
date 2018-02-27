@@ -18,7 +18,7 @@ describe Terjira::OptionSupportable do
 
   let(:prompt) { TTY::TestPrompt.new }
 
-  %w(projects boards sprints statuses users priorities resolutions).each do |resource|
+  %w(projects project boards sprints statuses users priorities resolutions).each do |resource|
     let(resource) { MockResource.send(resource) }
   end
 
@@ -35,6 +35,7 @@ describe Terjira::OptionSupportable do
 
     it 'suggests proejcts' do
       allow(Terjira::Client::Project).to receive(:all).and_return(projects)
+      allow(Terjira::Client::Project).to receive(:find).and_return(project)
 
       subject.options = { 'project' => 'project' }
       subject.suggest_options
