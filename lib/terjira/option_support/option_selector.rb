@@ -153,6 +153,18 @@ module Terjira
       end
     end
 
+    def update_comment
+      fetch(:editable_comment) do
+        selected_comment = user_comment
+
+        if selected_comment.present?
+          new_content = Editor.editor_text(selected_comment.body)
+
+          { 'selected_comment' => selected_comment, 'new_content' => new_content }
+        end
+      end
+    end
+
     def write_description
       fetch(:description) do
         if with_editor?
@@ -172,6 +184,31 @@ module Terjira
     end
 
     private
+
+    def user_comment
+      comment_id = get(:comment_id)
+
+      if comment_id.present?
+        user_comments.detect do |c|
+          c.id == comment_id && c.author['name'] == current_username
+        end
+      else
+        user_comments.reverse.detect do |c|
+          c.author['name'] == current_username
+        end
+      end
+    end
+
+    def user_comments
+      issue = Client::Issue.find(get(:issue))
+
+      unless issue.comments.empty?
+        issue
+          .comments
+          .reverse
+          .select { |c| c.author['name'] == current_username }
+      end || []
+    end
 
     def prompt_multiline(prompt_for)
       result = option_prompt.multiline("#{prompt_for}?")

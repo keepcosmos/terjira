@@ -122,8 +122,13 @@ module Terjira
         <%= pastel.dim('- ' + remain_comments.size.to_s + ' previous comments exist -') %>
       <% end -%>
       <% visiable_comments.each do |comment| -%>
+
+        <% id = comment.id -%>
+        <% author = comment.author['displayName'] -%>
+        <% created_at = formatted_date(comment.created) -%>
+
         <%= comment.body %>
-        - <%= comment.author['displayName'] %> <%= formatted_date(comment.created) %>
+        - (ID: <%= id %>) <%= author %> <%= created_at %>
       <% end -%>
       """
     end

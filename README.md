@@ -72,6 +72,8 @@ Issue:
   jira issue attach_file [ISSUE_KEY] ([FILE_PATH])  #Attach a file to issue
   jira issue comment [ISSUE_KEY]     # Write comment on the issue
                                      #   pass `-E` or `--editor` to open system default editor for composing comment
+  jira issue edit_comment [ISSUE_KEY] ([COMMENT_ID])     # Edit user's comment on the issue.
+                                     #   If COMMENT_ID is not given, it will choose user's last comment.
   jira issue delete [ISSUE_KEY]      # Delete the issue
   jira issue edit [ISSUE_KEY]        # Edit the issue
                                      #   pass `-E` or `--editor` to open system default editor for composing issue description

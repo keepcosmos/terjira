@@ -47,6 +47,11 @@ module Terjira
           find(issue)
         end
 
+        def edit_comment(issue, comment_id, message)
+          api_put("issue/#{issue.key_value}/comment/#{comment_id}", { body: message }.to_json)
+          find(issue)
+        end
+
         def create(options = {})
           params = extract_to_fields_params(options)
           resp = api_post 'issue', params.to_json
