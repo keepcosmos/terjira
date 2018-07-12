@@ -33,6 +33,7 @@ RSpec.configure do |config|
       eval("$#{stream} = #{stream.upcase}")
     end
 
+    puts "\n#{result}\n" if ENV['DISPLAY']
     result
   end
 end

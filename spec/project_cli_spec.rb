@@ -6,6 +6,7 @@ describe Terjira::ProjectCLI do
   context '#list' do
     it 'must show project list' do
       allow(Terjira::Client::Project).to receive(:all).and_return(projects)
+
       result = capture(:stdout) { described_class.start %w(ls) }
 
       projects.each do |project|
