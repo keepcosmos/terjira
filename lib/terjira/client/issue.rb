@@ -31,6 +31,11 @@ module Terjira
           api_delete("issue/#{issue.key_value}")
         end
 
+        def priority(issue, newPriority)
+          body = {"update":{"priority":[{"set":{"id":newPriority}}]}}
+          api_put("issue/#{issue.key_value}", body)
+        end
+
         def assign(issue, assignee)
           body = { name: assignee.key_value }.to_json
           api_put("issue/#{issue.key_value}/assignee", body)
