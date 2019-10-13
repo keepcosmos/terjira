@@ -2,7 +2,7 @@ PATH
   remote: .
   specs:
     terjira (0.4.3)
-      activesupport (= 6.0.0)
+      activesupport (= 5.2.3)
       jira-ruby (= 1.7.1)
       thor (~> 0.20.0)
       tty-prompt (~> 0.19.0)
@@ -12,12 +12,11 @@ PATH
 GEM
   remote: https://rubygems.org/
   specs:
-    activesupport (6.0.0)
+    activesupport (5.2.3)
       concurrent-ruby (~> 1.0, >= 1.0.2)
       i18n (>= 0.7, < 2)
       minitest (~> 5.1)
       tzinfo (~> 1.1)
-      zeitwerk (~> 2.1, >= 2.1.8)
     atlassian-jwt (0.2.0)
       jwt (~> 2.1.0)
     codeclimate-test-reporter (1.0.8)
@@ -97,7 +96,6 @@ GEM
     unicode-display_width (1.6.0)
     unicode_utils (1.4.0)
     wisper (2.0.0)
-    zeitwerk (2.2.0)
 
 PLATFORMS
   ruby
