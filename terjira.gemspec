@@ -20,18 +20,18 @@ Gem::Specification.new do |spec|
   spec.executables   = ["bin/jira"].map { |f| File.basename(f) }
   spec.require_paths = ["lib"]
 
-  spec.add_dependency "thor", "~> 0.19.0"
-  spec.add_dependency "jira-ruby", "1.5.0"
-  spec.add_dependency "activesupport", "4.1.11"
+  spec.add_dependency "thor", "~> 0.20.0"
+  spec.add_dependency "jira-ruby", "1.7.1"
+  spec.add_dependency "activesupport", "6.0.0"
 
-  spec.add_dependency "tty-table", "~> 0.10.0"
-  spec.add_dependency "tty-prompt", "~> 0.16.1"
-  spec.add_dependency "tty-spinner", "~> 0.4.1"
+  spec.add_dependency "tty-table", "~> 0.11.0"
+  spec.add_dependency "tty-prompt", "~> 0.19.0"
+  spec.add_dependency "tty-spinner", "~> 0.9.1"
 
-  spec.add_development_dependency "bundler", "~> 1.11"
-  spec.add_development_dependency "rake", "~> 10.0"
-  spec.add_development_dependency "rspec", "~> 3.5"
+  spec.add_development_dependency "bundler", "~> 1.17"
+  spec.add_development_dependency "rake", "~> 13.0"
+  spec.add_development_dependency "rspec", "~> 3.9"
   spec.add_development_dependency "simplecov", "~> 0"
   spec.add_development_dependency "codeclimate-test-reporter", "~> 1.0"
-  spec.add_development_dependency "pry", "~> 0.10.0"
+  spec.add_development_dependency "pry", "~> 0.12.0"
 end
