@@ -12,7 +12,14 @@ rvm:
 before_install:
   - gem install i18n --no-document
 
+before_script:
+  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+  - chmod +x ./cc-test-reporter
+  - ./cc-test-reporter before-build
+
 script: bundle exec rspec spec/
 
 after_success:
-  - bundle exec codeclimate-test-reporter
+  after_script:
+  - ./cc-test-reporter format-coverage -t simplecov
+  - if [[ "$TRAVIS_TEST_RESULT" == 0 ]]; then ./cc-test-reporter upload-coverage; fi
