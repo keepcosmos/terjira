@@ -93,7 +93,7 @@ module Terjira
 
       if opts[:epiclink]
         epiclink_field = Client::Field.epic_link
-        opts[epiclink_field.key] ||= opts.delete(:epiclink)
+        opts[epiclink_field.id] ||= opts.delete(:epiclink)
       end
 
       opts
