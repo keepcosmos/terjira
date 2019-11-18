@@ -23,6 +23,11 @@ module Terjira
           build(resp)
         end
 
+        def find_default(issue, options = {})
+          resp = api_get("issue/#{issue.key_value}", options)
+          build(resp)
+        end
+
         def search(options = {})
           resource.jql(build_jql(options))
         end
