@@ -157,7 +157,7 @@ module Terjira
       issue = args.shift
       raise 'must pass issue key or id' unless issue
       status = args.join(' ') if args.present?
-      issue = client_class.find(issue, expand: 'transitions.fields')
+      issue = client_class.find_default(issue, expand: 'transitions.fields')
 
       transitions = issue.transitions
       transition = transitions.find { |t| t.name.casecmp(status.to_s).zero? }
