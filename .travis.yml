@@ -5,13 +5,12 @@ addons:
     repo_token: 98123461fbec752591c40e3e7af46bcdc6576723bfac2d89c084bfae989e4db3
 
 rvm:
-  - 2.0
-  - 2.1
-  - 2.2
-  - 2.3
+  - 2.4
+  - 2.5
+  - 2.6
 
 before_install:
-  - gem install i18n --no-rdoc --no-ri --no-document
+  - gem install i18n --no-document
 
 script: bundle exec rspec spec/
 
