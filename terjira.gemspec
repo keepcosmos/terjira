@@ -11,7 +11,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["keepcosmos@gmail.com"]
 
   spec.summary       = "Terjira is interactive command line application for Jira"
-  spec.description   = "Terjira is interactive and easy to use command line interface (or Application) for Jira.\nYou do not need to remember reosurce key or id. Terjira suggests with interactive prompt."
+  spec.description   = "Terjira is interactive and easy to use command line interface (or Application) for Jira.\nYou do not need to remember resource key or id. Terjira suggests with interactive prompt."
   spec.homepage      = "https://github.com/keepcosmos/terjira"
   spec.license       = "MIT"
 

@@ -1,8 +1,11 @@
-require 'terjira'
+require 'simplecov'
 require_relative 'mock_resource'
 require 'pry'
-require 'simplecov'
-SimpleCov.start
+SimpleCov.start do
+ add_filter "spec/"
+end
+
+require 'terjira'
 
 RSpec.configure do |config|
   config.expect_with :rspec do |expectations|
