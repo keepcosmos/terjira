@@ -7,7 +7,7 @@
 
 Terjira is an interactive and easy to use command line interface (or Application) for Jira. You do not need to remember the resource key or id. Terjira suggests it with an interactive prompt.
 
-Your Jira must support Rest API 2.0 and Agile Rest API 1.0
+Your Jira must support Rest API 2.0 and Agile Rest API 1.0.
 
 ## Demo
 [Watch full demo](https://www.youtube.com/watch?v=T0hbhaXtH-Y)
@@ -33,7 +33,8 @@ If you have permission problem,
 ## Usage
 ```
 Authentication:
-  jira login                         # Login your Jira
+  jira login                         # Login your Jira using your Jira email & API token
+                                     # Refer: https://confluence.atlassian.com/cloud/api-tokens-938839638.html
                                      #   [--ssl-config]  with ssl configuration
                                      #   [--proxy-config] with proxy configuration
   jira logout                        # Logout your Jira
