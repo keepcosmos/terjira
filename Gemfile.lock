@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    terjira (0.4.3)
+    terjira (0.4.4)
       activesupport (= 5.2.3)
       jira-ruby (= 1.7.1)
       thor (~> 0.20.0)
@@ -34,7 +34,7 @@ GEM
     json (1.8.6)
     jwt (2.1.0)
     method_source (0.9.2)
-    minitest (5.12.2)
+    minitest (5.13.0)
     multipart-post (2.1.1)
     necromancer (0.5.0)
     oauth (0.5.4)
@@ -63,11 +63,11 @@ GEM
       json (>= 1.8, < 3)
       simplecov-html (~> 0.10.0)
     simplecov-html (0.10.2)
-    strings (0.1.6)
+    strings (0.1.7)
       strings-ansi (~> 0.1)
       unicode-display_width (~> 1.5)
       unicode_utils (~> 1.4)
-    strings-ansi (0.1.0)
+    strings-ansi (0.2.0)
     thor (0.20.3)
     thread_safe (0.3.6)
     tty-color (0.5.0)
@@ -93,7 +93,7 @@ GEM
       thread_safe (~> 0.1)
     unicode-display_width (1.6.0)
     unicode_utils (1.4.0)
-    wisper (2.0.0)
+    wisper (2.0.1)
 
 PLATFORMS
   ruby
