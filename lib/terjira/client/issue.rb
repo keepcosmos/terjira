@@ -61,7 +61,7 @@ module Terjira
         def update(issue, options = {})
           params = extract_to_update_params(options)
           params.merge!(extract_to_fields_params(options))
-          resp = api_put "issue/#{issue.key_value}", params.to_json
+          api_put "issue/#{issue.key_value}", params.to_json
           find(issue)
         end
 
@@ -101,9 +101,7 @@ module Terjira
           end
 
           [:project, :parent].each do |resource|
-            if opts.key?(resource)
-              params[resource] = { key: opts.delete(resource).key_value }
-            end
+            params[resource] = { key: opts.delete(resource).key_value } if opts.key?(resource)
           end
 
           opts.each { |k, v| params[k] = convert_param_key_value_hash(v) }

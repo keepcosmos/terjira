@@ -20,7 +20,7 @@ module Terjira
         def backlog(board_id, options = {})
           jql = build_jql(options)
           resp = if jql.present?
-                  agile_api_get("board/#{board_id}/backlog", jql: jql)
+                   agile_api_get("board/#{board_id}/backlog", jql: jql)
                  else
                    agile_api_get("board/#{board_id}/backlog")
                  end

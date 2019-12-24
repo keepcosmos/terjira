@@ -13,22 +13,22 @@ module Terjira
     end
 
     OPTION_TO_SELECTOR = {
-      project: :select_project,
-      board: :select_board,
-      summary: :write_summary,
-      description: :write_description,
-      sprint: :select_sprint,
-      issuetype: :select_issuetype,
       assignee: :select_assignee,
-      status: :select_issue_status,
-      priority: :select_priority,
-      resolution: :select_resolution,
-      epiclink: :write_epiclink_key,
+      board: :select_board,
       comment: :write_comment,
-      editable_comment: :update_comment
+      description: :write_description,
+      editable_comment: :update_comment,
+      epiclink: :write_epiclink_key,
+      issuetype: :select_issuetype,
+      priority: :select_priority,
+      project: :select_project,
+      resolution: :select_resolution,
+      sprint: :select_sprint,
+      status: :select_issue_status,
+      summary: :write_summary
     }.freeze
 
-    # Transforming and clening options
+    # Transforming and cleaning options
     # and suggest list of option values
     def suggest_options(opts = {})
       origin = options.dup
@@ -63,13 +63,13 @@ module Terjira
       default_value_options = Hash[default_value_options]
 
       # Suggest option values and save to resource store
-      default_value_options.each do |k, _v|
+      default_value_options.each_key do |k, _v|
         selector_method = OPTION_TO_SELECTOR[k.to_sym]
         send(selector_method) if selector_method
       end
 
       # Fetch selected values from resource store
-      default_value_options.each do |k, _v|
+      default_value_options.each_key do |k, _v|
         default_value_options[k] = resource_store.get(k)
       end
 

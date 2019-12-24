@@ -43,6 +43,5 @@ module Terjira
         @version_alert_cache ||= Terjira::FileCache.new("version", VERSION_CHECK_DURATION)
       end
     end
-
   end
 end

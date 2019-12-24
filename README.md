@@ -61,7 +61,7 @@ Sprint:
 Issue:
   jira issue help [COMMAND]          # Describe one specific subcommand
   jira issue ( ls | list )           # List of issues
-                                     #   default assignee option is current loggined user
+                                     #   Default assignee option is current logged-in user
                                      #   To show issues of all users(include no assignee)
                                      #   pass `--assignee ALL` or `-a ALL`.
   jira issue jql "[QUERY]"           # Search issues with JQL
@@ -81,7 +81,7 @@ Issue:
   jira issue new                     # Create an issue
                                      #   pass `-E` or `--editor` to open system default editor for composing issue description
   jira issue open [ISSUE_KEY]        # Open browser
-  jira issue url [ISSUE_KEY]         # return url of the issue
+  jira issue url [ISSUE_KEY]         # Return url of the issue
   jira issue take [ISSUE_KEY]        # Assign the issue to self
   jira issue trans [ISSUE_KEY] ([STATUS])     # Do transition
 

@@ -1,5 +1,3 @@
-# encoding: utf-8
-
 module Terjira
   module SprintPresenter
     def render_sprint_detail(sprint)
@@ -15,7 +13,7 @@ module Terjira
     end
 
     def render_sprints_summary(sprints)
-      headers = %w(ID Summary).map { |h| pastel.bold(h) }
+      headers = %w[ID Summary].map { |h| pastel.bold(h) }
       rows = []
       sort_sprint_by_state(sprints).each do |sprint|
         rows << [pastel.bold(sprint.id), summarise_sprint(sprint)]

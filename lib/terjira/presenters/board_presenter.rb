@@ -1,5 +1,3 @@
-# encoding: utf-8
-
 module Terjira
   module BoardPresenter
     def render_boards_summary(boards)

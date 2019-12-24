@@ -1,8 +1,6 @@
-# encoding: utf-8
-
 require 'tty-prompt'
-require_relative 'resource_store'
 require_relative 'editor'
+require_relative 'resource_store'
 
 module Terjira
   module OptionSelector
@@ -135,12 +133,12 @@ module Terjira
 
     def write_epiclink_key
       fetch(:epiclink) do
-        option_prompt.ask('Epic key?')
+        option_prompt.ask('Epic Key?')
       end
     end
 
     def write_epic_name
-      option_prompt.ask('Epic name?')
+      option_prompt.ask('Epic Name?')
     end
 
     def write_comment
@@ -180,7 +178,7 @@ module Terjira
     end
 
     def write_parent_issue_key
-      fetch(:parent) { option_prompt.ask('Parent issue key?') }
+      fetch(:parent) { option_prompt.ask('Parent Issue Key?') }
     end
 
     private
@@ -241,15 +239,11 @@ module Terjira
       @_option_select_prompt.on(:keypress) do |event|
         # emacs key binding
         { "\u000E" => :keydown, "\u0010" => :keyup }.each do |key, action|
-          if event.value == key
-            @_option_select_prompt.trigger(action)
-          end
+          @_option_select_prompt.trigger(action) if event.value == key
         end
         # vim key binding
         { 'j' => :keydown, 'k' => :keyup, 'h' => :keyleft, 'l' => :keyright }.each do |key, action|
-          if event.value == key
-            @_option_select_prompt.trigger(action)
-          end
+          @_option_select_prompt.trigger(action) if event.value == key
         end
       end
       @_option_select_prompt
