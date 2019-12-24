@@ -60,7 +60,7 @@ module Terjira
 
     # Delete the value for the given key from the cache
     def delete(key)
-      FileUtils.rm(get_path(key)) if File.exists? get_path(key)
+      FileUtils.rm(get_path(key)) if File.exist? get_path(key)
     end
 
     # Delete ALL data from the cache, regardless of expiry time
