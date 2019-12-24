@@ -1,5 +1,3 @@
-# encoding: utf-8
-
 module Terjira
   class Editor
     def self.editor_text(content = '')

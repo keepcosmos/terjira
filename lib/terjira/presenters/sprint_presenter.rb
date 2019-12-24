@@ -1,5 +1,3 @@
-# encoding: utf-8
-
 module Terjira
   module SprintPresenter
     def render_sprint_detail(sprint)

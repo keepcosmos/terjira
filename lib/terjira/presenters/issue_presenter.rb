@@ -1,5 +1,3 @@
-# encoding: utf-8
-
 require 'tty-prompt'
 require 'tty-table'
 require 'pastel'
