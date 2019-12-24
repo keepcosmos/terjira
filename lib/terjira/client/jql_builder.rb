@@ -1,8 +1,8 @@
 module Terjira
   module Client
     module JQLBuilder
-      STRICT_KEYS = %w(sprint assignee issuetype priority project status statusCategory).freeze
-      SEARCH_KEYS = %w(summary description).freeze
+      STRICT_KEYS = %w[sprint assignee issuetype priority project status statusCategory].freeze
+      SEARCH_KEYS = %w[summary description].freeze
 
       def build_jql(options = {})
         search = options.select { |k, _v| SEARCH_KEYS.include?(k.to_s) }

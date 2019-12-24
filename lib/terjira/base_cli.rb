@@ -30,7 +30,7 @@ module Terjira
       def open_url(url)
         open_cmd = case RUBY_PLATFORM
                    when /darwin/ then 'open'
-                   when  /cygwin/ then 'cygstart'
+                   when /cygwin/ then 'cygstart'
                    when /linux/ then 'xdg-open'
                    when /msys/ then 'start ""'
                    else nil

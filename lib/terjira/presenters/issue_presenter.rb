@@ -201,7 +201,7 @@ module Terjira
 
     def extract_status_names(issues)
       issue_names = issues.sort_by do |issue|
-        status_key = %w(new indeterminate done)
+        status_key = %w[new indeterminate done]
         idx = if issue.status.respond_to? :statusCategory
                 status_key.index(issue.status.statusCategory['key'])
               end

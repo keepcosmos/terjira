@@ -3,7 +3,7 @@ module Terjira
     OPTIONS = {
       'project' => {
         type: :string,
-        aliases: '-p',
+        aliases: '-p'
       },
       'board' => {
         type: :numeric,
@@ -23,9 +23,9 @@ module Terjira
       'state' => {
         type: :array,
         aliases: '-s',
-        default: %w(Active Future),
-        lazy_default: %w(Active Future),
-        enum: %w(Active Future Closed)
+        default: %w[Active Future],
+        lazy_default: %w[Active Future],
+        enum: %w[Active Future Closed]
       },
       'status' => {
         type: :string,
