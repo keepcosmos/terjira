@@ -99,7 +99,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  bundler (~> 1.17)
+  bundler (~> 2.1)
   pry (~> 0.12.0)
   rake (~> 13.0)
   rspec (~> 3.9)
@@ -107,4 +107,4 @@ DEPENDENCIES
   terjira!
 
 BUNDLED WITH
-   1.17.2
+   2.1.2
