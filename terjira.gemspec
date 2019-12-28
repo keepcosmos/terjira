@@ -28,7 +28,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency "tty-prompt", "~> 0.19.0"
   spec.add_dependency "tty-spinner", "~> 0.9.1"
 
-  spec.add_development_dependency "bundler", "~> 1.17"
+  spec.add_development_dependency "bundler", "~> 2.1"
   spec.add_development_dependency "rake", "~> 13.0"
   spec.add_development_dependency "rspec", "~> 3.9"
   spec.add_development_dependency "simplecov", "~> 0"
