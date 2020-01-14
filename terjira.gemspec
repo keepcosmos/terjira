@@ -20,12 +20,12 @@ Gem::Specification.new do |spec|
   spec.executables   = ["bin/jira"].map { |f| File.basename(f) }
   spec.require_paths = ["lib"]
 
-  spec.add_dependency "thor", "~> 0.20.0"
+  spec.add_dependency "thor", "~> 1.0.0"
   spec.add_dependency "jira-ruby", "1.7.1"
-  spec.add_dependency "activesupport", "5.2.3"
+  spec.add_dependency "activesupport", "6.0.2"
 
   spec.add_dependency "tty-table", "~> 0.11.0"
-  spec.add_dependency "tty-prompt", "~> 0.19.0"
+  spec.add_dependency "tty-prompt", "~> 0.20.0"
   spec.add_dependency "tty-spinner", "~> 0.9.1"
 
   spec.add_development_dependency "bundler", "~> 2.1"
