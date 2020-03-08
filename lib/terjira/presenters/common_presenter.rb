@@ -34,8 +34,8 @@ module Terjira
       else
         begin
           "#{user.displayName} (#{user.name})"
-        rescue
-          "#{user.displayName}"
+        rescue NoMethodError
+          user.displayName.to_s
         end
       end
     end
