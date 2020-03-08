@@ -32,7 +32,11 @@ module Terjira
       if user.nil?
         dim_none
       else
-        "#{user.displayName}(#{user.name})"
+        begin
+          "#{user.displayName} (#{user.name})"
+        rescue
+          "#{user.displayName}"
+        end
       end
     end
 
