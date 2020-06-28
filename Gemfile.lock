@@ -3,7 +3,7 @@ PATH
   specs:
     terjira (0.4.6)
       activesupport (= 6.0.3.1)
-      jira-ruby (= 1.7.1)
+      jira-ruby (= 2.0.0)
       thor (~> 1.0.1)
       tty-prompt (~> 0.20.0)
       tty-spinner (~> 0.9.3)
@@ -27,7 +27,7 @@ GEM
     equatable (0.6.1)
     i18n (1.8.3)
       concurrent-ruby (~> 1.0)
-    jira-ruby (1.7.1)
+    jira-ruby (2.0.0)
       activesupport
       atlassian-jwt
       multipart-post
