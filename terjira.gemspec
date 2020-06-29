@@ -21,7 +21,7 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
 
   spec.add_dependency "thor", "~> 1.0.1"
-  spec.add_dependency "jira-ruby", "1.7.1"
+  spec.add_dependency "jira-ruby", "2.0.0"
   spec.add_dependency "activesupport", "6.0.3.1"
 
   spec.add_dependency "tty-table", "~> 0.11.0"

@@ -7,7 +7,6 @@ module Terjira
         delegate :jql, :find, to: :resource
 
         def all(options = {})
-          options.delete(:assignee) if options[:assignee] =~ /^all/i
           return resource.all if options.blank?
           max_results = options.delete(:max_results) || 500
           jql(build_jql(options), max_results: max_results)
@@ -96,7 +95,7 @@ module Terjira
 
           custom_fields = options.keys.select { |k| k.to_s =~ /^customfield/ }
 
-          (custom_fields + [:summary, :description]).each do |k, _v|
+          (custom_fields + [:summary, :description]).each_key do |k, _v|
             params[k] = opts.delete(k) if opts.key?(k)
           end
 
