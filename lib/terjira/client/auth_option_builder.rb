@@ -30,7 +30,7 @@ module Terjira
           key(:site).ask('Site (ex: https://myjira.atlassian.net):', required: true)
           key(:context_path).ask('Jira path in your site (just press enter if you don\'t have):', default: '')
           key(:username).ask('Username:', required: true)
-          key(:password).mask('Password:', required: true)
+          key(:password).mask('Password (Server) / API Token (Cloud):', required: true)
 
           if options['ssl-config']
             key(:use_ssl).yes?('Use SSL?')

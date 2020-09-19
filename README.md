@@ -33,7 +33,8 @@ If you have permission problem,
 ## Usage
 ```
 Authentication:
-  jira login                         # Login your Jira using your Jira email & API token
+  jira login                         # Login your Jira using your Jira email & password 
+                                     # for Server or API token for Cloud.
                                      # Refer: https://confluence.atlassian.com/cloud/api-tokens-938839638.html
                                      #   [--ssl-config]  with ssl configuration
                                      #   [--proxy-config] with proxy configuration
