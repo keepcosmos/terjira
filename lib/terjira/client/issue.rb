@@ -95,7 +95,7 @@ module Terjira
 
           custom_fields = options.keys.select { |k| k.to_s =~ /^customfield/ }
 
-          (custom_fields + [:summary, :description]).each_key do |k, _v|
+          (custom_fields + [:summary, :description]).each_entry do |k, _v|
             params[k] = opts.delete(k) if opts.key?(k)
           end
 

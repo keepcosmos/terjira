@@ -1,9 +1,9 @@
 module Terjira
   module SharedOptions
     OPTIONS = {
-      'project' => {
+      'assignee' => {
         type: :string,
-        aliases: '-p'
+        aliases: '-a'
       },
       'board' => {
         type: :numeric,
@@ -11,14 +11,33 @@ module Terjira
         banner: 'BOARD_ID',
         lazy_default: 'board'
       },
-      'sprint' => {
-        type: :numeric,
-        banner: 'SPRINT_ID',
-        lazy_default: 'sprint'
-      },
-      'assignee' => {
+      'description' => {
         type: :string,
-        aliases: '-a'
+        aliases: '-d'
+      },
+      'epiclink' => {
+        type: :string,
+        aliases: '-e'
+      },
+      'editor' => {
+        type: :boolean,
+        aliases: '-E'
+      },
+      'comment' => {
+        type: :string,
+        aliases: '-m'
+      },
+      'project' => {
+        type: :string,
+        aliases: '-p'
+      },
+      'priority' => {
+        type: :string,
+        aliases: '-P'
+      },
+      'resolution' => {
+        type: :string,
+        aliases: '-r'
       },
       'state' => {
         type: :array,
@@ -31,37 +50,18 @@ module Terjira
         type: :string,
         aliases: '-s',
       },
-      'resolution' => {
+      'summary' => {
         type: :string,
-        aliases: '-r'
+        aliases: '-S'
       },
       'issuetype' => {
         type: :string,
         aliases: '-t'
       },
-      'priority' => {
-        type: :string,
-        aliases: '-P'
-      },
-      'summary' => {
-        type: :string,
-        aliases: '-S'
-      },
-      'description' => {
-        type: :string,
-        aliases: '-d'
-      },
-      'comment' => {
-        type: :string,
-        aliases: '-m'
-      },
-      'epiclink' => {
-        type: :string,
-        aliases: '-e'
-      },
-      'editor' => {
-        type: :boolean,
-        aliases: '-E'
+      'sprint' => {
+        type: :numeric,
+        banner: 'SPRINT_ID',
+        lazy_default: 'sprint'
       }
     }.freeze
 
