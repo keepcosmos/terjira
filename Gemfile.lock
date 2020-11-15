@@ -2,8 +2,8 @@ PATH
   remote: .
   specs:
     terjira (0.4.8)
-      activesupport (= 6.0.3.3)
-      jira-ruby (= 2.1.0)
+      activesupport (>= 4)
+      jira-ruby (~> 2.1)
       thor (~> 1.0.1)
       tty-prompt (~> 0.20.0)
       tty-spinner (~> 0.9.3)
