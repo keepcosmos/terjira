@@ -84,6 +84,12 @@ module Terjira
       render("Deleted")
     end
 
+    desc 'priority [ISSUE_KEY] [NEW_PRIORITY]', 'Update priority of the issue'
+    def prioirty(issue, newPriority = 3)
+      client_class.prioirty(issue, newPriority)
+      render("Priority Updated")
+    end
+
     desc 'comment [ISSUE_KEY]', 'Write comment on the issue'
     jira_options :comment, :editor
     def comment(issue)
