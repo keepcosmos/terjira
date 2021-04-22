@@ -37,7 +37,7 @@ GEM
     minitest (5.14.2)
     multipart-post (2.1.1)
     necromancer (0.5.1)
-    oauth (0.5.4)
+    oauth (0.5.6)
     pastel (0.7.4)
       equatable (~> 0.6)
       tty-color (~> 0.5)
