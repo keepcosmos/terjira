@@ -20,7 +20,7 @@ Gem::Specification.new do |spec|
   spec.executables   = ["bin/jira"].map { |f| File.basename(f) }
   spec.require_paths = ["lib"]
 
-  spec.add_dependency "thor", "~> 1.0.1"
+  spec.add_dependency "thor", "~> 1.0"
   spec.add_dependency "jira-ruby", "~> 2.1"
   spec.add_dependency "activesupport", ">= 4"
 
