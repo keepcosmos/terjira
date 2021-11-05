@@ -4,6 +4,7 @@ PATH
     terjira (0.4.8)
       activesupport (>= 4)
       jira-ruby (~> 2.1)
+      strings (>= 0.2)
       thor (~> 1.0)
       tty-prompt (>= 0.23)
       tty-spinner (>= 0.9)
