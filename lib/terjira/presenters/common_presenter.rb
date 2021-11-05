@@ -1,5 +1,6 @@
 require 'tty-table'
 require 'pastel'
+require 'unicode/display_width/string_ext'
 
 module Terjira
   module CommonPresenter
