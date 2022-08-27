@@ -1,0 +1,33 @@
+name: terjira
+base: core18
+version: git
+summary: Terjira is a very interactive and easy to use CLI tool for Jira
+description: |
+  Terjira is an interactive and easy to use command line interface
+  (or Application) for Jira. You do not need to remember the resource key
+  or id. Terjira suggests it with an interactive prompt.
+
+grade: stable
+confinement: strict
+
+parts:
+  terjira:
+    plugin: dump
+    source: .
+    override-build: |
+      gem build terjira.gemspec
+      gem install *.gem -i $SNAPCRAFT_PART_INSTALL
+    build-packages:
+      - gcc
+      - libc6-dev
+      - make
+      - ruby-dev
+    stage-packages: [ruby]
+
+apps:
+  terjira:
+    environment:
+      RUBYLIB: $SNAP/usr/lib/ruby/2.5.0:$SNAP/usr/lib/x86_64-linux-gnu/ruby/2.5.0
+      GEM_HOME: $SNAP/gems
+      GEM_PATH: $SNAP
+    command: ruby $SNAP/bin/jira
